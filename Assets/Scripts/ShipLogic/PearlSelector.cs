@@ -1,0 +1,24 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PearlSelector : MonoBehaviour
+{
+
+    [SerializeField] ShootLogic shootLogic;
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<SelectionPearl>() != null)
+        {
+            shootLogic.SetPearl(collision.GetComponent<SelectionPearl>());
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.GetComponent<SelectionPearl>() != null)
+        {
+            shootLogic.SetPearl(null);
+        }
+    }
+}
