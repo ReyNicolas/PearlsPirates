@@ -21,27 +21,40 @@ public class BulletLogic: MonoBehaviour
     private void Update()
     {
         if (!isMoving) return;
-        transform.position = Vector2.MoveTowards(transform.position, finalPosition, actualSpeed * Time.deltaTime);
-        actualSpeed -= 0.9f*actualSpeed*Time.deltaTime;
-        if (transform.position == finalPosition) StopAndStartPhysics();
+        Move();
+        ReduceSpeed();
+        if (ArriveToDestination()) StopAndStartPhysics();
     }
 
+   
     private void OnCollisionEnter2D(Collision2D collision)
     {
         StopAndStartPhysics();
     }
-   
+
+    void Move()=>
+        transform.position = Vector2.MoveTowards(transform.position, finalPosition, actualSpeed * Time.deltaTime);
+       
+    void ReduceSpeed() =>
+         actualSpeed -= 0.9f * actualSpeed * Time.deltaTime;
+    private bool ArriveToDestination()
+       => transform.position == finalPosition;
+
 
     public void Launch(Transform shootSpawnTransform, Vector3 finalPosition)
     {
         StartCoroutine(DestroyAndStartPower(shootSpawnTransform));
+        SetStartValues(shootSpawnTransform, finalPosition);   
+    }
+
+    void SetStartValues(Transform shootSpawnTransform, Vector3 finalPosition)
+    {
         transform.position = shootSpawnTransform.position;
         transform.rotation = shootSpawnTransform.rotation;
         actualSpeed = speed;
-        this.finalPosition= finalPosition;
-        isMoving= true;
+        this.finalPosition = finalPosition;
+        isMoving = true;
     }
-
 
     void StopAndStartPhysics()
     {

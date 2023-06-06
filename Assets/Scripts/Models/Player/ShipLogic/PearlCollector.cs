@@ -28,10 +28,13 @@ public class PearlCollector : MonoBehaviour
         pearl.transform.SetParent(transform);
     }
 
-    public SelectionPearl GetPearl()=> pearl;
-    public void SetEmpty()=> pearl = null;
+    public SelectionPearl GetPearl()=> 
+        pearl;
+    public void SetEmpty()=> 
+        pearl = null;
 
-    public bool IsEmpty()=> pearl == null;
+    public bool IsEmpty()=> 
+        pearl == null;
 
 
 }

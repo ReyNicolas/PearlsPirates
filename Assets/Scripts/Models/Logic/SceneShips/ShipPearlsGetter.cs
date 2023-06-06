@@ -17,7 +17,8 @@ public class ShipPearlsGetter : MonoBehaviour
         }
     }
 
-    public void AddColorsToCollect(List<Color> colors) => colorsToCollect.AddRange(colors);
+    public void AddColorsToCollect(List<Color> colors) => 
+        colorsToCollect.AddRange(colors);
 
 
     void TryToCollectThisPearls(List<SelectionPearl> pearls, PearlCollectorsManager collectorsManager)
@@ -38,7 +39,8 @@ public class ShipPearlsGetter : MonoBehaviour
         Destroy(pearl.gameObject);
     }
 
-    bool NeedsToCollectThisColor(Color color)=> colorsToCollect.Contains(color);
+    bool NeedsToCollectThisColor(Color color)=> 
+        colorsToCollect.Contains(color);
     
     PearlCollectedDTO GeneratePearlCollected(SelectionPearl pearl, PearlCollectorsManager collectorsManager) =>
         new PearlCollectedDTO(pearl, collectorsManager.PlayerID, "None"); 

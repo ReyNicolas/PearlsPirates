@@ -5,10 +5,13 @@ using UnityEngine;
 
 public class ColorGenerator {
 
-    List<Color> colors;
+    List<Color> colors=new List<Color>();
 
-    public void AddThisColors(List<Color> colors)=> colors.AddRange(colors);   
-    public void ClearThisColor(Color color)=> colors.RemoveAll(c => c == color);
+
+    public void AddThisColors(List<Color> colors)=>
+        colors.AddRange(colors);   
+    public void ClearThisColor(Color color)=> 
+        colors.RemoveAll(c => c == color);
     public List<Color> GetThisNumberOfRandomColors(int number)
     {   
         List<Color> randomColors = new List<Color>();
