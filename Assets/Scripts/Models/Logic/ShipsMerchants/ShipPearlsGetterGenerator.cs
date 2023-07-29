@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ShipGenerator
+public class ShipPearlsGetterGenerator
 {
     GameObject shipPrefab;
     PositionAsigner positionAsigner;
@@ -11,13 +11,13 @@ public class ShipGenerator
     List<ShipPearlsGetter> shipPearlsGetterList = new List<ShipPearlsGetter>();
     int numberOfColorsToCollectPerShip = 3;
 
-    public  ShipGenerator(GameObject shipPrefab, PositionAsigner positionAsigner, PearlsPointsCalculator pearlsPointsCalculator,ColorGenerator colorGenerator)
+    public ShipPearlsGetterGenerator(GameObject shipPrefab, PositionAsigner positionAsigner, PearlsPointsCalculator pearlsPointsCalculator,ColorGenerator colorGenerator)
     {
         this.shipPrefab = shipPrefab;
-        this.positionAsigner = positionAsigner;
-        GenerateShipPool();
+        this.positionAsigner = positionAsigner;        
         this.pearlsPointsCalculator = pearlsPointsCalculator;
         this.colorGenerator = colorGenerator;
+        GenerateShipPool();
     }
 
     public void ActiveShip()
@@ -40,21 +40,18 @@ public class ShipGenerator
             ship.SetActive(false);
         }
     }
-
-    void AddColorsToCollectToShip(ShipPearlsGetter shipPearlsGetter) =>
-        shipPearlsGetter.AddColorsToCollect(colorGenerator.GetThisNumberOfRandomColors(numberOfColorsToCollectPerShip));
-
     void GenerateShip(out GameObject ship, out ShipPearlsGetter shipPearlsGetter)
     {
         ship = GameObject.Instantiate(shipPrefab, Vector2.zero, Quaternion.identity);
         shipPearlsGetter = ship.GetComponent<ShipPearlsGetter>();
     }
+    void AddShipToList(ShipPearlsGetter shipPearlsGetter) =>
+        shipPearlsGetterList.Add(shipPearlsGetter);
+    void AddColorsToCollectToShip(ShipPearlsGetter shipPearlsGetter) =>
+        shipPearlsGetter.AddColorsToCollect(colorGenerator.GetThisNumberOfRandomColors(numberOfColorsToCollectPerShip));  
 
     void AddShiptToPointcalculaor(ShipPearlsGetter shipPearlsGetter) => 
-        pearlsPointsCalculator.AddShipPearlsGetter(shipPearlsGetter);
-
-    void AddShipToList(ShipPearlsGetter shipPearlsGetter) => 
-        shipPearlsGetterList.Add(shipPearlsGetter);
+        pearlsPointsCalculator.AddShipPearlsGetter(shipPearlsGetter);    
 
     ShipPearlsGetter GetShipScript() =>
         AreThereInActiveShipScript() ? InActiveShipScript() : RandomShipScript();

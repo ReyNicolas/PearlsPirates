@@ -6,23 +6,29 @@ public class SelectionPearl : MonoBehaviour
 {
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] SpriteRenderer spriteRenderer;
-    Power power;
+    PowerSO powerData;
 
-    public void Initialize(Color color, Power power)
+    public void Initialize(PowerSO powerData)
     {
-        spriteRenderer.color = color;
-        this.power = power;
+        this.powerData = powerData;
+        spriteRenderer.color = powerData.PowerColor;
     }
 
-    public Color GetColor()=> power.ColorToPearl;
+    public Color GetColor()
+    {
+        return powerData.PowerColor;
+    }
 
-    public void Use(ShootLogic shootLogic)=> shootLogic.SetBullet(GenerateBullet());
+    public void Use(ShootLogic shootLogic)
+    {
+        shootLogic.SetBullet(GenerateBullet());
+    }
 
     BulletLogic GenerateBullet()
     {
         GameObject bulletGO = Instantiate(bulletPrefab, transform.position, transform.rotation);
         BulletLogic bulletLogic = bulletGO.GetComponent<BulletLogic>();
-        bulletLogic.Initialize(spriteRenderer.color, power);
+        bulletLogic.Initialize(powerData);
         bulletGO.SetActive(false);
         return bulletLogic;
     }

@@ -3,12 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Move
+  - ActivationZone
+  - Float
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Selection
   - Water
   - UI
   - 

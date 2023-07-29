@@ -5,15 +5,15 @@ using UnityEngine;
 public class PearlToObtain : MonoBehaviour
 {
     [SerializeField] GameObject pearlSelectionPrefab;
-    [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] bool havePearl = true;
-    [SerializeField] Power power;
-    public void Initialize(Color color, Power power)
+    [SerializeField] PowerSO powerData;
+    public void Initialize(PowerSO powerData)
     {
-       spriteRenderer.color = color;
-       this.power = power;
+        this.powerData = powerData;
+       GetComponent<SpriteRenderer>().color = powerData.PowerColor;
     }
-    public bool HavePearl()=> havePearl;
+    public bool HavePearl()=> 
+        havePearl;
 
     public SelectionPearl GiveMeYourPearl()
     {
@@ -25,7 +25,7 @@ public class PearlToObtain : MonoBehaviour
     private SelectionPearl GenerateSelectionPearl()
     {
         SelectionPearl selectionPearl = Instantiate(pearlSelectionPrefab, transform.position, transform.rotation).GetComponent<SelectionPearl>();
-        selectionPearl.Initialize(spriteRenderer.color, power);
+        selectionPearl.Initialize(powerData);
         return selectionPearl;
     }
 

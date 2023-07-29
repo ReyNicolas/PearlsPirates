@@ -9,8 +9,8 @@ public class ShootLogic : MonoBehaviour
     [SerializeField] AimLogic aimLogic;
     [SerializeField] BulletLogic bulletLogic;
     [SerializeField] SelectionPearl selectionPearl;
+    [SerializeField] float shootSpeed = 1f;
     [SerializeField] float waitAfterShot = 0.5f;
-
 
     private void Update()
     {
@@ -28,14 +28,23 @@ public class ShootLogic : MonoBehaviour
         }
     }
 
-    public void SetPearl(SelectionPearl selectionPearl)=> this.selectionPearl = selectionPearl;
-    
-    public void SetBullet(BulletLogic bulletLogic)=> this.bulletLogic = bulletLogic;
+    public void SetPearl(SelectionPearl selectionPearl)
+    {
+        this.selectionPearl = selectionPearl;
+    }
+
+    public void SetBullet(BulletLogic bulletLogic)
+    { 
+        this.bulletLogic = bulletLogic; 
+    }
 
 
-    bool IsTherePearlSelected() => selectionPearl != null;
+    bool IsTherePearlSelected() => 
+        selectionPearl != null;
 
-    void FreezeAim() => aimLogic.WaitThisSeconds(waitAfterShot);
+    void FreezeAim() => 
+        aimLogic.WaitThisSeconds(waitAfterShot);
+
     void UsePearlSelected()
     {
         selectionPearl.Use(this);
@@ -45,7 +54,7 @@ public class ShootLogic : MonoBehaviour
     void LaunchBullet()
     {
         bulletLogic.gameObject.SetActive(true);
-        bulletLogic.Launch(shootSpawnTransform, aimLogic.GetAimPosition());
+        bulletLogic.Launch(shootSpawnTransform, aimLogic.GetAimPosition(),shootSpeed);
         bulletLogic = null;
     }
 }

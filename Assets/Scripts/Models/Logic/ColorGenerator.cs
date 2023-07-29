@@ -7,11 +7,16 @@ public class ColorGenerator {
 
     List<Color> colors=new List<Color>();
 
+    public void AddThisColors(List<Color> colors) 
+    {
+        this.colors.AddRange(colors);
+    }
 
-    public void AddThisColors(List<Color> colors)=>
-        colors.AddRange(colors);   
-    public void ClearThisColor(Color color)=> 
+    public void ClearThisColor(Color color) 
+    {
         colors.RemoveAll(c => c == color);
+    }
+
     public List<Color> GetThisNumberOfRandomColors(int number)
     {   
         List<Color> randomColors = new List<Color>();
@@ -21,12 +26,14 @@ public class ColorGenerator {
         }
         return randomColors;        
     }
+
     Color GetRandomColor()
     {
-        var color = colors[GetRandomIndex<Color>(colors)];
+        var color = colors[GetRandom<Color>(colors)];
         colors.Remove(color);
         return color;
     }
 
-    int GetRandomIndex<T>(List<T> list)=> Random.Range(0, list.Count);
+    int GetRandom<T>(List<T> list)=> 
+        Random.Range(0, list.Count);
 }

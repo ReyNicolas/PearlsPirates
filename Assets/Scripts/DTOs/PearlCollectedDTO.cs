@@ -1,13 +1,13 @@
 ﻿public class PearlCollectedDTO
 {
     public SelectionPearl pearl;
-    public int playerID;
+    public string playerName;
     public string bonusID;
 
-    public PearlCollectedDTO(SelectionPearl pearl, int playerID, string bonusID)
+    public PearlCollectedDTO(SelectionPearl pearl, string playerName, string bonusID)
     {
         this.pearl = pearl;
-        this.playerID = playerID;
+        this.playerName = playerName;
         this.bonusID = bonusID;
     }
 }

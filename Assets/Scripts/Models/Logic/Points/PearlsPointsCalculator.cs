@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class PearlsPointsCalculator: IPlayerPointsGiver
 {
-    public event Action<int, int> OnGivePlayerPoints;
+    public event Action<string, int> OnGivePlayerPoints;
     List<ShipPearlsGetter> shipsPearlsGetters = new List<ShipPearlsGetter>();
 
     public void AddShipPearlsGetter(ShipPearlsGetter ship)
@@ -13,7 +13,7 @@ public class PearlsPointsCalculator: IPlayerPointsGiver
     }
 
     void AddPearlToPlayerPoints(PearlCollectedDTO pearlCollectedData) =>
-        OnGivePlayerPoints?.Invoke(pearlCollectedData.playerID, GetPearlFinalPoints(pearlCollectedData));
+        OnGivePlayerPoints?.Invoke(pearlCollectedData.playerName, GetPearlFinalPoints(pearlCollectedData));
 
     int GetPearlFinalPoints(PearlCollectedDTO pearlCollectedData) =>
         SetBonusToPoints(pearlCollectedData.bonusID, GetPearlPoints(pearlCollectedData.pearl));

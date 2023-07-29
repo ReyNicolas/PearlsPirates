@@ -2,6 +2,6 @@
 
 public interface IPlayerPointsGiver
 {
-    event Action<int, int> OnGivePlayerPoints; 
+    event Action<string, int> OnGivePlayerPoints; 
 }
 

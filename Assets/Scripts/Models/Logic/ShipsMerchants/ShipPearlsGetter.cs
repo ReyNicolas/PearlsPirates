@@ -32,17 +32,17 @@ public class ShipPearlsGetter : MonoBehaviour
         }
     }
 
+    bool NeedsToCollectThisColor(Color color) =>
+        colorsToCollect.Contains(color);
+
     void CollectThisPearl(SelectionPearl pearl, PearlCollectorsManager collectorsManager)
     {
         colorsToCollect.Remove(pearl.GetColor());
         OnSelectionPearlCollected?.Invoke( GeneratePearlCollected(pearl,collectorsManager) );
         Destroy(pearl.gameObject);
-    }
-
-    bool NeedsToCollectThisColor(Color color)=> 
-        colorsToCollect.Contains(color);
+    }    
     
     PearlCollectedDTO GeneratePearlCollected(SelectionPearl pearl, PearlCollectorsManager collectorsManager) =>
-        new PearlCollectedDTO(pearl, collectorsManager.PlayerID, "None"); 
+        new PearlCollectedDTO(pearl, collectorsManager.PlayerName, "None"); 
   
 }
