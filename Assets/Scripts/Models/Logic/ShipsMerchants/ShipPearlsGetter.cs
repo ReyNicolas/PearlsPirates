@@ -43,6 +43,6 @@ public class ShipPearlsGetter : MonoBehaviour
     }    
     
     PearlCollectedDTO GeneratePearlCollected(SelectionPearl pearl, PearlCollectorsManager collectorsManager) =>
-        new PearlCollectedDTO(pearl, collectorsManager.PlayerName, "None"); 
+        new PearlCollectedDTO(pearl.GetPowerData(), collectorsManager.PlayerName, "None"); 
   
 }

@@ -5,7 +5,12 @@ using UnityEngine;
 
 public class ColorGenerator {
 
-    List<Color> colors=new List<Color>();
+    List<Color> colors;
+
+    public ColorGenerator(List<Color> colors)
+    {
+        this.colors = colors;
+    }
 
     public void AddThisColors(List<Color> colors) 
     {
@@ -20,19 +25,15 @@ public class ColorGenerator {
     public List<Color> GetThisNumberOfRandomColors(int number)
     {   
         List<Color> randomColors = new List<Color>();
-        for(int i = 0; i < Mathf.Min(colors.Count,number); i++)
+        for(int i = 0; i < number; i++)
         {
             randomColors.Add(GetRandomColor());
         }
         return randomColors;        
     }
 
-    Color GetRandomColor()
-    {
-        var color = colors[GetRandom<Color>(colors)];
-        colors.Remove(color);
-        return color;
-    }
+    Color GetRandomColor() => 
+        colors[GetRandom<Color>(colors)];
 
     int GetRandom<T>(List<T> list)=> 
         Random.Range(0, list.Count);

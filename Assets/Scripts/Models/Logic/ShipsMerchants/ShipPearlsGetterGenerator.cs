@@ -5,13 +5,13 @@ using UnityEngine;
 public class ShipPearlsGetterGenerator
 {
     GameObject shipPrefab;
-    PositionAsigner positionAsigner;
+    PositionGenerator positionAsigner;
     PearlsPointsCalculator pearlsPointsCalculator;
     ColorGenerator colorGenerator;
     List<ShipPearlsGetter> shipPearlsGetterList = new List<ShipPearlsGetter>();
     int numberOfColorsToCollectPerShip = 3;
 
-    public ShipPearlsGetterGenerator(GameObject shipPrefab, PositionAsigner positionAsigner, PearlsPointsCalculator pearlsPointsCalculator,ColorGenerator colorGenerator)
+    public ShipPearlsGetterGenerator(GameObject shipPrefab, PositionGenerator positionAsigner, PearlsPointsCalculator pearlsPointsCalculator,ColorGenerator colorGenerator)
     {
         this.shipPrefab = shipPrefab;
         this.positionAsigner = positionAsigner;        

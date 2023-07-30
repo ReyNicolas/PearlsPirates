@@ -5,53 +5,47 @@ using UnityEngine;
 
 public class MatchManager: MonoBehaviour
 {
+    [SerializeField] GameObject shipPrefab;
+    [SerializeField] GameObject pearlPrefab;
+    [SerializeField] MatchSO matchData;
     [SerializeField] List<PowerSO> powersDatas = new List<PowerSO>();
     [SerializeField] List<PlayerSO> playersDatas = new List<PlayerSO>();
     PointsManager pointsManager;
-    PositionAsigner positionAsigner = new PositionAsigner();
-    PearlsPointsCalculator pearlsPointsCalculator= new PearlsPointsCalculator();
-    ColorGenerator colorGenerator = new ColorGenerator();
-    ShipPearlsGetterGenerator shipGenerator;
+    PearlsPointsCalculator pearlsPointsCalculator = new PearlsPointsCalculator();
 
-    [SerializeField]GameObject shipPrefab;
+    PearGenerator pearGenerator;
+    PowerGenerator powerGenerator;
+    PositionGenerator positionGenerator = new PositionGenerator();
+    ColorGenerator colorGenerator;
+    ShipPearlsGetterGenerator shipGenerator;
+    PearlsInMatchController pearlsInMatchController;
+
+ 
 
     private void Awake()
     {
-        pointsManager = new PointsManager(playersDatas, new List<IPlayerPointsGiver>() { pearlsPointsCalculator});
-     
-        positionAsigner.SetDimensions(new Vector2(8, 8));
-        positionAsigner.SetCenterTransform(Camera.main.transform);  
+        matchData.Initialize(playersDatas, 100, 30, 30);
         
-        Test_______ColorGenerator();
-        shipGenerator = new ShipPearlsGetterGenerator(shipPrefab, positionAsigner, pearlsPointsCalculator,colorGenerator);
+        positionGenerator.SetDimensions(new Vector2(8, 8));
+        positionGenerator.SetCenterTransform(Camera.main.transform);
+
+        colorGenerator = new ColorGenerator(powersDatas.Select(pd=> pd.PowerColor).ToList());
+        pointsManager = new PointsManager(playersDatas, new List<IPlayerPointsGiver>() { pearlsPointsCalculator });
+        powerGenerator = new PowerGenerator(powersDatas);
+        pearGenerator = new PearGenerator(pearlPrefab, positionGenerator,powerGenerator);
+        shipGenerator = new ShipPearlsGetterGenerator(shipPrefab, positionGenerator, pearlsPointsCalculator,colorGenerator);
+        pearlsInMatchController = new PearlsInMatchController(matchData, pearGenerator);
         Test_______GenerateShips();
     }
 
-    void Test_______ColorGenerator()
-    {
-        colorGenerator.AddThisColors(GenerateColors());
-    }
+
 
     void Test_______GenerateShips()
     {
         for(int i = 0; i<5; i++)
         {
-
-        shipGenerator.ActiveShip();
+          shipGenerator.ActiveShip();
         }
     }
 
-    List<Color> GenerateColors()
-    {
-        var allColors = GeneratePowersColors();
-        var colors = new List<Color>();
-        for(int i = 0; i < 30; i++)
-        {
-            colors.Add(allColors[Random.Range(0,allColors.Count)]) ;
-        }
-        return colors;
-    }
-
-    List<Color> GeneratePowersColors() =>
-        powersDatas.Select(powerData => powerData.PowerColor).Distinct().ToList();
 }

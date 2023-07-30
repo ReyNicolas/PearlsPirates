@@ -1,12 +1,12 @@
 ﻿public class PearlCollectedDTO
 {
-    public SelectionPearl pearl;
+    public PowerSO powerData;
     public string playerName;
     public string bonusID;
 
-    public PearlCollectedDTO(SelectionPearl pearl, string playerName, string bonusID)
+    public PearlCollectedDTO(PowerSO powerData, string playerName, string bonusID)
     {
-        this.pearl = pearl;
+        this.powerData = powerData;
         this.playerName = playerName;
         this.bonusID = bonusID;
     }

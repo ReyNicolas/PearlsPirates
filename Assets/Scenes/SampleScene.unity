@@ -763,7 +763,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 316494519}
-  - component: {fileID: 316494518}
   - component: {fileID: 316494521}
   m_Layer: 0
   m_Name: Manager
@@ -772,21 +771,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &316494518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 316494517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eaa366c08951f8443a7af1ffb794da6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pearlPrefab: {fileID: 2638525727010648642, guid: 3ba75d93859f73a42bf98e55e0a05f38, type: 3}
-  powersDatas:
-  - {fileID: 11400000, guid: fbb158fe8017f7543a0b2c408909cdba, type: 2}
 --- !u!4 &316494519
 Transform:
   m_ObjectHideFlags: 0
@@ -814,11 +798,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4daccf10a2c27654b9e9fe0cc68bbd9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shipPrefab: {fileID: 6522883866240905775, guid: 36577121acda66f4fb294a7434a3569f, type: 3}
+  pearlPrefab: {fileID: 2638525727010648642, guid: 3ba75d93859f73a42bf98e55e0a05f38, type: 3}
+  matchData: {fileID: 0}
   powersDatas:
   - {fileID: 11400000, guid: fbb158fe8017f7543a0b2c408909cdba, type: 2}
   playersDatas:
   - {fileID: 11400000, guid: 0bc177a17d13a3b46af33a3d4e86cbec, type: 2}
-  shipPrefab: {fileID: 6522883866240905775, guid: 36577121acda66f4fb294a7434a3569f, type: 3}
 --- !u!1 &322993703
 GameObject:
   m_ObjectHideFlags: 0

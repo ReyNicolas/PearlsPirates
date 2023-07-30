@@ -7,6 +7,7 @@ public class PearlToObtain : MonoBehaviour
     [SerializeField] GameObject pearlSelectionPrefab;
     [SerializeField] bool havePearl = true;
     [SerializeField] PowerSO powerData;
+    public event Action<PearlToObtain> OnDestroy;
     public void Initialize(PowerSO powerData)
     {
         this.powerData = powerData;
@@ -31,6 +32,7 @@ public class PearlToObtain : MonoBehaviour
 
     IEnumerator DestroyMe()
     {
+        OnDestroy?.Invoke(this);
         yield return new WaitForEndOfFrame();
         Destroy(gameObject);
     }

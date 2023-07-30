@@ -18,6 +18,10 @@ public class SelectionPearl : MonoBehaviour
     {
         return powerData.PowerColor;
     }
+    public PowerSO GetPowerData()
+    {
+        return powerData;
+    }
 
     public void Use(ShootLogic shootLogic)
     {

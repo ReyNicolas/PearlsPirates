@@ -1,7 +1,7 @@
 using System.Xml.Schema;
 using UnityEngine;
 
-public class PositionAsigner
+public class PositionGenerator
 {
     Vector2 dimension;
     Transform centerTransform;

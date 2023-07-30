@@ -16,12 +16,12 @@ public class PearlsPointsCalculator: IPlayerPointsGiver
         OnGivePlayerPoints?.Invoke(pearlCollectedData.playerName, GetPearlFinalPoints(pearlCollectedData));
 
     int GetPearlFinalPoints(PearlCollectedDTO pearlCollectedData) =>
-        SetBonusToPoints(pearlCollectedData.bonusID, GetPearlPoints(pearlCollectedData.pearl));
+        SetBonusToPoints(pearlCollectedData.bonusID, GetPowerPoints(pearlCollectedData.powerData));
 
     int SetBonusToPoints(string bonus, int points) => 
         points;
 
-    int GetPearlPoints(SelectionPearl selectionPearl) => 
+    int GetPowerPoints(PowerSO powerData) => 
         1;
 }
 
