@@ -7,6 +7,7 @@ TagManager:
   - Move
   - ActivationZone
   - Float
+  - Scenary
   layers:
   - Default
   - TransparentFX
@@ -14,7 +15,7 @@ TagManager:
   - Selection
   - Water
   - UI
-  - 
+  - Scenary
   - 
   - 
   - 

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3c7907d0724a2f479c641e83660b865, type: 3}
+  m_Name: MatchData
+  m_EditorClassIdentifier: 
+  playersDatas:
+  - {fileID: 11400000, guid: 0bc177a17d13a3b46af33a3d4e86cbec, type: 2}
+  powersDatas:
+  - {fileID: 11400000, guid: fbb158fe8017f7543a0b2c408909cdba, type: 2}
+  - {fileID: 11400000, guid: ce51a1afa3e6169479eb7d7b4a4cd722, type: 2}
+  - {fileID: 11400000, guid: 6588be7e71e6aff4cafd75edb9b89611, type: 2}
+  - {fileID: 11400000, guid: 249d432b378232c45a497ee1fc561077, type: 2}
+  pearlPrefab: {fileID: 2638525727010648642, guid: 3ba75d93859f73a42bf98e55e0a05f38, type: 3}
+  totalPointsLimit: 100
+  totalPlayerPointsLimit: 30
+  numberPearlsToObtainInScene: 10
+  timeToGeneratePearl: 2
+  maxNumberOfPearls: 10
+  timeLeft: 30
