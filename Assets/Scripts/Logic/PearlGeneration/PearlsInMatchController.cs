@@ -2,7 +2,7 @@
 
 public class PearlsInMatchController
 {
-    List<PearlToObtain> pearlsToObtains = new List<PearlToObtain>();
+    public List<PearlToObtain> pearlsToObtains = new List<PearlToObtain>();
     MatchSO matchData;
 
     public PearlsInMatchController(MatchSO matchData, PearGenerator pearGenerator)

@@ -8,6 +8,12 @@ public class PearlToObtain : MonoBehaviour
     [SerializeField] bool havePearl = true;
     [SerializeField] PowerSO powerData;
     public event Action<PearlToObtain> OnDestroy;
+    Rigidbody2D rigidbody2D;
+
+    private void Awake()
+    {
+        rigidbody2D = GetComponent<Rigidbody2D>();
+    }
     public void Initialize(PowerSO powerData)
     {
         this.powerData = powerData;
@@ -21,6 +27,11 @@ public class PearlToObtain : MonoBehaviour
         havePearl= false;
         StartCoroutine(DestroyMe());      
         return GenerateSelectionPearl();
+    }
+
+    public void AddForce(Vector2 vectorForce)
+    {
+        rigidbody2D.AddForce(vectorForce,ForceMode2D.Impulse);
     }
 
     private SelectionPearl GenerateSelectionPearl()

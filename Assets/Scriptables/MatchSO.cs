@@ -13,6 +13,7 @@ public class MatchSO : ScriptableObject
     public int timeToGeneratePearl;
     public int maxNumberOfPearls;
     public float timeLeft;
+    public Vector2 wind;
 
     public void Initialize()
     {        

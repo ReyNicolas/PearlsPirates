@@ -20,8 +20,19 @@ public class PearlManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(GeneratePearl());
+        StartCoroutine(PlayWind());
     }
 
+    IEnumerator PlayWind()
+    {
+        while (true)
+        {
+            pearlsInMatchController.pearlsToObtains.ForEach(pearl => pearl.AddForce(matchData.wind));
+            yield return new WaitForSeconds(1f);
+            pearlsInMatchController.pearlsToObtains.ForEach(pearl => pearl.AddForce(-matchData.wind));
+            yield return new WaitForSeconds(1f);
+        }
+    }
     IEnumerator GeneratePearl()
     {
         while (true)

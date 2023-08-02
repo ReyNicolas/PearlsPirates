@@ -26,3 +26,4 @@ MonoBehaviour:
   timeToGeneratePearl: 2
   maxNumberOfPearls: 10
   timeLeft: 30
+  wind: {x: 0.1, y: 0.1}
