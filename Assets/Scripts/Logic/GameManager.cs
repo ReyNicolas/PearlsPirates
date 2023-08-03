@@ -1,9 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using static UnityEditor.Experimental.GraphView.GraphView;
+using UnityEngine.InputSystem.Users;
+using UnityEngine.InputSystem.XInput;
 
 public class GameManager: MonoBehaviour
 {
     [SerializeField] MatchSO matchData;
+    [SerializeField] List<PlayerSO> playersDatas;
+    [SerializeField] GameObject playerShipPrefab;
     public PositionGenerator positionGenerator = new PositionGenerator();
       public PearlsPointsCalculator pearlsPointsCalculator = new PearlsPointsCalculator();     
     PointsManager pointsManager;
@@ -18,7 +25,18 @@ public class GameManager: MonoBehaviour
     }
 
 
+    private void Start()
+    {
+        var gamepadCount = XInputControllerWindows.all.Count;
+        for (int i = 0; i < playersDatas.Count; i++)
+        {
+           var playerInput =  Instantiate(playerShipPrefab, positionGenerator.ReturnPosition(), Quaternion.identity).GetComponent<PlayerInput>();
+            playerInput.user.UnpairDevices();
+            InputUser.PerformPairingWithDevice(XInputControllerWindows.all[i], user: playerInput.user);
+        }
+    }
 
-    
+
+
 
 }

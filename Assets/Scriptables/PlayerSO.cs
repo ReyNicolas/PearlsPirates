@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [CreateAssetMenu(fileName = "PlayerData", menuName = "Player Data")]
 public class PlayerSO : ScriptableObject
@@ -9,4 +10,5 @@ public class PlayerSO : ScriptableObject
     public int PlayerScore;
     public int PointsToAdd;
     public List<PearlCollectedDTO> pearlsCollectedDatas;
+
 }

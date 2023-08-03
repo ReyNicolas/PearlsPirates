@@ -12,15 +12,15 @@ public class ShootLogic : MonoBehaviour
     [SerializeField] float shootSpeed = 1f;
     [SerializeField] float waitAfterShot = 0.5f;
 
-    private void Update()
-    {
-        Shoot();
-    }
+    //private void Update()
+    //{
+    //    Shoot();
+    //}
 
-    private void Shoot()
+    public void Shoot()
     {
      
-        if (Input.GetMouseButtonDown(0) && IsTherePearlSelected())
+        if (IsTherePearlSelected())
         {
             FreezeAim();
             UsePearlSelected();

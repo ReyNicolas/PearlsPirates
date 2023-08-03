@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class DotPositionLogic : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class DotPositionLogic : MonoBehaviour
     [SerializeField] Transform shootTransform;
     [SerializeField] Vector3 vMouse;
     [SerializeField] Vector3 vectorDistance;
+    [SerializeField] PlayerInput playerInput;
 
 
     private void Update()
@@ -19,8 +21,7 @@ public class DotPositionLogic : MonoBehaviour
     }
     void MoveDot()
     {
-        vMouse.x = Input.GetAxis("Mouse X");
-        vMouse.y = Input.GetAxis("Mouse Y");
+        vMouse = Vector2.ClampMagnitude(playerInput.actions["Aim"].ReadValue<Vector2>(), 1f);
         transform.position += (vMouse * speed * Time.deltaTime);
     }
     void GetDistanceMouseToShootPosition()

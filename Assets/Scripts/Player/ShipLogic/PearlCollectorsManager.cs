@@ -6,7 +6,7 @@ using UnityEngine;
 public class PearlCollectorsManager : MonoBehaviour
 {
     [SerializeField] List<PearlCollector> collectors;
-    public string PlayerName;
+    public PlayerSO playerData;
 
     public List<SelectionPearl> GiveSelectionPearlsFromCollectors()
     {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ShipMovement : MonoBehaviour
 {
@@ -10,8 +11,8 @@ public class ShipMovement : MonoBehaviour
     [SerializeField] float maxSpeed = 20f;
     [SerializeField]  float actualSpeed = 0;
     [SerializeField]  float timeToWaitReduce = 0.2f;
-
     [SerializeField] Vector2 movement;
+    [SerializeField] PlayerInput playerInput;
 
     private void Awake()
     {
@@ -25,7 +26,7 @@ public class ShipMovement : MonoBehaviour
 
     private void Update()
     {
-        movement = Vector2.ClampMagnitude(new Vector2(Input.GetAxis("Horizontal"),  Input.GetAxis("Vertical")), 1f);
+        movement = Vector2.ClampMagnitude(playerInput.actions["Move"].ReadValue<Vector2>(), 1f);
     }
 
 
