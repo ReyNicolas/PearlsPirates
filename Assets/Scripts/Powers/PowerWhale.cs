@@ -17,6 +17,7 @@ public class PowerWhale : MonoBehaviour
         if(targetTransform != null)
         {
             transform.position = Vector2.MoveTowards(transform.position, targetTransform.position, speed * Time.deltaTime);
+            transform.up = targetTransform.position- transform.position;
         }
     }
 

@@ -27,16 +27,13 @@ public class GameManager: MonoBehaviour
 
     private void Start()
     {
-        var gamepadCount = XInputControllerWindows.all.Count;
+        var gamepadCount = Gamepad.all.Count;
         for (int i = 0; i < playersDatas.Count; i++)
         {
            var playerInput =  Instantiate(playerShipPrefab, positionGenerator.ReturnPosition(), Quaternion.identity).GetComponent<PlayerInput>();
             playerInput.user.UnpairDevices();
-            InputUser.PerformPairingWithDevice(XInputControllerWindows.all[i], user: playerInput.user);
+            InputUser.PerformPairingWithDevice(Gamepad.all[i], user: playerInput.user);
         }
     }
-
-
-
 
 }
