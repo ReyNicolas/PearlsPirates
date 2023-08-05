@@ -22,8 +22,11 @@ MonoBehaviour:
   pearlPrefab: {fileID: 2638525727010648642, guid: 3ba75d93859f73a42bf98e55e0a05f38, type: 3}
   totalPointsLimit: 100
   totalPlayerPointsLimit: 30
+  timeLeft: 30
   numberPearlsToObtainInScene: 10
   timeToGeneratePearl: 2
   maxNumberOfPearls: 10
-  timeLeft: 30
+  merchantsInScene: 0
+  timeToGenerateMerchants: 60
+  maxNumberOfMerchants: 2
   wind: {x: 0.1, y: 0.1}

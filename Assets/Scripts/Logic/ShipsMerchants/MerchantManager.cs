@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -8,24 +10,33 @@ public class MerchantManager : MonoBehaviour
     [SerializeField] MatchSO matchData;
     [SerializeField] GameObject shipPrefab;
     [SerializeField] GameManager gameManager;
+    [SerializeField] List<ShipPearlsGetter> merchants = new List<ShipPearlsGetter>();
 
-    private void Awake()
-    {
-        colorGenerator = new ColorGenerator(matchData.powersDatas.Select(pd => pd.PowerColor).ToList());
-
-    }
+  
     private void Start()
     {
-        shipGenerator = new ShipPearlsGetterGenerator(shipPrefab, gameManager.positionGenerator, gameManager.pearlsPointsCalculator, colorGenerator);
-        Test_______GenerateShips();
-
+        shipGenerator = new ShipPearlsGetterGenerator(shipPrefab, gameManager.positionGenerator, gameManager.pearlsPointsCalculator, matchData);
+        colorGenerator = new ColorGenerator(PowersColors(), shipGenerator);
+        shipGenerator.OnCreatedMerchant += AddMerchant;
+        shipGenerator.StartGeneration();
     }
 
-    void Test_______GenerateShips()
+    List<Color> PowersColors() => 
+        matchData.powersDatas.Select(pd => pd.PowerColor).ToList();
+
+    void AddMerchant(ShipPearlsGetter merchantToAdd)
     {
-        for (int i = 0; i < 2; i++)
-        {
-            shipGenerator.ActiveShip();
-        }
+        merchants.Add(merchantToAdd);
+
+        matchData.merchantsInScene = merchants.Count;
+        merchantToAdd.OnDestroy += RemoveMerchant;
     }
+
+    void RemoveMerchant(ShipPearlsGetter merchantToRemove)
+    {
+        merchants.Remove(merchantToRemove);
+        matchData.merchantsInScene = merchants.Count;
+    }
+
+
 }

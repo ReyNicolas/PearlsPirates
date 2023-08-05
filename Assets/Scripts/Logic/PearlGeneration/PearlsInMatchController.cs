@@ -5,7 +5,7 @@ public class PearlsInMatchController
     public List<PearlToObtain> pearlsToObtains = new List<PearlToObtain>();
     MatchSO matchData;
 
-    public PearlsInMatchController(MatchSO matchData, PearGenerator pearGenerator)
+    public PearlsInMatchController(MatchSO matchData, PearlGenerator pearGenerator)
     {
         this.matchData = matchData;
         pearGenerator.OnCreatedPearlToObtain += AddPearl;

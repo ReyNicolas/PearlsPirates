@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class PearlCollector : MonoBehaviour
 {
-
     SelectionPearl pearl = null;
+    public PlayerSO playerData;   
    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.GetComponent<PearlToObtain>() && IsEmpty())
@@ -17,10 +17,17 @@ public class PearlCollector : MonoBehaviour
             {
                 SetPearl(pearlToObtain.GiveMeYourPearl());
             }
-        }        
+        }
+        if(collision.GetComponent<ShipPearlsGetter>() && !IsEmpty())
+        {
+            if (collision.GetComponent<ShipPearlsGetter>().TryToCollectThisPearlFromThisPlayer(pearl, playerData))
+            {
+                SetEmpty();
+            }
+        }
     }
 
-    public void SetPearl(SelectionPearl pearl)
+    void SetPearl(SelectionPearl pearl)
     {
         this.pearl = pearl;
         pearl.transform.position = transform.position;

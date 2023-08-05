@@ -1,69 +1,45 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ShipPearlsGetterGenerator
+public class ShipPearlsGetterGenerator: IGameObjectCreator
 {
     GameObject shipPrefab;
-    PositionGenerator positionAsigner;
-    PearlsPointsCalculator pearlsPointsCalculator;
-    ColorGenerator colorGenerator;
-    List<ShipPearlsGetter> shipPearlsGetterList = new List<ShipPearlsGetter>();
-    int numberOfColorsToCollectPerShip = 3;
+    public event Action<ShipPearlsGetter> OnCreatedMerchant;
+    public event Action<GameObject> OnCreatedInMapGameObject;
 
-    public ShipPearlsGetterGenerator(GameObject shipPrefab, PositionGenerator positionAsigner, PearlsPointsCalculator pearlsPointsCalculator,ColorGenerator colorGenerator)
+    MatchSO matchData;
+
+    public ShipPearlsGetterGenerator(GameObject shipPrefab, PositionGenerator positionAsigner, PearlsPointsCalculator pearlsPointsCalculator, MatchSO matchData)
     {
-        this.shipPrefab = shipPrefab;
-        this.positionAsigner = positionAsigner;        
-        this.pearlsPointsCalculator = pearlsPointsCalculator;
-        this.colorGenerator = colorGenerator;
-        GenerateShipPool();
+        this.shipPrefab = shipPrefab;       
+        this.matchData = matchData;
+        pearlsPointsCalculator.SubscribeToShipGenerator(this);
+        positionAsigner.AddObjectToListen(this);
     }
 
-    public void ActiveShip()
+    public void StartGeneration()
     {
-        var shipScript = GetShipScript();
-        shipScript.gameObject.SetActive(true);
-        shipScript.transform.position = positionAsigner.ReturnPosition();
-    }
-
-    void GenerateShipPool()
-    {
-        for (int i = 0; i < 10; i++)
+        for(int i=0; i<matchData.maxNumberOfMerchants; i++)
         {
-            GameObject ship;
-            ShipPearlsGetter shipPearlsGetter;
-            GenerateShip(out ship, out shipPearlsGetter);
-            AddShipToList(shipPearlsGetter);
-            AddColorsToCollectToShip(shipPearlsGetter);
-            AddShiptToPointcalculaor(shipPearlsGetter);
-            ship.SetActive(false);
+            GenerateShip();
         }
     }
-    void GenerateShip(out GameObject ship, out ShipPearlsGetter shipPearlsGetter)
+
+    void GenerateShip()
     {
-        ship = GameObject.Instantiate(shipPrefab, Vector2.zero, Quaternion.identity);
-        shipPearlsGetter = ship.GetComponent<ShipPearlsGetter>();
+        var shipScript = GameObject.Instantiate(shipPrefab, Vector3.zero, Quaternion.identity).GetComponent<ShipPearlsGetter>();
+        shipScript.Initialize(matchData.timeToGenerateMerchants);
+        shipScript.OnDestroy += GenerateShipAfterDestroy;
+        OnCreatedInMapGameObject?.Invoke(shipScript.gameObject);
+        OnCreatedMerchant?.Invoke(shipScript);
     }
-    void AddShipToList(ShipPearlsGetter shipPearlsGetter) =>
-        shipPearlsGetterList.Add(shipPearlsGetter);
-    void AddColorsToCollectToShip(ShipPearlsGetter shipPearlsGetter) =>
-        shipPearlsGetter.AddColorsToCollect(colorGenerator.GetThisNumberOfRandomColors(numberOfColorsToCollectPerShip));  
 
-    void AddShiptToPointcalculaor(ShipPearlsGetter shipPearlsGetter) => 
-        pearlsPointsCalculator.AddShipPearlsGetter(shipPearlsGetter);    
-
-    ShipPearlsGetter GetShipScript() =>
-        AreThereInActiveShipScript() ? InActiveShipScript() : RandomShipScript();
-
-    bool AreThereInActiveShipScript() =>
-        shipPearlsGetterList.Any(sp => !sp.gameObject.activeSelf);        
-    
-    ShipPearlsGetter InActiveShipScript()=> 
-        shipPearlsGetterList.Find(sp=>!sp.gameObject.activeSelf);
-
-    ShipPearlsGetter RandomShipScript()=> 
-        shipPearlsGetterList[Random.Range(0, shipPearlsGetterList.Count)];
-
-
+    void GenerateShipAfterDestroy(ShipPearlsGetter getter)
+    {
+        GenerateShip();
+    }
 }
+

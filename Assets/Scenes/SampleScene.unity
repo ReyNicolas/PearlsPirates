@@ -311,6 +311,7 @@ MonoBehaviour:
   matchData: {fileID: 11400000, guid: ffc32afcbaf134045ba596fcc3c6776a, type: 2}
   shipPrefab: {fileID: 6522883866240905775, guid: 36577121acda66f4fb294a7434a3569f, type: 3}
   gameManager: {fileID: 316494521}
+  merchants: []
 --- !u!1 &1433996385
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,7 +517,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8393833839901144575, guid: 66b3d7eb7be4b784c8d6a554c08c2ef4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4
+      value: -5.1
       objectReference: {fileID: 0}
     - target: {fileID: 8393833839901144575, guid: 66b3d7eb7be4b784c8d6a554c08c2ef4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -569,7 +570,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1406346850327643695, guid: 83c2cf0523377ab43b22f3ec8cab9a1a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -4.49
       objectReference: {fileID: 0}
     - target: {fileID: 1406346850327643695, guid: 83c2cf0523377ab43b22f3ec8cab9a1a, type: 3}
       propertyPath: m_LocalPosition.z

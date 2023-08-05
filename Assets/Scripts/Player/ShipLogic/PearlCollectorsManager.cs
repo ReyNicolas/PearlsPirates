@@ -8,9 +8,9 @@ public class PearlCollectorsManager : MonoBehaviour
     [SerializeField] List<PearlCollector> collectors;
     public PlayerSO playerData;
 
-    public List<SelectionPearl> GiveSelectionPearlsFromCollectors()
+    private void Start()
     {
-        return collectors.Where(c=>!c.IsEmpty()).Select(c=> c.GetPearl()).ToList();
+        collectors.ForEach(c => c.playerData = playerData);
     }
 
 }

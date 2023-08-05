@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerGenerator
+public class PearlPowerGenerator
 {
     List<PowerSO> powersSOs = new List<PowerSO>();
 
-    public PowerGenerator(List<PowerSO> powersSOs)
+    public PearlPowerGenerator(List<PowerSO> powersSOs, PearlGenerator pearlGenerator )
     {
         this.powersSOs = powersSOs;
+        pearlGenerator.OnCreatedPearlToObtain += SetPearlPower;
     }
 
-    public void SetPearlPower(PearlToObtain pearlToObtain)
+    void SetPearlPower(PearlToObtain pearlToObtain)
     {
         PowerSO powerData = GetRandomPower();
         pearlToObtain.Initialize(powerData);

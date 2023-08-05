@@ -12,7 +12,18 @@ public class PositionGenerator
     public void SetDimensions(Vector2 vector) => 
         dimension = vector;
 
-    public Vector2 ReturnPosition()
+    public void AddObjectToListen(IGameObjectCreator gameObjectCreator)
+    {
+        gameObjectCreator.OnCreatedInMapGameObject += AssignPosition;
+    }
+
+    void AssignPosition(GameObject gameObject)
+    {
+        gameObject.transform.position = ReturnPosition();
+    }
+
+
+    Vector2 ReturnPosition()
     {
         while (true)
         {
@@ -21,7 +32,7 @@ public class PositionGenerator
         }        
     }
 
-    private Vector2 GenerateRandomPosition()
+    Vector2 GenerateRandomPosition()
     {
         var position = centerTransform.position;
         return new Vector2(position.x + Random.Range(-dimension.x, dimension.x), position.y + Random.Range(-dimension.y, dimension.y));

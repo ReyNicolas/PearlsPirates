@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b3cec2b70e7d144907535b83569212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 0}
 --- !u!61 &5452052812481330090
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -254,6 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b3cec2b70e7d144907535b83569212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 0}
 --- !u!61 &2913010480863023194
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -544,6 +546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b3cec2b70e7d144907535b83569212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 0}
 --- !u!61 &6087191353150020843
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5634,7 +5637,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxDistance: 7
   minDistance: 1.5
-  speed: 3
+  speed: 7
   distanceFloat: 0
   shootTransform: {fileID: 7993203429228346569}
   vMouse: {x: 0, y: 0, z: 0}
@@ -5935,6 +5938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b3cec2b70e7d144907535b83569212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 0}
 --- !u!61 &2225411788024464893
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6025,6 +6029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b3cec2b70e7d144907535b83569212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 0}
 --- !u!61 &3989541828415937067
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6152,6 +6157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b3cec2b70e7d144907535b83569212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 0}
 --- !u!61 &4418922495436084659
 BoxCollider2D:
   m_ObjectHideFlags: 0

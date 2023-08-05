@@ -1,48 +1,67 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ShipPearlsGetter : MonoBehaviour
 {
-    [SerializeField] List<Color> colorsToCollect= new List<Color>();
-    public Action<PearlCollectedDTO> OnSelectionPearlCollected;
 
-    private void OnTriggerStay2D(Collider2D collision)
+    [SerializeField] List<Color> colorsToCollect = new List<Color>();
+    [SerializeField] List<Transform> pearlsContainers;
+    public Action<PearlCollectedDTO> OnSelectionPearlCollected;
+    public event Action<ShipPearlsGetter> OnDestroy;
+    public void Initialize(float timeAlive)
     {
-        if (collision.GetComponent<PearlCollectorsManager>())
-        {
-            PearlCollectorsManager collectorsManager= collision.GetComponent<PearlCollectorsManager>();
-            TryToCollectThisPearls(collectorsManager.GiveSelectionPearlsFromCollectors(), collectorsManager);
-        }
+        StartCoroutine(DestroyMe(timeAlive));
+    }
+     
+    IEnumerator DestroyMe(float timeAlive)
+    {
+        yield return new WaitForSeconds(timeAlive);
+        OnDestroy?.Invoke(this);
+        Destroy(gameObject);
     }
 
-    public void AddColorsToCollect(List<Color> colors) => 
-        colorsToCollect.AddRange(colors);
-
-
-    void TryToCollectThisPearls(List<SelectionPearl> pearls, PearlCollectorsManager collectorsManager)
+    public int GetNumberOfContainers()
     {
-        foreach(SelectionPearl pearl in pearls)
+        return pearlsContainers.Count;
+    }
+    public void SetColorsToCollect(List<Color> colors)
+    {
+        colorsToCollect = colors;
+    }
+
+
+    public bool TryToCollectThisPearlFromThisPlayer (SelectionPearl pearl, PlayerSO playerData)
+    {        
+        if (NeedsToCollectThisColor(pearl.GetColor()))
         {
-            if (NeedsToCollectThisColor(pearl.GetColor()))
-            {
-                CollectThisPearl(pearl, collectorsManager);
-            }
+            CollectThisPearl(pearl,playerData);
+            return true;
         }
+        return false;        
     }
 
     bool NeedsToCollectThisColor(Color color) =>
         colorsToCollect.Contains(color);
 
-    void CollectThisPearl(SelectionPearl pearl, PearlCollectorsManager collectorsManager)
+    void CollectThisPearl(SelectionPearl pearl, PlayerSO playerData)
     {
         colorsToCollect.Remove(pearl.GetColor());
-        OnSelectionPearlCollected?.Invoke( GeneratePearlCollected(pearl,collectorsManager) );
-        Destroy(pearl.gameObject);
-    }    
-    
-    PearlCollectedDTO GeneratePearlCollected(SelectionPearl pearl, PearlCollectorsManager collectorsManager) =>
-        new PearlCollectedDTO(pearl.GetPowerData(), collectorsManager.playerData.PlayerName, "None"); 
+        OnSelectionPearlCollected?.Invoke(GeneratePearlCollected(pearl, playerData));
+        SetConainerToPearl(pearl);
+        if(colorsToCollect.Count == 0) StartCoroutine(DestroyMe(0.1f));
+    }
+
+    void SetConainerToPearl(SelectionPearl pearl)
+    {
+        pearl.transform.position = pearlsContainers.First().position;
+        pearl.transform.SetParent(pearlsContainers.First());
+        pearlsContainers.RemoveAt(0);
+    }
+
+    PearlCollectedDTO GeneratePearlCollected(SelectionPearl pearl, PlayerSO playerData) =>
+        new PearlCollectedDTO(pearl.GetPowerData(), playerData); 
   
 }

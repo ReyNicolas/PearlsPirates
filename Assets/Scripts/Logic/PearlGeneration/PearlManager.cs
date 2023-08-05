@@ -6,14 +6,15 @@ public class PearlManager : MonoBehaviour
 {
     [SerializeField] MatchSO matchData;
     [SerializeField] GameManager matchManager;
-    PearGenerator pearGenerator;
-    PowerGenerator powerGenerator;
+    PearlGenerator pearGenerator;
+    PearlPowerGenerator powerGenerator;
     PearlsInMatchController pearlsInMatchController;
 
     private void Awake()
     {
-        powerGenerator = new PowerGenerator(matchData.powersDatas);
-        pearGenerator = new PearGenerator(matchData.pearlPrefab, matchManager.positionGenerator, powerGenerator);
+        pearGenerator = new PearlGenerator(matchData.pearlPrefab);
+        powerGenerator = new PearlPowerGenerator(matchData.powersDatas,pearGenerator);
+        matchManager.positionGenerator.AddObjectToListen(pearGenerator);
         pearlsInMatchController = new PearlsInMatchController(matchData, pearGenerator);
     }
 

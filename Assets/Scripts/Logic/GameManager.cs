@@ -5,8 +5,10 @@ using UnityEngine.InputSystem;
 using static UnityEditor.Experimental.GraphView.GraphView;
 using UnityEngine.InputSystem.Users;
 using UnityEngine.InputSystem.XInput;
+using Unity.Mathematics;
+using System;
 
-public class GameManager: MonoBehaviour
+public class GameManager: MonoBehaviour, IGameObjectCreator
 {
     [SerializeField] MatchSO matchData;
     [SerializeField] List<PlayerSO> playersDatas;
@@ -15,25 +17,38 @@ public class GameManager: MonoBehaviour
       public PearlsPointsCalculator pearlsPointsCalculator = new PearlsPointsCalculator();     
     PointsManager pointsManager;
 
+    public event Action<GameObject> OnCreatedInMapGameObject;
+
     private void Awake()
     {
         matchData.Initialize();
         
         positionGenerator.SetDimensions(new Vector2(8, 8));
         positionGenerator.SetCenterTransform(Camera.main.transform);
+        positionGenerator.AddObjectToListen(this);
         pointsManager = new PointsManager(matchData.playersDatas, new List<IPlayerPointsGiver>() { pearlsPointsCalculator });
+        StartPlayers();
     }
 
 
-    private void Start()
+     void StartPlayers()
     {
         var gamepadCount = Gamepad.all.Count;
-        for (int i = 0; i < playersDatas.Count; i++)
+        for (int i = 0; i < math.min(playersDatas.Count,gamepadCount); i++)
         {
-           var playerInput =  Instantiate(playerShipPrefab, positionGenerator.ReturnPosition(), Quaternion.identity).GetComponent<PlayerInput>();
-            playerInput.user.UnpairDevices();
-            InputUser.PerformPairingWithDevice(Gamepad.all[i], user: playerInput.user);
+            var shipGO = Instantiate(playerShipPrefab, Vector3.zero, Quaternion.identity);
+            OnCreatedInMapGameObject?.Invoke(shipGO);
+            SetInput(i, shipGO.GetComponent<PlayerInput>());
+            SetPlayerDataInCollectorManager(playersDatas[i], shipGO.GetComponent<PearlCollectorsManager>());
         }
     }
 
+    void SetPlayerDataInCollectorManager(PlayerSO playerData, PearlCollectorsManager collectorsManager) 
+        => collectorsManager.playerData = playerData;
+
+    void SetInput(int index, PlayerInput playerInput)
+    {
+        playerInput.user.UnpairDevices();
+        InputUser.PerformPairingWithDevice(Gamepad.all[index], user: playerInput.user);
+    }
 }
