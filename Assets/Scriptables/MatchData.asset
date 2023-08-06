@@ -20,13 +20,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6588be7e71e6aff4cafd75edb9b89611, type: 2}
   - {fileID: 11400000, guid: 249d432b378232c45a497ee1fc561077, type: 2}
   pearlPrefab: {fileID: 2638525727010648642, guid: 3ba75d93859f73a42bf98e55e0a05f38, type: 3}
-  totalPointsLimit: 100
-  totalPlayerPointsLimit: 30
+  totalPointsLimit: 30
+  totalPlayerPointsLimit: 10
   timeLeft: 30
   numberPearlsToObtainInScene: 10
   timeToGeneratePearl: 2
   maxNumberOfPearls: 10
-  merchantsInScene: 0
+  merchantsInScene: 2
   timeToGenerateMerchants: 60
   maxNumberOfMerchants: 2
   wind: {x: 0.1, y: 0.1}
+  winnerData:
+    value: {fileID: 11400000, guid: 0bc177a17d13a3b46af33a3d4e86cbec, type: 2}

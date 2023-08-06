@@ -7,6 +7,7 @@ using UnityEngine.InputSystem.Users;
 using UnityEngine.InputSystem.XInput;
 using Unity.Mathematics;
 using System;
+using UniRx;
 
 public class GameManager: MonoBehaviour, IGameObjectCreator
 {
@@ -27,6 +28,15 @@ public class GameManager: MonoBehaviour, IGameObjectCreator
         SetPositionGenerator();
         pointsManager = new PointsManager(matchData.playersDatas, new List<IPlayerPointsGiver>() { pearlsPointsCalculator });
         StartPlayers();
+        matchData.winnerData.Subscribe(value => StopGameIfThereIsWinner(value));
+    }
+
+     void StopGameIfThereIsWinner(PlayerSO playerData)
+    {
+        if(playerData != null)
+        {
+            Time.timeScale = 0;
+        }
     }
 
     void StartPlayers()
