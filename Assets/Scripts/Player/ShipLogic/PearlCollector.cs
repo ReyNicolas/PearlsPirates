@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UniRx;
 
 public class PearlCollector : MonoBehaviour
 {
+    [SerializeField] int id;
+    public PlayerSO playerData;
     SelectionPearl pearl = null;
-    public PlayerSO playerData;   
-   private void OnTriggerStay2D(Collider2D collision)
+
+ 
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.GetComponent<PearlToObtain>() && IsEmpty())
         {
@@ -33,12 +37,18 @@ public class PearlCollector : MonoBehaviour
         pearl.transform.position = transform.position;
         pearl.transform.rotation = transform.rotation;
         pearl.transform.SetParent(transform);
+        pearl.pearlCollector = this;
+        playerData.powersInCollectors[id] = pearl.GetPowerData();
     }
 
     public SelectionPearl GetPearl()=> 
         pearl;
-    public void SetEmpty()=> 
+    public void SetEmpty()
+    {
         pearl = null;
+        playerData.powersInCollectors[id] = null;
+    }
+        
 
     public bool IsEmpty()=> 
         pearl == null;

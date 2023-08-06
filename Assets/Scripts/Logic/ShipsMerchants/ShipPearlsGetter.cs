@@ -11,6 +11,7 @@ public class ShipPearlsGetter : MonoBehaviour
     [SerializeField] List<Transform> pearlsContainers;
     public Action<PearlCollectedDTO> OnSelectionPearlCollected;
     public event Action<ShipPearlsGetter> OnDestroy;
+    public event Action<List<Color>> OnChangeColors;
     public void Initialize(float timeAlive)
     {
         StartCoroutine(DestroyMe(timeAlive));
@@ -30,6 +31,7 @@ public class ShipPearlsGetter : MonoBehaviour
     public void SetColorsToCollect(List<Color> colors)
     {
         colorsToCollect = colors;
+        OnChangeColors?.Invoke(colorsToCollect);
     }
 
 
@@ -49,6 +51,7 @@ public class ShipPearlsGetter : MonoBehaviour
     void CollectThisPearl(SelectionPearl pearl, PlayerSO playerData)
     {
         colorsToCollect.Remove(pearl.GetColor());
+        OnChangeColors?.Invoke(colorsToCollect);
         OnSelectionPearlCollected?.Invoke(GeneratePearlCollected(pearl, playerData));
         SetConainerToPearl(pearl);
         if(colorsToCollect.Count == 0) StartCoroutine(DestroyMe(0.1f));
@@ -61,7 +64,11 @@ public class ShipPearlsGetter : MonoBehaviour
         pearlsContainers.RemoveAt(0);
     }
 
-    PearlCollectedDTO GeneratePearlCollected(SelectionPearl pearl, PlayerSO playerData) =>
-        new PearlCollectedDTO(pearl.GetPowerData(), playerData); 
+    PearlCollectedDTO GeneratePearlCollected(SelectionPearl pearl, PlayerSO playerData)
+    {
+        playerData.pearlsCollectedDatas.Add(pearl.GetPowerData());
+        return new PearlCollectedDTO(pearl.GetPowerData(), playerData); 
+    }
+        
   
 }

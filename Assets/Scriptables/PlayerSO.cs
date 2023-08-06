@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UniRx;
 
 [CreateAssetMenu(fileName = "PlayerData", menuName = "Player Data")]
 public class PlayerSO : ScriptableObject
@@ -8,7 +9,32 @@ public class PlayerSO : ScriptableObject
     public string PlayerName;
     public Color PlayerColor;
     public int PlayerScore;
-    public int PointsToAdd;
-    public List<PearlCollectedDTO> pearlsCollectedDatas;
+    public ReactiveProperty<int> PointsToAdd = new ReactiveProperty<int>(0);
+    public ReactiveCollection<PowerSO> pearlsCollectedDatas = new ReactiveCollection<PowerSO>();
+    public ReactiveDictionary<int, PowerSO> powersInCollectors = new ReactiveDictionary<int, PowerSO> {
+        {0,null },
+        {1,null },
+        {2,null },
+        {3,null },
+        {4,null },
+        {5,null }
+    };
+    public Vector3 position;
 
+    public void Initialize()
+    {
+        PlayerScore = 0;
+        pearlsCollectedDatas.Clear();
+        ResetValuesForRound();
+
+    }
+
+    public void ResetValuesForRound()
+    {
+        PointsToAdd.Value = 0;
+        for (int i = 0; i < powersInCollectors.Count; i++)
+        {
+            powersInCollectors[i] = null;
+        }
+    }
 }

@@ -6,6 +6,7 @@ public class SelectionPearl : MonoBehaviour
 {
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] SpriteRenderer spriteRenderer;
+    public PearlCollector pearlCollector;
     PowerSO powerData;
 
     public void Initialize(PowerSO powerData)
@@ -26,6 +27,7 @@ public class SelectionPearl : MonoBehaviour
     public void Use(ShootLogic shootLogic)
     {
         shootLogic.SetBullet(GenerateBullet());
+        pearlCollector.SetEmpty();
     }
 
     BulletLogic GenerateBullet()

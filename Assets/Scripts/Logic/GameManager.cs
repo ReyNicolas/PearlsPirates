@@ -21,17 +21,15 @@ public class GameManager: MonoBehaviour, IGameObjectCreator
 
     private void Awake()
     {
+        Application.targetFrameRate = 60; // Establece el máximo de FPS a 60
         matchData.Initialize();
-        
-        positionGenerator.SetDimensions(new Vector2(8, 8));
-        positionGenerator.SetCenterTransform(Camera.main.transform);
-        positionGenerator.AddObjectToListen(this);
+
+        SetPositionGenerator();
         pointsManager = new PointsManager(matchData.playersDatas, new List<IPlayerPointsGiver>() { pearlsPointsCalculator });
         StartPlayers();
     }
 
-
-     void StartPlayers()
+    void StartPlayers()
     {
         var gamepadCount = Gamepad.all.Count;
         for (int i = 0; i < math.min(playersDatas.Count,gamepadCount); i++)
@@ -40,7 +38,14 @@ public class GameManager: MonoBehaviour, IGameObjectCreator
             OnCreatedInMapGameObject?.Invoke(shipGO);
             SetInput(i, shipGO.GetComponent<PlayerInput>());
             SetPlayerDataInCollectorManager(playersDatas[i], shipGO.GetComponent<PearlCollectorsManager>());
+            playersDatas[i].Initialize();
         }
+    }
+    void SetPositionGenerator()
+    {
+        positionGenerator.SetDimensions(new Vector2(8, 8));
+        positionGenerator.SetCenterTransform(Camera.main.transform);
+        positionGenerator.AddObjectToListen(this);
     }
 
     void SetPlayerDataInCollectorManager(PlayerSO playerData, PearlCollectorsManager collectorsManager) 

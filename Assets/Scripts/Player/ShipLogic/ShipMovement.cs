@@ -14,11 +14,7 @@ public class ShipMovement : MonoBehaviour
     [SerializeField] Vector2 movement;
     [SerializeField] PlayerInput playerInput;
 
-    private void Awake()
-    {
-        Application.targetFrameRate = 60;
-    }
-
+   
     private void Start()
     {
         InvokeRepeating("ReduceVelocities", 0, timeToWaitReduce);

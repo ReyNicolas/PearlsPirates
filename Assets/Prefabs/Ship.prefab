@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b3cec2b70e7d144907535b83569212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 1
   playerData: {fileID: 0}
 --- !u!61 &5452052812481330090
 BoxCollider2D:
@@ -255,6 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b3cec2b70e7d144907535b83569212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 5
   playerData: {fileID: 0}
 --- !u!61 &2913010480863023194
 BoxCollider2D:
@@ -546,6 +548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b3cec2b70e7d144907535b83569212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   playerData: {fileID: 0}
 --- !u!61 &6087191353150020843
 BoxCollider2D:
@@ -5493,7 +5496,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 9ccc45b33a7444b44877f4e7120b471e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5593,7 +5596,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 04cdc39bb3ddb1c469a7e795f07f0425, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5938,6 +5941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b3cec2b70e7d144907535b83569212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 2
   playerData: {fileID: 0}
 --- !u!61 &2225411788024464893
 BoxCollider2D:
@@ -6029,6 +6033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b3cec2b70e7d144907535b83569212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 3
   playerData: {fileID: 0}
 --- !u!61 &3989541828415937067
 BoxCollider2D:
@@ -6157,6 +6162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b3cec2b70e7d144907535b83569212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 4
   playerData: {fileID: 0}
 --- !u!61 &4418922495436084659
 BoxCollider2D:

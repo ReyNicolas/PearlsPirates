@@ -13,4 +13,8 @@ public class PearlCollectorsManager : MonoBehaviour
         collectors.ForEach(c => c.playerData = playerData);
     }
 
+    private void Update()
+    {
+        playerData.position = transform.position;
+    }
 }

@@ -12,6 +12,6 @@ public class PointsManager
         this.pointsGivers.ForEach(pg => pg.OnGivePlayerPoints += AddPointsToPlayer);
     }   
     void AddPointsToPlayer(string playerName, int points) =>
-        playersDatas.Find(pd => pd.PlayerName == playerName).PointsToAdd += points;
+        playersDatas.Find(pd => pd.PlayerName == playerName).PointsToAdd.Value += points;
 }
 
