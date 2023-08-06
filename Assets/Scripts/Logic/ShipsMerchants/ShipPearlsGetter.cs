@@ -23,7 +23,6 @@ public class ShipPearlsGetter : MonoBehaviour
         OnDestroy?.Invoke(this);
         Destroy(gameObject);
     }
-
     public int GetNumberOfContainers()
     {
         return pearlsContainers.Count;
@@ -35,26 +34,37 @@ public class ShipPearlsGetter : MonoBehaviour
     }
 
 
-    public bool TryToCollectThisPearlFromThisPlayer (SelectionPearl pearl, PlayerSO playerData)
-    {        
-        if (NeedsToCollectThisColor(pearl.GetColor()))
+    public void TryToCollectThisPearlsFromThisPlayerData(List<SelectionPearl> selectionPearls, PlayerSO playerData)
+    {
+        List<SelectionPearl> pearlsToSelect = selectionPearls;
+        List<SelectionPearl> pearlsToCollect = new List<SelectionPearl>();
+        
+        for(int i = 0; i < colorsToCollect.Count; i++)
         {
-            CollectThisPearl(pearl,playerData);
-            return true;
+            var pearl = pearlsToSelect.Find(ps => ps.GetPowerData().PowerColor == colorsToCollect[i]);
+            if (pearl != null) 
+            {
+                pearlsToCollect.Add(pearl);
+                pearlsToSelect.Remove(pearl);
+            }
         }
-        return false;        
+        if (pearlsToCollect.Count == colorsToCollect.Count) CollectPearls(pearlsToCollect, playerData);
+
     }
 
-    bool NeedsToCollectThisColor(Color color) =>
-        colorsToCollect.Contains(color);
+    void CollectPearls(List<SelectionPearl> pearlsSelected, PlayerSO playerData)
+    {
+        pearlsSelected.ForEach(ps => CollectThisPearl(ps, playerData));
+        colorsToCollect.Clear();
+        OnChangeColors?.Invoke(colorsToCollect);
+        StopCoroutine("DestroyMe");
+        StartCoroutine(DestroyMe(0.1f));
+    }
 
     void CollectThisPearl(SelectionPearl pearl, PlayerSO playerData)
     {
-        colorsToCollect.Remove(pearl.GetColor());
-        OnChangeColors?.Invoke(colorsToCollect);
         OnSelectionPearlCollected?.Invoke(GeneratePearlCollected(pearl, playerData));
         SetConainerToPearl(pearl);
-        if(colorsToCollect.Count == 0) StartCoroutine(DestroyMe(0.1f));
     }
 
     void SetConainerToPearl(SelectionPearl pearl)
@@ -69,6 +79,5 @@ public class ShipPearlsGetter : MonoBehaviour
         playerData.pearlsCollectedDatas.Add(pearl.GetPowerData());
         return new PearlCollectedDTO(pearl.GetPowerData(), playerData); 
     }
-        
-  
+
 }

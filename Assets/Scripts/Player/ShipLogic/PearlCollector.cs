@@ -8,36 +8,28 @@ public class PearlCollector : MonoBehaviour
 {
     [SerializeField] int id;
     public PlayerSO playerData;
-    SelectionPearl pearl = null;
+    public SelectionPearl pearl = null;
 
- 
-    private void OnTriggerStay2D(Collider2D collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<PearlToObtain>() && IsEmpty())
+        if (collision.GetComponent<SelectionPearl>() && IsEmpty())
         {
-            PearlToObtain pearlToObtain = collision.GetComponent<PearlToObtain>();
-
-            if (pearlToObtain.HavePearl())
-            {
-                SetPearl(pearlToObtain.GiveMeYourPearl());
-            }
+            SetPearl(collision.GetComponent<SelectionPearl>());
         }
-        if(collision.GetComponent<ShipPearlsGetter>() && !IsEmpty())
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.GetComponent<SelectionPearl>() == pearl)
         {
-            if (collision.GetComponent<ShipPearlsGetter>().TryToCollectThisPearlFromThisPlayer(pearl, playerData))
-            {
-                SetEmpty();
-            }
+            SetEmpty();
         }
     }
 
     void SetPearl(SelectionPearl pearl)
     {
         this.pearl = pearl;
-        pearl.transform.position = transform.position;
-        pearl.transform.rotation = transform.rotation;
-        pearl.transform.SetParent(transform);
-        pearl.pearlCollector = this;
         playerData.powersInCollectors[id] = pearl.GetPowerData();
     }
 

@@ -13,19 +13,25 @@ public class ShipMovement : MonoBehaviour
     [SerializeField]  float timeToWaitReduce = 0.2f;
     [SerializeField] Vector2 movement;
     [SerializeField] PlayerInput playerInput;
+    public PlayerSO playerData;
 
    
     private void Start()
     {
         InvokeRepeating("ReduceVelocities", 0, timeToWaitReduce);
+
     }
 
     private void Update()
     {
         movement = Vector2.ClampMagnitude(playerInput.actions["Move"].ReadValue<Vector2>(), 1f);
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.relativeVelocity.magnitude>=1) GetComponent<AudioSource>().Play();
+    }
 
-
+    
     private void FixedUpdate()
     {
         MoveShip(movement);        
@@ -42,6 +48,7 @@ public class ShipMovement : MonoBehaviour
     {
         actualSpeed = rigidbody2D.velocity.magnitude;
         if (actualSpeed > maxSpeed)rigidbody2D.velocity = rigidbody2D.velocity.normalized * maxSpeed;
+        playerData.actualSpeed.Value = actualSpeed;
     }
           
 

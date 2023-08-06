@@ -28,7 +28,8 @@ public class PositionGenerator
         while (true)
         {
             var position = GenerateRandomPosition();
-            if(!Physics2D.BoxCast(position, Vector2.one, 0, Vector2.zero, 0.1f))  return position;
+            if (!Physics2D.BoxCast(position, Vector2.one, 0, Vector2.zero, 0.1f)) return position;
+            else Debug.Log("no position");
         }        
     }
 

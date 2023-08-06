@@ -11,12 +11,8 @@ public class ShootLogic : MonoBehaviour
     [SerializeField] SelectionPearl selectionPearl;
     [SerializeField] float shootSpeed = 1f;
     [SerializeField] float waitAfterShot = 0.5f;
-
-    //private void Update()
-    //{
-    //    Shoot();
-    //}
-
+    [SerializeField] AudioSource shootAudioSource;
+    [SerializeField] ParticleSystem particleSystem;
     public void Shoot()
     {
      
@@ -24,7 +20,9 @@ public class ShootLogic : MonoBehaviour
         {
             FreezeAim();
             UsePearlSelected();
-            LaunchBullet();            
+            LaunchBullet();       
+            shootAudioSource.Play();
+            particleSystem.Play();
         }
     }
 

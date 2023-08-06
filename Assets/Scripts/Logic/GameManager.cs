@@ -23,33 +23,12 @@ public class GameManager: MonoBehaviour, IGameObjectCreator
     private void Awake()
     {
         Application.targetFrameRate = 60; // Establece el máximo de FPS a 60
-        matchData.Initialize();
 
+        matchData.Initialize();
         SetPositionGenerator();
-        pointsManager = new PointsManager(matchData.playersDatas, new List<IPlayerPointsGiver>() { pearlsPointsCalculator });
+        SetPointManager();
         StartPlayers();
         matchData.winnerData.Subscribe(value => StopGameIfThereIsWinner(value));
-    }
-
-     void StopGameIfThereIsWinner(PlayerSO playerData)
-    {
-        if(playerData != null)
-        {
-            Time.timeScale = 0;
-        }
-    }
-
-    void StartPlayers()
-    {
-        var gamepadCount = Gamepad.all.Count;
-        for (int i = 0; i < math.min(playersDatas.Count,gamepadCount); i++)
-        {
-            var shipGO = Instantiate(playerShipPrefab, Vector3.zero, Quaternion.identity);
-            OnCreatedInMapGameObject?.Invoke(shipGO);
-            SetInput(i, shipGO.GetComponent<PlayerInput>());
-            SetPlayerDataInCollectorManager(playersDatas[i], shipGO.GetComponent<PearlCollectorsManager>());
-            playersDatas[i].Initialize();
-        }
     }
     void SetPositionGenerator()
     {
@@ -57,13 +36,41 @@ public class GameManager: MonoBehaviour, IGameObjectCreator
         positionGenerator.SetCenterTransform(Camera.main.transform);
         positionGenerator.AddObjectToListen(this);
     }
-
-    void SetPlayerDataInCollectorManager(PlayerSO playerData, PearlCollectorsManager collectorsManager) 
-        => collectorsManager.playerData = playerData;
-
+    void SetPointManager()
+        => pointsManager = new PointsManager(matchData.playersDatas, new List<IPlayerPointsGiver>() { pearlsPointsCalculator });
+    void StartPlayers()
+    {
+        var gamepadCount = Gamepad.all.Count;
+        for (int i = 0; i < math.min(playersDatas.Count, gamepadCount); i++)
+        {
+            var shipGO = Instantiate(playerShipPrefab, Vector3.zero, Quaternion.identity);
+            OnCreatedInMapGameObject?.Invoke(shipGO);
+            SetInput(i, shipGO.GetComponent<PlayerInput>());
+            SetPlayerDataInShip(playersDatas[i], shipGO.GetComponent<PearlCollectorsManager>(),shipGO.GetComponent<ShipMovement>());
+            playersDatas[i].Initialize();
+        }
+    }
+    void SetPlayerDataInShip(PlayerSO playerData, PearlCollectorsManager collectorsManager, ShipMovement shipMovement)
+    {
+        collectorsManager.playerData = playerData;
+        shipMovement.playerData = playerData;
+    } 
     void SetInput(int index, PlayerInput playerInput)
     {
         playerInput.user.UnpairDevices();
         InputUser.PerformPairingWithDevice(Gamepad.all[index], user: playerInput.user);
     }
+
+    void StopGameIfThereIsWinner(PlayerSO playerData)
+    {
+        if(playerData != null)
+        {
+            Time.timeScale = 0;
+        }
+    }
+
+   
+   
+   
+   
 }

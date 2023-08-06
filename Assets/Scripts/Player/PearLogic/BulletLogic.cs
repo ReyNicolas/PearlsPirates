@@ -8,6 +8,10 @@ public class BulletLogic: MonoBehaviour
     [SerializeField] Vector3 finalPosition = Vector3.zero;
     [SerializeField] bool isMoving;
     [SerializeField] Rigidbody2D rigidbody2D;
+    [SerializeField] ParticleSystem particleSystem;
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] GameObject CreationEffectPrefab;
+
     PowerSO powerData;
 
     public void Initialize(PowerSO powerData)
@@ -41,6 +45,8 @@ public class BulletLogic: MonoBehaviour
     {
         yield return new WaitForSeconds(powerData.TimeToStart);
         Instantiate(powerData.PowerPrefab, transform.position, transform.rotation);
+        Destroy(Instantiate(CreationEffectPrefab, transform.position, Quaternion.identity),1.5f);
+
         Destroy(gameObject);
     }
 
@@ -65,7 +71,9 @@ public class BulletLogic: MonoBehaviour
         if (isMoving)
         {
             isMoving=false;
-            rigidbody2D.AddForce(transform.up * actualSpeed / 10, ForceMode2D.Impulse);
+            particleSystem.Play();
+            audioSource.Play();
+            rigidbody2D.AddForce(transform.up * actualSpeed / 10, ForceMode2D.Impulse);            
             this.enabled = false;
         }
     }

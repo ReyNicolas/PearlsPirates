@@ -13,10 +13,8 @@ public class ColorGenerator {
         shipPearlsGetterGenerator.OnCreatedMerchant += AddColorsToMerchant; 
     }
 
-    void AddColorsToMerchant(ShipPearlsGetter shipPearlsGetter)
-    {
-        shipPearlsGetter.SetColorsToCollect( GetThisNumberOfRandomColors(shipPearlsGetter.GetNumberOfContainers()) );
-    }
+    void AddColorsToMerchant(ShipPearlsGetter shipPearlsGetter) 
+        => shipPearlsGetter.SetColorsToCollect(GetThisNumberOfRandomColors(shipPearlsGetter.GetNumberOfContainers()));
 
     List<Color> GetThisNumberOfRandomColors(int number)
     {
@@ -33,16 +31,6 @@ public class ColorGenerator {
 
     int GetRandom<T>(List<T> list) =>
         Random.Range(0, list.Count);
-
-    //public void AddThisColors(List<Color> colors) 
-    //{
-    //    this.colors.AddRange(colors);
-    //}
-
-    //public void ClearThisColor(Color color) 
-    //{
-    //    colors.RemoveAll(c => c == color);
-    //}
 
 
 }

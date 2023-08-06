@@ -20,6 +20,7 @@ public class PlayerSO : ScriptableObject
         {5,null }
     };
     public Vector3 position;
+    public ReactiveProperty<float> actualSpeed = new ReactiveProperty<float>(0);
 
     public void Initialize()
     {
@@ -32,6 +33,7 @@ public class PlayerSO : ScriptableObject
     public void ResetValuesForRound()
     {
         PointsToAdd.Value = 0;
+        actualSpeed.Value = 0;
         for (int i = 0; i < powersInCollectors.Count; i++)
         {
             powersInCollectors[i] = null;
