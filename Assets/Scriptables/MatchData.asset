@@ -21,7 +21,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 249d432b378232c45a497ee1fc561077, type: 2}
   pearlPrefab: {fileID: 2638525727010648642, guid: 3ba75d93859f73a42bf98e55e0a05f38, type: 3}
   totalPointsLimit: 30
-  totalPlayerPointsLimit: 10
+  totalPlayerPointsLimit: 3
   timeLeft: 30
   numberPearlsToObtainInScene: 10
   timeToGeneratePearl: 2

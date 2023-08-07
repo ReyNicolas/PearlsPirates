@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b41b319459394247a963a0c46781cd2, type: 3}
   m_Name: Player4Data
   m_EditorClassIdentifier: 
-  PlayerName: Purple
+  PlayerName: Purple Player
   PlayerColor: {r: 0.5019608, g: 0, b: 0.5019608, a: 1}
   PlayerScore: 0
-  PointsToAdd: 0
+  PointsToAdd:
+    value: 0
+  position: {x: 0, y: 0, z: 0}
+  actualSpeed:
+    value: 0

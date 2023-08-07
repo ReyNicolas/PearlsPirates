@@ -14,6 +14,7 @@ public class ShipPearlsGetter : MonoBehaviour
     public event Action<List<Color>> OnChangeColors;
     public void Initialize(float timeAlive)
     {
+        StopCoroutine("DestroyMe");
         StartCoroutine(DestroyMe(timeAlive));
     }
      

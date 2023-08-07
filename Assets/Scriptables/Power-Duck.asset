@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2466f14fcadc54aa8ed6682135b254, type: 3}
   m_Name: Power-Duck
   m_EditorClassIdentifier: 
-  PowerColor: {r: 1, g: 1, b: 0, a: 0.74509805}
+  PowerColor: {r: 1, g: 1, b: 0, a: 0.8627451}
   PowerPrefab: {fileID: 8026774802749510680, guid: 23cd31b48f072184aaaa49dfa578070a, type: 3}
   TimeToStart: 2
   sprite: {fileID: 21300000, guid: c4e36e2b5ee0e3d4ca930b7241fd3aba, type: 3}

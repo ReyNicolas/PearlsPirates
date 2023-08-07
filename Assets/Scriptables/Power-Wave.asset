@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2466f14fcadc54aa8ed6682135b254, type: 3}
   m_Name: Power-Wave
   m_EditorClassIdentifier: 
-  PowerColor: {r: 0, g: 0, b: 1, a: 0.74509805}
+  PowerColor: {r: 0, g: 0, b: 1, a: 0.8627451}
   PowerPrefab: {fileID: 1427411701510591610, guid: dda4f4f4aa6c56a48a54d8610f4bf807, type: 3}
   TimeToStart: 2
   sprite: {fileID: 1031816897, guid: ebe00e73b65d3c74e808c4fff9edc7d1, type: 3}
