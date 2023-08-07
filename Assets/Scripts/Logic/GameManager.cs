@@ -2,9 +2,7 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.Experimental.GraphView.GraphView;
 using UnityEngine.InputSystem.Users;
-using UnityEngine.InputSystem.XInput;
 using Unity.Mathematics;
 using System;
 using UniRx;
@@ -12,7 +10,7 @@ using UniRx;
 public class GameManager: MonoBehaviour, IGameObjectCreator
 {
     [SerializeField] MatchSO matchData;
-    [SerializeField] List<PlayerSO> playersDatas;
+    List<PlayerSO> playersDatas;
     [SerializeField] GameObject playerShipPrefab;
     public PositionGenerator positionGenerator = new PositionGenerator();
       public PearlsPointsCalculator pearlsPointsCalculator = new PearlsPointsCalculator();     
@@ -22,6 +20,7 @@ public class GameManager: MonoBehaviour, IGameObjectCreator
 
     private void Awake()
     {
+        playersDatas = matchData.playersDatas;
         Application.targetFrameRate = 60; // Establece el máximo de FPS a 60
 
         matchData.Initialize();

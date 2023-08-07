@@ -8,11 +8,17 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] ResultUI resultUI;
     [SerializeField] MatchSO matchData;
+    [SerializeField] List<GameObject> playerPanels;
 
 
     private void Start()
     {
         matchData.winnerData.Subscribe(value => SetResult(value));
+
+        for(int i = 0; i < matchData.playersDatas.Count; i++)
+        {
+            playerPanels[i].SetActive(true);
+        }
     }
 
     void SetResult(PlayerSO playerData)
@@ -24,10 +30,3 @@ public class UIManager : MonoBehaviour
     }
 }
 
-//public class PlayerResultUI : MonoBehaviour
-//{
-//    public void ShowResult(PlayerSO playerData)
-//    {
-        
-//    }
-//}
