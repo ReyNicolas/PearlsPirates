@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ff685d01e1134b54187ab48c929ff05a
+guid: e90a279cad35ea347b92efd26dd1e6d1
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -127,9 +127,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 139
-        width: 455
-        height: 718
+        y: 179
+        width: 570
+        height: 827
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,8 +137,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3ef68b46ed65d4459454ce699b97142
-      internalID: 1597915716
+      spriteID: be6127237e8664a4cb808493a04940e9
+      internalID: -999071154
       vertices: []
       indices: 
       edges: []
@@ -147,10 +147,10 @@ TextureImporter:
       name: Isles_1
       rect:
         serializedVersion: 2
-        x: 659
+        x: 713
         y: 0
-        width: 616
-        height: 1104
+        width: 754
+        height: 1296
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,8 +158,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b0609c704b9a6c42809f2ee80500612
-      internalID: -598608425
+      spriteID: 9d1bdbe11cc77f742b9fd473e6c5a1fa
+      internalID: 1172773472
       vertices: []
       indices: 
       edges: []
@@ -168,10 +168,10 @@ TextureImporter:
       name: Isles_2
       rect:
         serializedVersion: 2
-        x: 1437
-        y: 275
-        width: 499
-        height: 606
+        x: 1561
+        y: 292
+        width: 639
+        height: 776
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,8 +179,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fd1217b3830c1854e8430babe955947e
-      internalID: 725649267
+      spriteID: 93c03eaf82525814080b15da3aa4a1eb
+      internalID: -809732106
       vertices: []
       indices: 
       edges: []
@@ -196,9 +196,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Isles_0: 1597915716
-      Isles_1: -598608425
-      Isles_2: 725649267
+      Isles_0: -999071154
+      Isles_1: 1172773472
+      Isles_2: -809732106
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

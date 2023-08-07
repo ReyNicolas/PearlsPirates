@@ -11,13 +11,14 @@ public class BulletLogic: MonoBehaviour
     [SerializeField] ParticleSystem particleSystem;
     [SerializeField] AudioSource audioSource;
     [SerializeField] GameObject CreationEffectPrefab;
+    [SerializeField] SpriteRenderer spriteRenderer;
 
     PowerSO powerData;
 
     public void Initialize(PowerSO powerData)
     {
         this.powerData = powerData;
-        GetComponent<SpriteRenderer>().color = powerData.PowerColor;
+        spriteRenderer.color = powerData.PowerColor;
     }
 
     private void Update()

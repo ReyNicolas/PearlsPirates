@@ -30,6 +30,9 @@ public class GameManager: MonoBehaviour, IGameObjectCreator
         StartPlayers();
         matchData.winnerData.Subscribe(value => StopGameIfThereIsWinner(value));
     }
+
+
+
     void SetPositionGenerator()
     {
         positionGenerator.SetDimensions(new Vector2(8, 8));
@@ -71,6 +74,7 @@ public class GameManager: MonoBehaviour, IGameObjectCreator
 
    
    
+
    
    
 }

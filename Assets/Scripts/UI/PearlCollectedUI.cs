@@ -6,6 +6,7 @@ public class PearlCollectedUI: MonoBehaviour
 {
     [SerializeField] float timeAlive;
     Image image;
+    [SerializeField]Image cover;
 
     private void Start()
     {
@@ -30,10 +31,16 @@ public class PearlCollectedUI: MonoBehaviour
         int inc = 0;
         while (true)
         {
-            image.color = new Color(image.color.r, image.color.r, image.color.b, 1 -(0.1f * inc));
-            yield return new WaitForSeconds(timeAlive/10);
+            ReduceAlpha(image,inc);
+            ReduceAlpha(cover, inc);
+            yield return new WaitForSeconds(timeAlive / 10);
             inc++;
         }
-        
+
+    }
+
+    private void ReduceAlpha(Image imageToReduceColor, int inc)
+    {
+        imageToReduceColor.color = new Color(imageToReduceColor.color.r, imageToReduceColor.color.b, imageToReduceColor.color.b, 1 - (0.1f * inc));
     }
 }

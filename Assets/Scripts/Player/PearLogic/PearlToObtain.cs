@@ -7,6 +7,7 @@ public class PearlToObtain : MonoBehaviour
     [SerializeField] GameObject pearlSelectionPrefab;
     [SerializeField] bool havePearl = true;
     [SerializeField] PowerSO powerData;
+    [SerializeField] SpriteRenderer spriteRenderer;
     public event Action<PearlToObtain> OnDestroy;
     Rigidbody2D rigidbody2D;
 
@@ -17,7 +18,7 @@ public class PearlToObtain : MonoBehaviour
     public void Initialize(PowerSO powerData)
     {
         this.powerData = powerData;
-       GetComponent<SpriteRenderer>().color = powerData.PowerColor;
+        spriteRenderer.color = powerData.PowerColor;
     }
     public bool HavePearl()=> 
         havePearl;

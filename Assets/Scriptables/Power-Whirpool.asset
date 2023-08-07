@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2466f14fcadc54aa8ed6682135b254, type: 3}
   m_Name: Power-Whirpool
   m_EditorClassIdentifier: 
-  PowerColor: {r: 1, g: 0, b: 0.80549717, a: 1}
+  PowerColor: {r: 1, g: 0, b: 0.80549717, a: 0.74509805}
   PowerPrefab: {fileID: 2541412941404171679, guid: 1853b4aa42f40d244885379a8bb8048f, type: 3}
   TimeToStart: 2
   sprite: {fileID: 21300000, guid: 0206d84ed7f60424181da0968c6fa333, type: 3}

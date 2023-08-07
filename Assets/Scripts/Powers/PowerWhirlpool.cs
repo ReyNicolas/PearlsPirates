@@ -11,6 +11,7 @@ public class PowerWhirlpool : MonoBehaviour
         Destroy(gameObject, timeAlive);
     }
 
+   
 
     private void OnTriggerStay2D(Collider2D collision)
     {
