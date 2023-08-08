@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ShipMovement : MonoBehaviour
+public class ShipMovement : MonoBehaviour, IDestroy
 {
     [SerializeField] Rigidbody2D rigidbody2D;
     [SerializeField] float acSpeed = 10.0f;
@@ -15,7 +16,8 @@ public class ShipMovement : MonoBehaviour
     [SerializeField] PlayerInput playerInput;
     public PlayerSO playerData;
 
-   
+    public event Action<GameObject> onDestroy;
+
     private void Start()
     {
         InvokeRepeating("ReduceVelocities", 0, timeToWaitReduce);
@@ -58,4 +60,9 @@ public class ShipMovement : MonoBehaviour
         rigidbody2D.velocity *=  0.8f;
     }
 
+    public void Destroy()
+    {
+        onDestroy?.Invoke(gameObject);
+        gameObject.SetActive(false);
+    }
 }

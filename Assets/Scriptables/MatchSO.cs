@@ -10,7 +10,9 @@ public class MatchSO : ScriptableObject
     [Header("Data")]
     public List<PlayerSO> playersDatas;
     public List<PowerSO> powersDatas;
+    public GameObject playerShipPrefab;
     public GameObject pearlPrefab;
+    public GameObject instantPearlPrefab;
     [Header("End conditions Settings")]
     public int totalPointsLimit;
     public int totalPlayerPointsLimit;

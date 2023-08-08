@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public class PowerWhale : MonoBehaviour
+public class PowerWhale : MonoBehaviour, IDestroy
 {
     [SerializeField] float speed;
     [SerializeField] Transform targetTransform;
     [SerializeField] float timeAlive;
 
+    public event Action<GameObject> onDestroy;
 
     public void Start()
     {
@@ -29,4 +31,9 @@ public class PowerWhale : MonoBehaviour
         }
     }
 
+    public void Destroy()
+    {
+        Destroy(gameObject);
+        onDestroy?.Invoke(gameObject);
+    }
 }

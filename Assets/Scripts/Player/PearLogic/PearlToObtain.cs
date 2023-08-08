@@ -2,13 +2,15 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class PearlToObtain : MonoBehaviour
+public class PearlToObtain : MonoBehaviour, IDestroy
 {
     [SerializeField] GameObject pearlSelectionPrefab;
     [SerializeField] bool havePearl = true;
     [SerializeField] PowerSO powerData;
     [SerializeField] SpriteRenderer spriteRenderer;
     public event Action<PearlToObtain> OnDestroy;
+    public event Action<GameObject> onDestroy;
+
     Rigidbody2D rigidbody2D;
 
     private void Awake()
@@ -49,5 +51,8 @@ public class PearlToObtain : MonoBehaviour
         Destroy(gameObject);
     }
 
-
+    public void Destroy()
+    {
+        StartCoroutine(DestroyMe());
+    }
 }

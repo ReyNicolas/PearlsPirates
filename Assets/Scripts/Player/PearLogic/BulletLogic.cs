@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class BulletLogic: MonoBehaviour
+public class BulletLogic: MonoBehaviour, IDestroy
 {
     [SerializeField] float actualSpeed;
     [SerializeField] Vector3 finalPosition = Vector3.zero;
@@ -14,6 +14,8 @@ public class BulletLogic: MonoBehaviour
     [SerializeField] SpriteRenderer spriteRenderer;
 
     PowerSO powerData;
+
+    public event Action<GameObject> onDestroy;
 
     public void Initialize(PowerSO powerData)
     {
@@ -78,5 +80,9 @@ public class BulletLogic: MonoBehaviour
             this.enabled = false;
         }
     }
-    
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
+    }
 }

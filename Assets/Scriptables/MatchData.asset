@@ -19,7 +19,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ce51a1afa3e6169479eb7d7b4a4cd722, type: 2}
   - {fileID: 11400000, guid: 6588be7e71e6aff4cafd75edb9b89611, type: 2}
   - {fileID: 11400000, guid: 249d432b378232c45a497ee1fc561077, type: 2}
+  playerShipPrefab: {fileID: 7126736621012607696, guid: 613d43e712cb11048bbdf2f04932d8e5, type: 3}
   pearlPrefab: {fileID: 2638525727010648642, guid: 3ba75d93859f73a42bf98e55e0a05f38, type: 3}
+  instantPearlPrefab: {fileID: 2638525727010648642, guid: ef57218a4084c9a4784b2d6973edf963, type: 3}
   totalPointsLimit: 30
   totalPlayerPointsLimit: 3
   timeLeft: 30
@@ -31,4 +33,4 @@ MonoBehaviour:
   maxNumberOfMerchants: 2
   wind: {x: 0.1, y: 0.1}
   winnerData:
-    value: {fileID: 11400000, guid: 0bc177a17d13a3b46af33a3d4e86cbec, type: 2}
+    value: {fileID: 0}

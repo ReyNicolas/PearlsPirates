@@ -13,6 +13,7 @@ public class HomeMenuManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI playerPointsLabel;
     [SerializeField] TextMeshProUGUI matchPointsLabel;
     [SerializeField] TextMeshProUGUI gamepadCount;
+    [SerializeField] TextMeshProUGUI errorMessage;
 
     private void Start()
     {
@@ -33,6 +34,11 @@ public class HomeMenuManager : MonoBehaviour
 
     public void StartMatch()
     {
+        if (Gamepad.all.Count == 0) 
+            {
+                errorMessage.text = "Add at least one gamepad";
+            return;
+            }
         matchData.playersDatas = playersDatas.Take(Gamepad.all.Count).ToList();
         SceneManager.LoadScene("MatchScene");
     }

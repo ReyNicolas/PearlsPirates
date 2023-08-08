@@ -10,32 +10,37 @@ using UniRx;
 public class GameManager: MonoBehaviour, IGameObjectCreator
 {
     [SerializeField] MatchSO matchData;
-    List<PlayerSO> playersDatas;
-    [SerializeField] GameObject playerShipPrefab;
+    public  PlayerRespawnGenerator respawnGenerator;
     public PositionGenerator positionGenerator = new PositionGenerator();
-      public PearlsPointsCalculator pearlsPointsCalculator = new PearlsPointsCalculator();     
+    public PearlsPointsCalculator pearlsPointsCalculator = new PearlsPointsCalculator();     
     PointsManager pointsManager;
+    List<PlayerSO> playersDatas;
 
     public event Action<GameObject> OnCreatedInMapGameObject;
 
     private void Awake()
     {
+
         playersDatas = matchData.playersDatas;
         Application.targetFrameRate = 60; // Establece el máximo de FPS a 60
-
+       
         matchData.Initialize();
         SetPositionGenerator();
         SetPointManager();
+        SetRespawnGenerator();
         StartPlayers();
         matchData.winnerData.Subscribe(value => StopGameIfThereIsWinner(value));
     }
 
-
+    void SetRespawnGenerator()
+    {
+        respawnGenerator = new PlayerRespawnGenerator(matchData.instantPearlPrefab);
+        positionGenerator.AddObjectToListen(respawnGenerator);
+    }
 
     void SetPositionGenerator()
     {
-        positionGenerator.SetDimensions(new Vector2(8, 8));
-        positionGenerator.SetCenterTransform(Camera.main.transform);
+        positionGenerator.SetDimension();
         positionGenerator.AddObjectToListen(this);
     }
     void SetPointManager()
@@ -45,15 +50,16 @@ public class GameManager: MonoBehaviour, IGameObjectCreator
         var gamepadCount = Gamepad.all.Count;
         for (int i = 0; i < math.min(playersDatas.Count, gamepadCount); i++)
         {
-            var shipGO = Instantiate(playerShipPrefab, Vector3.zero, Quaternion.identity);
+            var shipGO = Instantiate(matchData.playerShipPrefab, Vector3.zero, Quaternion.identity);
+            SetPlayerDataInShip(playersDatas[i], shipGO.GetComponent<PearlCollectorsManager>(), shipGO.GetComponent<ShipMovement>());            
             OnCreatedInMapGameObject?.Invoke(shipGO);
-            SetInput(i, shipGO.GetComponent<PlayerInput>());
-            SetPlayerDataInShip(playersDatas[i], shipGO.GetComponent<PearlCollectorsManager>(),shipGO.GetComponent<ShipMovement>());
-            playersDatas[i].Initialize();
+            respawnGenerator.Listen(shipGO.GetComponent<IDestroy>());
+            SetInput(i, shipGO.GetComponent<PlayerInput>());           
         }
     }
     void SetPlayerDataInShip(PlayerSO playerData, PearlCollectorsManager collectorsManager, ShipMovement shipMovement)
     {
+        playerData.Initialize();
         collectorsManager.playerData = playerData;
         shipMovement.playerData = playerData;
     } 
