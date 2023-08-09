@@ -8,6 +8,8 @@ using System;
 public class MatchSO : ScriptableObject
 {
     [Header("Data")]
+    public string homeMenuScene;
+    public string matchScene;
     public List<PlayerSO> playersDatas;
     public List<PowerSO> powersDatas;
     public GameObject playerShipPrefab;

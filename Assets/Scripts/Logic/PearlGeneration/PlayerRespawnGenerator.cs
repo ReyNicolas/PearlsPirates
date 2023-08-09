@@ -18,8 +18,9 @@ public class PlayerRespawnGenerator : IGameObjectCreator
     public void CreateInstantPearl(GameObject content)
     {
         var instantPearlGenerated = GameObject.Instantiate(instantPearlPrefab, Vector3.zero, Quaternion.identity).GetComponent<InstantPearl>();
-        instantPearlGenerated.SetContent(content);
         OnCreatedInMapGameObject?.Invoke(instantPearlGenerated.gameObject);
+        instantPearlGenerated.SetContent(content);
+       
     }
 
 }

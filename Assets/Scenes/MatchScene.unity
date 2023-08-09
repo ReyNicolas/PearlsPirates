@@ -247,6 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad2cbfdc1409b584f9dd62a0e11fe602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisappearEffectPrefab: {fileID: 2682294502332081795, guid: 3e4136b0dd6c86f458044af25809a0b5, type: 3}
 --- !u!61 &43690671
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -290,7 +291,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 35.5, y: 0.2}
+  m_Size: {x: 38, y: 0.2}
   m_EdgeRadius: 0
 --- !u!61 &43690672
 BoxCollider2D:
@@ -335,7 +336,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 35.5, y: 0.2}
+  m_Size: {x: 38, y: 0.2}
   m_EdgeRadius: 0
 --- !u!61 &43690673
 BoxCollider2D:
@@ -380,7 +381,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 22}
+  m_Size: {x: 0.2, y: 22.2}
   m_EdgeRadius: 0
 --- !u!61 &43690674
 BoxCollider2D:
@@ -425,7 +426,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 22}
+  m_Size: {x: 0.2, y: 22.2}
   m_EdgeRadius: 0
 --- !u!1 &73831887
 GameObject:
@@ -1325,6 +1326,8 @@ MonoBehaviour:
   interfaceSounds: {fileID: 666251876}
   pointClip: {fileID: 8300000, guid: 1c418336e47cd5c4da3283bb59c10c7b, type: 3}
   winClip: {fileID: 8300000, guid: 746e009f63487414083abb340ef79c24, type: 3}
+  disappearClip: {fileID: 8300000, guid: 5e97b80b8b6af2f4c8c8c3b3d656263e, type: 3}
+  deadZoneLogic: {fileID: 43690670}
 --- !u!82 &666251875
 AudioSource:
   m_ObjectHideFlags: 0

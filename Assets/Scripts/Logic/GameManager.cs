@@ -6,6 +6,7 @@ using UnityEngine.InputSystem.Users;
 using Unity.Mathematics;
 using System;
 using UniRx;
+using UnityEngine.SceneManagement;
 
 public class GameManager: MonoBehaviour, IGameObjectCreator
 {
@@ -20,7 +21,6 @@ public class GameManager: MonoBehaviour, IGameObjectCreator
 
     private void Awake()
     {
-
         playersDatas = matchData.playersDatas;
         Application.targetFrameRate = 60; // Establece el máximo de FPS a 60
        
@@ -30,6 +30,18 @@ public class GameManager: MonoBehaviour, IGameObjectCreator
         SetRespawnGenerator();
         StartPlayers();
         matchData.winnerData.Subscribe(value => StopGameIfThereIsWinner(value));
+    }
+
+    private void Update()// TODO: es para probar opciones
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(matchData.matchScene);
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(matchData.homeMenuScene);
+        }
     }
 
     void SetRespawnGenerator()

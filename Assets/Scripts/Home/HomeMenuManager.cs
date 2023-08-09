@@ -49,7 +49,7 @@ public class HomeMenuManager : MonoBehaviour
         }
         matchData.playersDatas = playersDatas.Take(Gamepad.all.Count).ToList();
         InputSystem.onDeviceChange -= OnDeviceChange;
-        SceneManager.LoadScene("MatchScene");
+        SceneManager.LoadScene(matchData.matchScene);
     }
 
     public void SetPoinstPlayer()

@@ -69,6 +69,7 @@ public class ShipMovement : MonoBehaviour, IDestroy
     public void Destroy()
     {
         onDestroy?.Invoke(gameObject);
+        particleSystem.Clear();
         gameObject.SetActive(false);
     }
 }

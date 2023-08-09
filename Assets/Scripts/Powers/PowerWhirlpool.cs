@@ -27,8 +27,7 @@ public class PowerWhirlpool : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.attachedRigidbody)
-        {
-             
+        {             
             collision.attachedRigidbody.AddForce( CalculateForce(transform.position - collision.transform.position) ,ForceMode2D.Impulse);
         }   
     }

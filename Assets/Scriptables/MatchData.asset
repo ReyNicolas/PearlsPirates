@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3c7907d0724a2f479c641e83660b865, type: 3}
   m_Name: MatchData
   m_EditorClassIdentifier: 
+  homeMenuScene: Home
+  matchScene: MatchScene
   playersDatas:
   - {fileID: 11400000, guid: 0bc177a17d13a3b46af33a3d4e86cbec, type: 2}
   powersDatas:
@@ -22,10 +24,10 @@ MonoBehaviour:
   playerShipPrefab: {fileID: 7126736621012607696, guid: 613d43e712cb11048bbdf2f04932d8e5, type: 3}
   pearlPrefab: {fileID: 2638525727010648642, guid: 3ba75d93859f73a42bf98e55e0a05f38, type: 3}
   instantPearlPrefab: {fileID: 2638525727010648642, guid: ef57218a4084c9a4784b2d6973edf963, type: 3}
-  totalPointsLimit: 30
-  totalPlayerPointsLimit: 3
+  totalPointsLimit: 90
+  totalPlayerPointsLimit: 30
   timeLeft: 30
-  numberPearlsToObtainInScene: 10
+  numberPearlsToObtainInScene: 2
   timeToGeneratePearl: 2
   maxNumberOfPearls: 10
   merchantsInScene: 2

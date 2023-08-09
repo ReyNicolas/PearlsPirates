@@ -14,6 +14,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource interfaceSounds;
     [SerializeField] AudioClip pointClip;
     [SerializeField] AudioClip winClip;
+    [SerializeField] AudioClip disappearClip;
+    [SerializeField] DeadZoneLogic deadZoneLogic;
     int playersMoving;
 
     private void Start()
@@ -21,6 +23,7 @@ public class AudioManager : MonoBehaviour
         StartCoroutine(SetWavesVolume());
         matchData.winnerData.Subscribe(wd => PlayWinnerClip(wd));
         matchData.playersDatas.ForEach(pd => pd.PointsToAdd.Subscribe(pa => PlayPointsClip(pa)));
+        deadZoneLogic.OnDeadZone += PlayDisappearClip;
     }
 
      void PlayWinnerClip(PlayerSO winnerData)
@@ -39,6 +42,11 @@ public class AudioManager : MonoBehaviour
     {
         if(points==0) return;
         interfaceSounds.PlayOneShot(pointClip);
+    }
+
+    void PlayDisappearClip()
+    {
+        interfaceSounds.PlayOneShot(disappearClip);
     }
 
     IEnumerator SetWavesVolume()
