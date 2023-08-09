@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,38 +9,46 @@ using UnityEngine.SceneManagement;
 
 public class HomeMenuManager : MonoBehaviour
 {
-    [SerializeField] List<PlayerSO> playersDatas;   
+    [SerializeField] List<PlayerSO> playersDatas;
+    [SerializeField] List<HomePlayerPanel> playersPanels;
     [SerializeField] MatchSO matchData;
     [SerializeField] TextMeshProUGUI playerPointsLabel;
     [SerializeField] TextMeshProUGUI matchPointsLabel;
     [SerializeField] TextMeshProUGUI gamepadCount;
     [SerializeField] TextMeshProUGUI errorMessage;
-
+    int gamepads = 0;
     private void Start()
     {
+        SetPoinstPlayer();
         SetPoinstMatch();
-        SetPoinstMatch();
-        StartCoroutine(CountGamepads());
+        CountGamepads();
+        InputSystem.onDeviceChange += OnDeviceChange;
     }
 
-    IEnumerator CountGamepads()
+    void OnDeviceChange(InputDevice device, InputDeviceChange change)
     {
-        while (true)
+        CountGamepads();
+    }
+    void CountGamepads()
+    {
+        gamepads = Gamepad.all.Count;
+        gamepadCount.text = gamepads.ToString();
+        playersPanels.ForEach(pp => pp.gameObject.SetActive(false));
+        for (int i = 0; i < gamepads; i++)
         {
-            yield return new WaitForSeconds(0.2f);
-            gamepadCount.text = Gamepad.all.Count.ToString();
+            playersPanels[i].gameObject.SetActive(true);
         }
-        
     }
 
     public void StartMatch()
     {
-        if (Gamepad.all.Count == 0) 
-            {
-                errorMessage.text = "Add at least one gamepad";
+        if (Gamepad.all.Count == 0)
+        {
+            errorMessage.text = "Add at least one gamepad";
             return;
-            }
+        }
         matchData.playersDatas = playersDatas.Take(Gamepad.all.Count).ToList();
+        InputSystem.onDeviceChange -= OnDeviceChange;
         SceneManager.LoadScene("MatchScene");
     }
 
@@ -52,4 +61,12 @@ public class HomeMenuManager : MonoBehaviour
     {
         matchData.totalPointsLimit = int.Parse(matchPointsLabel.text);
     }
+    
 }
+
+
+
+
+ 
+
+    

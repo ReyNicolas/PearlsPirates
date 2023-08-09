@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b41b319459394247a963a0c46781cd2, type: 3}
   m_Name: Player3Data
   m_EditorClassIdentifier: 
+  shipSprite: {fileID: -2111669853, guid: b093ef28c7349c24782de205d3e5a057, type: 3}
   PlayerName: Yellow Player
   PlayerColor: {r: 1, g: 1, b: 0, a: 1}
   PlayerScore: 0

@@ -148,7 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   targetTransform: {fileID: 0}
-  timeAlive: 10
+  timeAlive: 5
 --- !u!82 &7955313981987574668
 AudioSource:
   m_ObjectHideFlags: 0

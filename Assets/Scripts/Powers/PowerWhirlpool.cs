@@ -1,4 +1,5 @@
-﻿using Unity.Mathematics;
+﻿using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PowerWhirlpool : MonoBehaviour
@@ -9,9 +10,19 @@ public class PowerWhirlpool : MonoBehaviour
     public void Start()
     {
         Destroy(gameObject, timeAlive);
+        StartCoroutine(startsToDisappear());
     }
 
-   
+    IEnumerator startsToDisappear()
+    {
+        yield return new WaitForSeconds(timeAlive * 0.8f);
+        while (true)
+        {
+            force *= 0.9f;
+            transform.localScale *= 0.9f;
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {

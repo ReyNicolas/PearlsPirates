@@ -5515,7 +5515,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7853372597565357323
 Transform:
   m_ObjectHideFlags: 0
@@ -6368,7 +6368,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 15
+      scalar: 0
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -10719,6 +10719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody2D: {fileID: 2655296778463712130}
+  particleSystem: {fileID: 5406970263006323116}
   acSpeed: 30
   turnSpeed: 12
   maxSpeed: 6

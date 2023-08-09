@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b41b319459394247a963a0c46781cd2, type: 3}
   m_Name: Player2Data
   m_EditorClassIdentifier: 
+  shipSprite: {fileID: -438173171, guid: b093ef28c7349c24782de205d3e5a057, type: 3}
   PlayerName: Brown Player
   PlayerColor: {r: 0.5882353, g: 0.29411766, b: 0, a: 1}
   PlayerScore: 0

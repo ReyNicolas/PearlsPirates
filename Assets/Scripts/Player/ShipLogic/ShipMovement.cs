@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class ShipMovement : MonoBehaviour, IDestroy
 {
     [SerializeField] Rigidbody2D rigidbody2D;
+    [SerializeField] ParticleSystem particleSystem;
     [SerializeField] float acSpeed = 10.0f;
     [SerializeField] float turnSpeed = 10.0f;
     [SerializeField] float maxSpeed = 20f;
@@ -21,7 +22,7 @@ public class ShipMovement : MonoBehaviour, IDestroy
     private void Start()
     {
         InvokeRepeating("ReduceVelocities", 0, timeToWaitReduce);
-
+        InvokeRepeating("Particles", 0, 0.1f);
     }
 
     private void Update()
@@ -58,6 +59,11 @@ public class ShipMovement : MonoBehaviour, IDestroy
     {       
         rigidbody2D.angularVelocity *=  0.7f;
         rigidbody2D.velocity *=  0.8f;
+    }
+
+    void Particles()
+    {
+        particleSystem.Emit(Mathf.RoundToInt(actualSpeed - 0.5f));
     }
 
     public void Destroy()

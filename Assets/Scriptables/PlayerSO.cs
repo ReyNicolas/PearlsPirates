@@ -6,6 +6,7 @@ using UniRx;
 [CreateAssetMenu(fileName = "PlayerData", menuName = "Player Data")]
 public class PlayerSO : ScriptableObject
 {
+    public Sprite shipSprite;
     public string PlayerName;
     public Color PlayerColor;
     public int PlayerScore;

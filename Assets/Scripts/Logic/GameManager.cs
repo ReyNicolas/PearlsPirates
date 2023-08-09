@@ -62,6 +62,7 @@ public class GameManager: MonoBehaviour, IGameObjectCreator
         playerData.Initialize();
         collectorsManager.playerData = playerData;
         shipMovement.playerData = playerData;
+        shipMovement.GetComponent<SpriteRenderer>().sprite = playerData.shipSprite;
     } 
     void SetInput(int index, PlayerInput playerInput)
     {

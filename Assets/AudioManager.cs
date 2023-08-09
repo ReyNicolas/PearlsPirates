@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UniRx;
 using System;
+using Unity.Mathematics;
 
 public class AudioManager : MonoBehaviour
 {
@@ -47,8 +48,8 @@ public class AudioManager : MonoBehaviour
             playersMoving = 0;
             yield return new WaitForSeconds(0.1f);
             playersMoving = matchData.playersDatas.Count(pd => pd.actualSpeed.Value > 1);
-            waveSource.volume += playersMoving > 0 ? 0.02f * playersMoving : -0.02f;
-
+            waveSource.volume += playersMoving > 0 ? 0.05f * playersMoving : -0.05f;
+             waveSource.volume = math.max(waveSource.volume, 0.1f);
         }
         
     }
