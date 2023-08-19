@@ -4,20 +4,20 @@ using System.Collections.Generic;
 public class PearlsPointsCalculator: IPlayerPointsGiver
 {
     public event Action<string, int> OnGivePlayerPoints;
-    List<ShipPearlsGetter> shipsPearlsGetters = new List<ShipPearlsGetter>();
+    List<IMarket> markets = new List<IMarket>();
 
-   public void  SubscribeToShipGenerator(ShipPearlsGetterGenerator shipPearlsGetterGenerator) {
+   public void  SubscribeToShipGenerator(MarketShipGenerator shipPearlsGetterGenerator) {
 
-        shipPearlsGetterGenerator.OnCreatedMerchant += AddShipPearlsGetter;
+        shipPearlsGetterGenerator.OnCreatedMerchant += AddMarket;
     }
 
-    void AddShipPearlsGetter(ShipPearlsGetter ship)
+    void AddMarket(IMarket market)
     {
-        shipsPearlsGetters.Add(ship);
-        ship.OnSelectionPearlCollected += AddPearlToPlayerPoints;
+        markets.Add(market);
+        market.OnSelectionPearlCollected += AddPearlToPlayerPoints;
     }
 
-    void AddPearlToPlayerPoints(PearlCollectedDTO pearlCollectedData) =>
+   public void AddPearlToPlayerPoints(PearlCollectedDTO pearlCollectedData) =>
         OnGivePlayerPoints?.Invoke(pearlCollectedData.playerData.PlayerName, 1);
 
 }

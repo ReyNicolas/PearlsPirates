@@ -30,9 +30,9 @@ MonoBehaviour:
   numberPearlsToObtainInScene: 2
   timeToGeneratePearl: 2
   maxNumberOfPearls: 10
-  merchantsInScene: 2
+  merchantsInScene: 0
   timeToGenerateMerchants: 60
-  maxNumberOfMerchants: 2
+  maxNumberOfMerchants: 0
   wind: {x: 0.1, y: 0.1}
   winnerData:
     value: {fileID: 0}

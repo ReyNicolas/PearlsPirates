@@ -10693,7 +10693,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 20
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.5
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -10725,6 +10725,7 @@ MonoBehaviour:
   maxSpeed: 6
   actualSpeed: 0
   timeToWaitReduce: 0.5
+  minTorque: 0.5
   movement: {x: 0, y: 0}
   playerInput: {fileID: 4315813878268582773}
   playerData: {fileID: 0}

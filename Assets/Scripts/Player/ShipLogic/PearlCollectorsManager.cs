@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -28,9 +26,9 @@ public class PearlCollectorsManager : MonoBehaviour
             return;
         }
 
-        if (collision.gameObject.GetComponent<ShipPearlsGetter>())
+        if (collision.gameObject.GetComponent<IMarket>() != null)
         {
-            collision.gameObject.GetComponent<ShipPearlsGetter>().TryToCollectThisPearlsFromThisPlayerData(GetPearls(), playerData);
+            collision.gameObject.GetComponent<IMarket>().TryToCollectThisPearlsFromThisPlayerData(GetPearls(), playerData);
         }
     }
 

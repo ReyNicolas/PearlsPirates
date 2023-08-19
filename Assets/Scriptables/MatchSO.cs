@@ -35,7 +35,7 @@ public class MatchSO : ScriptableObject
     public void Initialize()
     {        
         numberPearlsToObtainInScene = 0;
-        playersDatas.ForEach(pd => pd.PointsToAdd.Subscribe(value => CheckWinner(value)));
+        playersDatas.ForEach(pd =>  pd.PointsToAdd.Subscribe(value => CheckWinner(value)));
         winnerData.Value = null;
     }
 

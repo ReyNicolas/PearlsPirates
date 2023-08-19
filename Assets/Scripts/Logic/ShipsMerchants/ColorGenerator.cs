@@ -7,14 +7,14 @@ public class ColorGenerator {
 
     List<Color> colors;
 
-    public ColorGenerator(List<Color> colors, ShipPearlsGetterGenerator shipPearlsGetterGenerator)
+    public ColorGenerator(List<Color> colors, MarketShipGenerator shipPearlsGetterGenerator)
     {
         this.colors = colors;
-        shipPearlsGetterGenerator.OnCreatedMerchant += AddColorsToMerchant; 
+        shipPearlsGetterGenerator.OnCreatedMerchant += AddColorsToMarket; 
     }
 
-    void AddColorsToMerchant(ShipPearlsGetter shipPearlsGetter) 
-        => shipPearlsGetter.SetColorsToCollect(GetThisNumberOfRandomColors(shipPearlsGetter.GetNumberOfContainers()));
+    public void AddColorsToMarket(IMarket market) 
+        => market.SetColorsToCollect(GetThisNumberOfRandomColors(market.GetNumberOfColors()));
 
     List<Color> GetThisNumberOfRandomColors(int number)
     {
