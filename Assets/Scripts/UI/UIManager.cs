@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        matchData.winnerData.Subscribe(value => SetResult(value));
+        matchData.winnerData.Where(wd=>wd!=null).Subscribe(value => SetResult(value));
 
         for(int i = 0; i < matchData.playersDatas.Count; i++)
         {
@@ -23,10 +23,10 @@ public class UIManager : MonoBehaviour
 
     void SetResult(PlayerSO playerData)
     {
-        if (playerData!=null) {
-            resultUI.gameObject.SetActive(true);
-            resultUI.ShowResult(matchData);
-        }
+        
+        resultUI.gameObject.SetActive(true);
+        resultUI.ShowResult(matchData);
+        
     }
 }
 

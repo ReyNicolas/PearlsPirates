@@ -16,10 +16,3 @@ public class ResultUI : MonoBehaviour
     }
 }
 
-//public class PlayerResultUI : MonoBehaviour
-//{
-//    public void ShowResult(PlayerSO playerData)
-//    {
-        
-//    }
-//}

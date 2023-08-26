@@ -21,33 +21,24 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(SetWavesVolume());
-        matchData.winnerData.Subscribe(wd => PlayWinnerClip(wd));
-        matchData.playersDatas.ForEach(pd => pd.PointsToAdd.Subscribe(pa => PlayPointsClip(pa)));
+        matchData.winnerData.Where(wd=>wd!=null).Subscribe(wd => PlayWinnerClip(wd));
+        matchData.playersDatas.ForEach(pd => pd.PointsToAdd.Where(points=>points!=0).Subscribe(pa => PlayPointsClip(pa)));
         deadZoneLogic.OnDeadZone += PlayDisappearClip;
     }
 
      void PlayWinnerClip(PlayerSO winnerData)
-    {
-        if(winnerData!=null)
-        {
-            musicSource.volume = 0.1f;
-            waveSource.volume = 0.1f;
-
-            interfaceSounds.PlayOneShot(winClip);
-            interfaceSounds.Play();
-        }
+    {        
+        musicSource.volume = 0.1f;
+        waveSource.volume = 0.1f;
+        interfaceSounds.PlayOneShot(winClip);
+        interfaceSounds.Play();
     }
 
-    void PlayPointsClip(int points)
-    {
-        if(points==0) return;
+    void PlayPointsClip(int points) => 
         interfaceSounds.PlayOneShot(pointClip);
-    }
 
-    void PlayDisappearClip()
-    {
+    void PlayDisappearClip() =>
         interfaceSounds.PlayOneShot(disappearClip);
-    }
 
     IEnumerator SetWavesVolume()
     {

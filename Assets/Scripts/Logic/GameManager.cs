@@ -29,7 +29,7 @@ public class GameManager: MonoBehaviour, IGameObjectCreator
         SetPointManager();
         SetRespawnGenerator();
         StartPlayers();
-        matchData.winnerData.Subscribe(value => StopGameIfThereIsWinner(value));
+        matchData.winnerData.Where(winner=> winner != null).Subscribe(_ => StopGame());
     }
 
     private void Update()// TODO: es para probar opciones
@@ -82,12 +82,9 @@ public class GameManager: MonoBehaviour, IGameObjectCreator
         InputUser.PerformPairingWithDevice(Gamepad.all[index], user: playerInput.user);
     }
 
-    void StopGameIfThereIsWinner(PlayerSO playerData)
-    {
-        if(playerData != null)
-        {
-            Time.timeScale = 0;
-        }
+    void StopGame()
+    {       
+            Time.timeScale = 0;        
     }
 
 

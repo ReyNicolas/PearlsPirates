@@ -24,9 +24,6 @@ public class PositionGenerator
     }
 
 
-  //  public void SetCenterTransform(Transform transform) =>
-    //    centerTransform = transform;
-
     public void SetDimensions(Vector2 vector) => 
         dimension = vector;
 

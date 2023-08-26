@@ -11,7 +11,6 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] GameObject pearlCollectedPrefab;
     [SerializeField] List<Image> powersImages;
     [SerializeField] Canvas ScreenCanvas;
-  //  [SerializeField] Transform pearlsCollectedTransform;
     [SerializeField] TextMeshProUGUI playerPoints;
     [SerializeField] PlayerSO playerData;
 

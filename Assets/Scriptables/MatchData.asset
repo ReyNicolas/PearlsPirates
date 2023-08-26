@@ -27,7 +27,7 @@ MonoBehaviour:
   totalPointsLimit: 90
   totalPlayerPointsLimit: 30
   timeLeft: 30
-  numberPearlsToObtainInScene: 2
+  numberPearlsToObtainInScene: 10
   timeToGeneratePearl: 2
   maxNumberOfPearls: 10
   merchantsInScene: 0
@@ -35,4 +35,4 @@ MonoBehaviour:
   maxNumberOfMerchants: 0
   wind: {x: 0.1, y: 0.1}
   winnerData:
-    value: {fileID: 0}
+    value: {fileID: 11400000, guid: 0bc177a17d13a3b46af33a3d4e86cbec, type: 2}
