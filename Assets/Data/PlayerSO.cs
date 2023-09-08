@@ -40,4 +40,12 @@ public class PlayerSO : ScriptableObject
             powersInCollectors[i] = null;
         }
     }
+
+    public void DisposeValues()
+    {
+        PointsToAdd?.Dispose();
+        pearlsCollectedDatas?.Dispose();
+        powersInCollectors?.Dispose();
+        actualSpeed?.Dispose();
+    }
 }

@@ -5,7 +5,7 @@ public class MarketPierColorsUI:MonoBehaviour
 {
     [SerializeField] List<GameObject> spritesGo;
     [SerializeField] MarketPier marketPier;
-    private void Start()
+    private void Awake()
     {
         marketPier.OnChangeColors += SetColors;
     }

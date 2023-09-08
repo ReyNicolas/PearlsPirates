@@ -61,6 +61,7 @@ public class MatchSO : ScriptableObject
 
     public void Initialize()
     {        
+
         numberPearlsToObtainInScene = 0;
         playersDatas.ForEach(pd =>  pd.PointsToAdd.Subscribe(value => CheckWinner(value)));
         winnerData.Value = null;
@@ -87,6 +88,14 @@ public class MatchSO : ScriptableObject
     bool EndedByTotalPointsLimit()
     {
         return (playersDatas.Sum(pd => pd.PointsToAdd.Value)) >= totalPointsLimit;
+    }
+
+    public void DisposeAudio()
+    {
+        masterVolume.Dispose();
+        musicVolume.Dispose();
+        soundEffectsVolume.Dispose();
+        interfaceVolume.Dispose();
     }
 }
 

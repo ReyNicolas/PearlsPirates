@@ -11,6 +11,7 @@ using UnityEngine.SceneManagement;
 public class GameManager: MonoBehaviour, IGameObjectCreator
 {
     [SerializeField] MatchSO matchData;
+    [SerializeField] GameObject optionsGO;
     public  PlayerRespawnGenerator respawnGenerator;
     public PositionGenerator positionGenerator = new PositionGenerator();
     public PearlsPointsCalculator pearlsPointsCalculator = new PearlsPointsCalculator();     
@@ -22,7 +23,7 @@ public class GameManager: MonoBehaviour, IGameObjectCreator
     private void Awake()
     {
         playersDatas = matchData.playersDatas;
-        Application.targetFrameRate = 60; // Establece el máximo de FPS a 60
+        
        
         matchData.Initialize();
         SetPositionGenerator();
@@ -36,11 +37,11 @@ public class GameManager: MonoBehaviour, IGameObjectCreator
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene(matchData.matchScene);
+            Restart();
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene(matchData.homeMenuScene);
+            optionsGO.SetActive(!optionsGO.activeSelf);
         }
     }
 
@@ -88,6 +89,14 @@ public class GameManager: MonoBehaviour, IGameObjectCreator
     }
 
 
+    public void Restart()
+    {
+        SceneManager.LoadScene(matchData.matchScene);
+    }
+    public void ReturnHomeMenu()
+    {
+        SceneManager.LoadScene(matchData.homeMenuScene);
+    }
    
    
 

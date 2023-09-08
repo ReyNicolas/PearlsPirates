@@ -15,7 +15,12 @@ public class VolumeController:MonoBehaviour
         SetInitialVolumesSliders();
         matchData.SetAudioMixer();
     }
-    
+
+    private void OnDestroy()
+    {
+        matchData.DisposeAudio();
+    }
+
     public void SetAllVolumesUIs()
     {
         if (!volumeSlidersSetted) return;

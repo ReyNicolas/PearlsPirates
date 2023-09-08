@@ -37,7 +37,12 @@ public class ShipMovement : MonoBehaviour, IDestroy
         if(collision.relativeVelocity.magnitude>=1) GetComponent<AudioSource>().Play();
     }
 
-    
+    private void OnDestroy()
+    {
+        playerData.DisposeValues();
+    }
+
+
     private void FixedUpdate()
     {
         MoveShip(movement);        
