@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -17,6 +18,8 @@ public class HomeMenuManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI gamepadCount;
     [SerializeField] TextMeshProUGUI errorMessage;
     int gamepads = 0;
+
+
     private void Start()
     {
         SetPoinstPlayer();
@@ -61,12 +64,11 @@ public class HomeMenuManager : MonoBehaviour
     {
         matchData.totalPointsLimit = int.Parse(matchPointsLabel.text);
     }
-    
 }
 
 
 
 
- 
 
-    
+
+

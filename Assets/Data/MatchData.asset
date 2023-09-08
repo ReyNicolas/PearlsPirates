@@ -27,12 +27,22 @@ MonoBehaviour:
   totalPointsLimit: 90
   totalPlayerPointsLimit: 30
   timeLeft: 30
-  numberPearlsToObtainInScene: 10
+  numberPearlsToObtainInScene: 2
   timeToGeneratePearl: 2
   maxNumberOfPearls: 10
   merchantsInScene: 0
   timeToGenerateMerchants: 60
   maxNumberOfMerchants: 0
   wind: {x: 0.1, y: 0.1}
+  mixer: {fileID: 24100000, guid: e4016fd05d9805943b0420f19a715ad7, type: 2}
+  masterVolume:
+    value: 100
+  musicVolume:
+    value: 100
+  soundEffectsVolume:
+    value: 100
+  interfaceVolume:
+    value: 100
+  volumeMultiplier: 25
   winnerData:
-    value: {fileID: 11400000, guid: 0bc177a17d13a3b46af33a3d4e86cbec, type: 2}
+    value: {fileID: 0}

@@ -20,6 +20,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
+        matchData.SetAudioMixer(); 
         StartCoroutine(SetWavesVolume());
         matchData.winnerData.Where(wd=>wd!=null).Subscribe(wd => PlayWinnerClip(wd));
         matchData.playersDatas.ForEach(pd => pd.PointsToAdd.Where(points=>points!=0).Subscribe(pa => PlayPointsClip(pa)));
