@@ -27,6 +27,14 @@ Follow these steps to run the game on your local machine:
 5. Click the play button in the Unity editor to start the game.
 Note: you need at least one gamepad to play.
 
+## Details:
+
+Made in Unity.
+-UniRx(Reactive Extensions for Unity).
+-Unity's new Input System.
+-Scriptable objects.
+
+
 ## Credits:
 [Music](https://assetstore.unity.com/packages/audio/music/arcade-game-bgm-17-210775) 
 
