@@ -66,3 +66,13 @@ The following packages were updated:
   com.unity.feature.2d from version 1.0.0 to 2.0.0
   com.unity.ide.rider from version 3.0.21 to 3.0.24
   com.unity.timeline from version 1.7.4 to 1.7.5
+
+=== Thu Sep 28 14:40:48 2023
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.collab-proxy from version 2.0.5 to 2.0.7
+  com.unity.inputsystem from version 1.6.3 to 1.7.0
+  com.unity.visualscripting from version 1.8.0 to 1.9.0
