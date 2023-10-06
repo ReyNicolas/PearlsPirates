@@ -4105,7 +4105,7 @@ MonoBehaviour:
   m_Value: 1
   m_Options:
     m_Options:
-    - m_Text: 1
+    - m_Text: 10
       m_Image: {fileID: 0}
     - m_Text: 20
       m_Image: {fileID: 0}
