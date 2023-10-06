@@ -1,11 +1,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PearlCollectorsManager : MonoBehaviour
 {
     [SerializeField] List<PearlCollector> collectors;
+    [SerializeField] AudioClip rotateClip;
+    PlayerInput playerInput;
     public PlayerSO playerData;
+
+    private void Awake()
+    {
+        playerInput = GetComponent<PlayerInput>();
+    }
 
     private void Start()
     {
@@ -42,4 +50,6 @@ public class PearlCollectorsManager : MonoBehaviour
         pearl.transform.position = collector.transform.position;
         pearl.transform.SetParent(collector.transform);
     }
+
+
 }

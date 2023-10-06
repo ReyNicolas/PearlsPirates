@@ -13,19 +13,31 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] Canvas ScreenCanvas;
     [SerializeField] TextMeshProUGUI playerPoints;
     [SerializeField] PlayerSO playerData;
+    CompositeDisposable disposables;
 
+    private void OnEnable()
+    {
+        disposables = new CompositeDisposable(
+            playerData.powersInCollectors
+             .ObserveReplace()
+             .Subscribe(powerSO => SetPowerImage(powerSO.Key, powerSO.NewValue)),
+
+            playerData.PointsToAdd
+                .Subscribe(value => UpdatePlayerPointsText(value)),
+
+            playerData.pearlsCollectedDatas
+                .ObserveAdd()
+                .Subscribe(powerCollected => ShowPearlCollected(powerCollected.Value))            
+            );
+    }
+
+    private void OnDisable()
+    {
+        disposables.Dispose();
+    }
     private void Start()
     {
-        playerData.powersInCollectors
-         .ObserveReplace()
-         .Subscribe(powerSO => SetPowerImage(powerSO.Key, powerSO.NewValue));
-
-        playerData.PointsToAdd
-            .Subscribe(value=> UpdatePlayerPointsText(value));
-
-        playerData.pearlsCollectedDatas
-            .ObserveAdd()
-            .Subscribe(powerCollected=> ShowPearlCollected(powerCollected.Value));
+        
 
         SetPlayerColor(GetComponent<Image>(), playerData.PlayerColor);
     }

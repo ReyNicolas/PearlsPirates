@@ -52,6 +52,7 @@ public class HomeMenuManager : MonoBehaviour
         }
         matchData.playersDatas = playersDatas.Take(Gamepad.all.Count).ToList();
         InputSystem.onDeviceChange -= OnDeviceChange;
+        matchData.Initialize();
         SceneManager.LoadScene(matchData.matchScene);
     }
 

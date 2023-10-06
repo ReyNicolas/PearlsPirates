@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerRespawnGenerator : IGameObjectCreator
 {
     GameObject instantPearlPrefab;
-    public event Action<GameObject> OnCreatedInMapGameObject;
+    public event Action<GameObject> onCreatedInMapGameObject;
     public PlayerRespawnGenerator(GameObject instantPearlPrefab)
     {
         this.instantPearlPrefab = instantPearlPrefab;
@@ -18,7 +18,7 @@ public class PlayerRespawnGenerator : IGameObjectCreator
     public void CreateInstantPearl(GameObject content)
     {
         var instantPearlGenerated = GameObject.Instantiate(instantPearlPrefab, Vector3.zero, Quaternion.identity).GetComponent<InstantPearl>();
-        OnCreatedInMapGameObject?.Invoke(instantPearlGenerated.gameObject);
+        onCreatedInMapGameObject?.Invoke(instantPearlGenerated.gameObject);
         instantPearlGenerated.SetContent(content);
        
     }

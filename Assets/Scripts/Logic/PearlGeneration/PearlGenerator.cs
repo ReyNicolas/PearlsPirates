@@ -5,7 +5,7 @@ public class PearlGenerator: IGameObjectCreator
 {
     GameObject pearlPrefab;
     public event Action<PearlToObtain> OnCreatedPearlToObtain;
-    public event Action<GameObject> OnCreatedInMapGameObject;
+    public event Action<GameObject> onCreatedInMapGameObject;
     public PearlGenerator(GameObject pearlPrefab)
     {
         this.pearlPrefab = pearlPrefab;     
@@ -15,12 +15,12 @@ public class PearlGenerator: IGameObjectCreator
     {
         var pearlToObtainGenerated = GameObject.Instantiate(pearlPrefab, Vector3.zero, Quaternion.identity).GetComponent<PearlToObtain>();
         OnCreatedPearlToObtain?.Invoke(pearlToObtainGenerated);
-        OnCreatedInMapGameObject?.Invoke(pearlToObtainGenerated.gameObject);
+        onCreatedInMapGameObject?.Invoke(pearlToObtainGenerated.gameObject);
     }        
     
 }
 
 public interface IGameObjectCreator
 {
-    event Action<GameObject> OnCreatedInMapGameObject;
+    event Action<GameObject> onCreatedInMapGameObject;
 }

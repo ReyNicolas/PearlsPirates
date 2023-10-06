@@ -29,7 +29,7 @@ public class PositionGenerator
 
     public void AddObjectToListen(IGameObjectCreator gameObjectCreator)
     {
-        gameObjectCreator.OnCreatedInMapGameObject += AssignPosition;
+        gameObjectCreator.onCreatedInMapGameObject += AssignPosition;
     }
 
     void AssignPosition(GameObject gameObject)

@@ -14,26 +14,44 @@ public class GameManager: MonoBehaviour, IGameObjectCreator
     [SerializeField] GameObject optionsGO;
     public  PlayerRespawnGenerator respawnGenerator;
     public PositionGenerator positionGenerator = new PositionGenerator();
-    public PearlsPointsCalculator pearlsPointsCalculator = new PearlsPointsCalculator();     
+    public PearlsPointsCalculator pearlsPointsCalculator = new PearlsPointsCalculator();
+    CompositeDisposable disposables;
     PointsManager pointsManager;
     List<PlayerSO> playersDatas;
 
-    public event Action<GameObject> OnCreatedInMapGameObject;
+    public event Action<GameObject> onCreatedInMapGameObject;
 
     private void Awake()
     {
         playersDatas = matchData.playersDatas;
-        
-       
-        matchData.Initialize();
+        matchData.Initialize();  
         SetPositionGenerator();
         SetPointManager();
         SetRespawnGenerator();
-        StartPlayers();
-        matchData.winnerData.Where(winner=> winner != null).Subscribe(_ => StopGame());
+        SetPlayers();        
     }
 
-    private void Update()// TODO: es para probar opciones
+    private void OnEnable()
+    {       
+        disposables = new CompositeDisposable(
+            matchData.winnerData
+            .Where(winner => winner != null)
+            .Subscribe(_ => StopGame()));
+
+        matchData.playersDatas.ForEach(playerData
+            => disposables.Add(  // add disposable playerData
+                       playerData.PointsToAdd
+                       .Subscribe(value => matchData.CheckWinner(value)))
+            );
+    }
+ 
+
+    private void OnDisable()
+    {
+        disposables.Dispose();
+    }
+
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -58,21 +76,20 @@ public class GameManager: MonoBehaviour, IGameObjectCreator
     }
     void SetPointManager()
         => pointsManager = new PointsManager(matchData.playersDatas, new List<IPlayerPointsGiver>() { pearlsPointsCalculator });
-    void StartPlayers()
+    void SetPlayers()
     {
         var gamepadCount = Gamepad.all.Count;
         for (int i = 0; i < math.min(playersDatas.Count, gamepadCount); i++)
         {
             var shipGO = Instantiate(matchData.playerShipPrefab, Vector3.zero, Quaternion.identity);
             SetPlayerDataInShip(playersDatas[i], shipGO.GetComponent<PearlCollectorsManager>(), shipGO.GetComponent<ShipMovement>());            
-            OnCreatedInMapGameObject?.Invoke(shipGO);
+            onCreatedInMapGameObject?.Invoke(shipGO);
             respawnGenerator.Listen(shipGO.GetComponent<IDestroy>());
             SetInput(i, shipGO.GetComponent<PlayerInput>());           
         }
     }
     void SetPlayerDataInShip(PlayerSO playerData, PearlCollectorsManager collectorsManager, ShipMovement shipMovement)
     {
-        playerData.Initialize();
         collectorsManager.playerData = playerData;
         shipMovement.playerData = playerData;
         shipMovement.GetComponent<SpriteRenderer>().sprite = playerData.shipSprite;
@@ -85,16 +102,18 @@ public class GameManager: MonoBehaviour, IGameObjectCreator
 
     void StopGame()
     {       
-            Time.timeScale = 0;        
+        Time.timeScale = 0;        
     }
 
 
     public void Restart()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(matchData.matchScene);
     }
     public void ReturnHomeMenu()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(matchData.homeMenuScene);
     }
    

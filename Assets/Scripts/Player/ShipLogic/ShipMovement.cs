@@ -8,15 +8,17 @@ using UnityEngine.InputSystem;
 
 public class ShipMovement : MonoBehaviour, IDestroy
 {
-    [SerializeField] Rigidbody2D rigidbody2D;
-    [SerializeField] ParticleSystem particleSystem;
+    [Header("Movement info")]
     [SerializeField] float acSpeed = 10.0f;
     [SerializeField] float turnSpeed = 10.0f;
     [SerializeField] float maxSpeed = 20f;
-    [SerializeField]  float actualSpeed = 0;
-    [SerializeField]  float timeToWaitReduce = 0.2f;
+    [SerializeField] float actualSpeed = 0;
+    [SerializeField] float timeToWaitReduce = 0.2f;
     [SerializeField] float minTorque =0.5f;
     [SerializeField] Vector2 movement;
+    [Header("References")]
+    [SerializeField] Rigidbody2D rigidbody2D;
+    [SerializeField] ParticleSystem particleSystem;
     [SerializeField] PlayerInput playerInput;
     public PlayerSO playerData;
 
@@ -36,13 +38,7 @@ public class ShipMovement : MonoBehaviour, IDestroy
     {
         if(collision.relativeVelocity.magnitude>=1) GetComponent<AudioSource>().Play();
     }
-
-    private void OnDestroy()
-    {
-        playerData.DisposeValues();
-    }
-
-
+       
     private void FixedUpdate()
     {
         MoveShip(movement);        

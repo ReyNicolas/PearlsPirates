@@ -9,6 +9,7 @@ public class BulletLogic: MonoBehaviour, IDestroy
     [SerializeField] bool isMoving;
     [SerializeField] Rigidbody2D rigidbody2D;
     [SerializeField] ParticleSystem particleSystem;
+    [SerializeField] ParticleSystem particleLine;
     [SerializeField] AudioSource audioSource;
     [SerializeField] GameObject CreationEffectPrefab;
     [SerializeField] SpriteRenderer spriteRenderer;
@@ -28,7 +29,7 @@ public class BulletLogic: MonoBehaviour, IDestroy
         if (!isMoving) return;
         Move();
         ReduceSpeed();
-        if (ArriveToDestination()) StopAndStartPhysics();
+        if (ArriveToDestination())StopAndStartPhysics(); 
     }
 
    
@@ -40,11 +41,11 @@ public class BulletLogic: MonoBehaviour, IDestroy
 
     public void Launch(Transform shootSpawnTransform, Vector3 finalPosition, float speed)
     {
-        StartCoroutine(DestroyAndStartPower(shootSpawnTransform));
+        StartCoroutine(DestroyAndStartPower());
         SetStartValues(shootSpawnTransform, finalPosition, speed);   
     }
 
-     IEnumerator DestroyAndStartPower(Transform shootTransform)
+     IEnumerator DestroyAndStartPower()
     {
         yield return new WaitForSeconds(powerData.TimeToStart);
         Instantiate(powerData.PowerPrefab, transform.position, transform.rotation);
@@ -71,6 +72,7 @@ public class BulletLogic: MonoBehaviour, IDestroy
 
     void StopAndStartPhysics()
     {
+        particleLine.loop = false;
         if (isMoving)
         {
             isMoving=false;

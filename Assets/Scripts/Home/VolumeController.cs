@@ -10,13 +10,17 @@ public class VolumeController:MonoBehaviour
     [SerializeField] MatchSO matchData;
     bool volumeSlidersSetted;
 
-    private void Start()
+    private void Awake()
     {
-        SetInitialVolumesSliders();
+        SetInitialVolumesSliders();        
+    }
+
+    private void OnEnable()
+    {
         matchData.SetAudioMixer();
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         matchData.DisposeAudio();
     }

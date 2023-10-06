@@ -23,7 +23,7 @@ public class SelectionPearl : MonoBehaviour
         return powerData;
     }
 
-    public void Use(ShootLogic shootLogic)
+    public void Use(IShootLogic shootLogic)
     {
         shootLogic.SetBullet(GenerateBullet());
     }

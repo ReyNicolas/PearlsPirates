@@ -10,7 +10,7 @@ public class PlayerSO : ScriptableObject
     public string PlayerName;
     public Color PlayerColor;
     public int PlayerScore;
-    public ReactiveProperty<int> PointsToAdd = new ReactiveProperty<int>(0);
+    public ReactiveProperty<int> PointsToAdd= new ReactiveProperty<int>(0);
     public ReactiveCollection<PowerSO> pearlsCollectedDatas = new ReactiveCollection<PowerSO>();
     public ReactiveDictionary<int, PowerSO> powersInCollectors = new ReactiveDictionary<int, PowerSO> {
         {0,null },
@@ -33,19 +33,12 @@ public class PlayerSO : ScriptableObject
 
     public void ResetValuesForRound()
     {
-        PointsToAdd.Value = 0;
+        PointsToAdd.Dispose();
+        PointsToAdd= new ReactiveProperty<int>(0);
         actualSpeed.Value = 0;
         for (int i = 0; i < powersInCollectors.Count; i++)
         {
             powersInCollectors[i] = null;
         }
-    }
-
-    public void DisposeValues()
-    {
-        PointsToAdd?.Dispose();
-        pearlsCollectedDatas?.Dispose();
-        powersInCollectors?.Dispose();
-        actualSpeed?.Dispose();
     }
 }

@@ -5,7 +5,7 @@ public class MarketShipGenerator: IGameObjectCreator
 {
     GameObject shipPrefab;
     public event Action<MarketShip> OnCreatedMerchant;
-    public event Action<GameObject> OnCreatedInMapGameObject;
+    public event Action<GameObject> onCreatedInMapGameObject;
 
     MatchSO matchData;
 
@@ -30,7 +30,7 @@ public class MarketShipGenerator: IGameObjectCreator
         var shipScript = GameObject.Instantiate(shipPrefab, Vector3.zero, Quaternion.identity).GetComponent<MarketShip>();
         shipScript.Initialize(matchData.timeToGenerateMerchants);
         shipScript.OnDestroy += GenerateShipAfterDestroy;
-        OnCreatedInMapGameObject?.Invoke(shipScript.gameObject);
+        onCreatedInMapGameObject?.Invoke(shipScript.gameObject);
         OnCreatedMerchant?.Invoke(shipScript);
     }
 

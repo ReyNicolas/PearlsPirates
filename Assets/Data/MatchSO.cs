@@ -28,7 +28,7 @@ public class MatchSO : ScriptableObject
     public int merchantsInScene;
     public int timeToGenerateMerchants;
     public int maxNumberOfMerchants;
-    [Header("Wind Settings")]    
+    [Header("Wind Settings")]
     public Vector2 wind;
     [Header("Sound Settings")]
     public AudioMixer mixer;
@@ -37,37 +37,38 @@ public class MatchSO : ScriptableObject
     public ReactiveProperty<float> soundEffectsVolume = new ReactiveProperty<float>(1);
     public ReactiveProperty<float> interfaceVolume = new ReactiveProperty<float>(1);
     public float volumeMultiplier;
-
+    public List<AudioClip> actualMusicToPlay;
+    CompositeDisposable audioDisposables;
 
 
     public ReactiveProperty<PlayerSO> winnerData = new ReactiveProperty<PlayerSO>(null);
 
-    public void DisposeMixer()
+    public void DisposeAudio()
     {
-        masterVolume.Dispose();
-        musicVolume.Dispose();
-        soundEffectsVolume.Dispose();
-        interfaceVolume.Dispose();
+        audioDisposables.Dispose();
     }
+
     public void SetAudioMixer()
     {
-        masterVolume.Subscribe(value=> SetAudio("master", value/100));
-        musicVolume.Subscribe(value=> SetAudio("bgm", value/100));
-        soundEffectsVolume.Subscribe(value=> SetAudio("sfx", value / 100));
-        interfaceVolume.Subscribe(value=> SetAudio("sui", value/ 100));
+        audioDisposables = new CompositeDisposable(
+            masterVolume.Subscribe(value => SetAudio("master", value / 100)),
+            musicVolume.Subscribe(value => SetAudio("bgm", value / 100)),
+            soundEffectsVolume.Subscribe(value => SetAudio("sfx", value / 100)),
+            interfaceVolume.Subscribe(value => SetAudio("sui", value / 100))
+        );
     }
-    void SetAudio(string param,float value) 
+    void SetAudio(string param, float value)
         => mixer.SetFloat(param, Mathf.Log10(value) * volumeMultiplier);
 
     public void Initialize()
-    {        
-
+    {
         numberPearlsToObtainInScene = 0;
-        playersDatas.ForEach(pd =>  pd.PointsToAdd.Subscribe(value => CheckWinner(value)));
-        winnerData.Value = null;
+        playersDatas.ForEach(playerData=> playerData.Initialize());
+        winnerData.Dispose();
+        winnerData = new ReactiveProperty<PlayerSO>(null);
     }
 
-    void CheckWinner(int value)
+   public void CheckWinner(int value)
     {
         if (EndedByTotalPointsLimit() || EndedByTotalPlayerPointsLimit())
         {
@@ -90,12 +91,6 @@ public class MatchSO : ScriptableObject
         return (playersDatas.Sum(pd => pd.PointsToAdd.Value)) >= totalPointsLimit;
     }
 
-    public void DisposeAudio()
-    {
-        masterVolume.Dispose();
-        musicVolume.Dispose();
-        soundEffectsVolume.Dispose();
-        interfaceVolume.Dispose();
-    }
+    
 }
 

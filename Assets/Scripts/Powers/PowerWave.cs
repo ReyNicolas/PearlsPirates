@@ -40,18 +40,8 @@ public class PowerWave : MonoBehaviour
         {
             transform.localScale -= vectorAux * (reductionMultiplier);
             audioSource.volume = audioSource.volume - (reductionMultiplier);
-        }
-
-       
+        }  
 
     }
-
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.CompareTag("Scenary"))
-    //    {
-    //        Destroy(gameObject);
-    //    }
-    //}
     
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PearlSelector : MonoBehaviour
 {
 
-    [SerializeField] ShootLogic shootLogic;
+    [SerializeField] IShootLogic shootLogic;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

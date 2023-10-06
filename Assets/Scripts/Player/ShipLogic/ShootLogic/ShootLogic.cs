@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootLogic : MonoBehaviour
+public class ShootLogic :  IShootLogic
 {
     [SerializeField] Transform shootSpawnTransform;
     [SerializeField] AimLogic aimLogic;
@@ -13,9 +10,9 @@ public class ShootLogic : MonoBehaviour
     [SerializeField] float waitAfterShot = 0.5f;
     [SerializeField] AudioSource shootAudioSource;
     [SerializeField] ParticleSystem particleSystem;
+    
     public void Shoot()
-    {
-     
+    {     
         if (IsTherePearlSelected())
         {
             FreezeAim();
@@ -26,12 +23,12 @@ public class ShootLogic : MonoBehaviour
         }
     }
 
-    public void SetPearl(SelectionPearl selectionPearl)
+    public override void SetPearl(SelectionPearl selectionPearl)
     {
         this.selectionPearl = selectionPearl;
     }
 
-    public void SetBullet(BulletLogic bulletLogic)
+    public override void SetBullet(BulletLogic bulletLogic)
     { 
         this.bulletLogic = bulletLogic; 
     }
@@ -55,4 +52,12 @@ public class ShootLogic : MonoBehaviour
         bulletLogic.Launch(shootSpawnTransform, aimLogic.GetAimPosition(),shootSpeed);
         bulletLogic = null;
     }
+
+    
+}
+
+public abstract class IShootLogic: MonoBehaviour
+{
+    public abstract void SetBullet(BulletLogic bulletLogic);
+    public abstract void SetPearl(SelectionPearl selectionPearl);
 }
