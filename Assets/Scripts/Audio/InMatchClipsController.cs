@@ -12,7 +12,7 @@ public class InMatchClipsController : MonoBehaviour
     [SerializeField] AudioManager audioManager;
     CompositeDisposable disposables;
 
-    private void OnEnable()
+    private void Start()
     {
         deadZoneLogic.OnDeadZone += PlayDeadZoneClip;
         disposables = new CompositeDisposable(
@@ -31,7 +31,7 @@ public class InMatchClipsController : MonoBehaviour
             );
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         deadZoneLogic.OnDeadZone -= PlayDeadZoneClip;
         disposables.Dispose();

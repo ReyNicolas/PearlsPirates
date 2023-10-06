@@ -31,7 +31,7 @@ public class GameManager: MonoBehaviour, IGameObjectCreator
         SetPlayers();        
     }
 
-    private void OnEnable()
+    private void Start()
     {       
         disposables = new CompositeDisposable(
             matchData.winnerData
@@ -46,7 +46,7 @@ public class GameManager: MonoBehaviour, IGameObjectCreator
     }
  
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         disposables.Dispose();
     }

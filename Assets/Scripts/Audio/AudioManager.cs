@@ -9,7 +9,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource interfaceSounds;
     CompositeDisposable disposables;
 
-    private void OnEnable()
+    private void Start()
     {
         matchData.SetAudioMixer();
         // update subscription
@@ -20,7 +20,7 @@ public class AudioManager : MonoBehaviour
             .Subscribe(_ => PlayNewTrack()));       
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         disposables.Dispose();
     }

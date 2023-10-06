@@ -12,7 +12,7 @@ public class WavesAudioController: MonoBehaviour
 
     int playersMoving;
 
-    private void OnEnable()
+    private void Start()
     {
         disposables = new CompositeDisposable(
             matchData.winnerData
@@ -22,7 +22,7 @@ public class WavesAudioController: MonoBehaviour
         StartCoroutine(SetWavesVolume());    
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         disposables.Dispose(); 
     }
