@@ -9,7 +9,6 @@ public class BulletLogic: MonoBehaviour, IDestroy
     [SerializeField] bool isMoving;
     [SerializeField] Rigidbody2D rigidbody2D;
     [SerializeField] ParticleSystem particleSystem;
-    [SerializeField] ParticleSystem particleLine;
     [SerializeField] AudioSource audioSource;
     [SerializeField] GameObject CreationEffectPrefab;
     [SerializeField] SpriteRenderer spriteRenderer;
@@ -72,7 +71,6 @@ public class BulletLogic: MonoBehaviour, IDestroy
 
     void StopAndStartPhysics()
     {
-        particleLine.loop = false;
         if (isMoving)
         {
             isMoving=false;
