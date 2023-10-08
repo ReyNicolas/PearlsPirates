@@ -7,12 +7,13 @@ using Unity.Mathematics;
 using System;
 using UniRx;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
-public class GameManager: MonoBehaviour, IGameObjectCreator
+public class GameManager : MonoBehaviour, IGameObjectCreator
 {
     [SerializeField] MatchSO matchData;
     [SerializeField] GameObject optionsGO;
-    public  PlayerRespawnGenerator respawnGenerator;
+    public PlayerRespawnGenerator respawnGenerator;
     public PositionGenerator positionGenerator = new PositionGenerator();
     public PearlsPointsCalculator pearlsPointsCalculator = new PearlsPointsCalculator();
     CompositeDisposable disposables;
@@ -24,15 +25,15 @@ public class GameManager: MonoBehaviour, IGameObjectCreator
     private void Awake()
     {
         playersDatas = matchData.playersDatas;
-        matchData.Initialize();  
+        matchData.Initialize();
         SetPositionGenerator();
         SetPointManager();
         SetRespawnGenerator();
-        SetPlayers();        
+        SetPlayers();
     }
 
     private void Start()
-    {       
+    {
         disposables = new CompositeDisposable(
             matchData.winnerData
             .Where(winner => winner != null)
@@ -44,7 +45,7 @@ public class GameManager: MonoBehaviour, IGameObjectCreator
                        .Subscribe(value => matchData.CheckWinner(value)))
             );
     }
- 
+
 
     private void OnDestroy()
     {
@@ -82,12 +83,18 @@ public class GameManager: MonoBehaviour, IGameObjectCreator
         for (int i = 0; i < math.min(playersDatas.Count, gamepadCount); i++)
         {
             var shipGO = Instantiate(matchData.playerShipPrefab, Vector3.zero, Quaternion.identity);
-            SetPlayerDataInShip(playersDatas[i], shipGO.GetComponent<PearlCollectorsManager>(), shipGO.GetComponent<ShipMovement>());            
+            SetPlayerDataInShip(playersDatas[i], shipGO.GetComponent<PearlCollectorsManager>(), shipGO.GetComponent<ShipMovement>());
             onCreatedInMapGameObject?.Invoke(shipGO);
             respawnGenerator.Listen(shipGO.GetComponent<IDestroy>());
-            SetInput(i, shipGO.GetComponent<PlayerInput>());           
+            SetInput(i, shipGO.GetComponent<PlayerInput>());
+            SetATransformLookToZeroCoord(shipGO.transform);
         }
     }
+    void SetATransformLookToZeroCoord(Transform aTransform)
+    {
+        aTransform.up = - aTransform.position;
+    }
+
     void SetPlayerDataInShip(PlayerSO playerData, PearlCollectorsManager collectorsManager, ShipMovement shipMovement)
     {
         collectorsManager.playerData = playerData;
