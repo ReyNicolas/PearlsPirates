@@ -34,7 +34,7 @@ public class PowerWave : MonoBehaviour
     {        
         if (!collision.CompareTag("Scenary") && collision.attachedRigidbody)
         {
-            collision.attachedRigidbody.velocity = direction * speed;
+            collision.attachedRigidbody.velocity = transform.up * speed;
         }
         if (collision.CompareTag("Scenary"))
         {
