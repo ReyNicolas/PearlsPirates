@@ -16136,9 +16136,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9e7aed99ab4aa24591fae17b3a5a300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationTime: 0.5
+  degreesPerSecond: 120
   audioSource: {fileID: 3050994964467742987}
   audioClip: {fileID: 8300000, guid: 77399f06a85edbc41a8c7d5738df0702, type: 3}
+  degrees: 0
 --- !u!1 &8955667711031734711
 GameObject:
   m_ObjectHideFlags: 0
