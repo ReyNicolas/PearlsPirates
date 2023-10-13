@@ -24,7 +24,7 @@ public class InMatchClipsController : MonoBehaviour
 
             matchData.playersDatas.ForEach(
                 pd =>
-                disposables.Add( //Add to composite
+                disposables.Add(
                     pd.PointsToAdd
                     .Where(points => points != 0)
                     .Subscribe(pa => PlayInterfaceClip(pointClip)))

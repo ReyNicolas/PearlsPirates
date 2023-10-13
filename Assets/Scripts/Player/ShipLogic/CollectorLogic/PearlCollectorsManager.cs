@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,18 +28,25 @@ public class PearlCollectorsManager : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<PearlToObtain>())
+        if  (collision.gameObject.TryGetComponent<PearlToObtain>(out var pearlToObtain))
         {
            var collector =  collectors.OrderBy(c=> (collision.transform.position- c.transform.position).magnitude).ToList().Find(c=>c.IsEmpty());
-            if (collector != null) SetPearlToCollector(collision.gameObject.GetComponent<PearlToObtain>().GiveMeYourPearl(), collector);
+            if (collector != null) SetPearlToCollector(pearlToObtain.GiveMeYourPearl(), collector);
             return;
         }
+    }
 
-        if (collision.gameObject.GetComponent<IMarket>() != null)
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.TryGetComponent<IMarket>(out var market))
         {
-            collision.gameObject.GetComponent<IMarket>().TryToCollectThisPearlsFromThisPlayerData(GetPearls(), playerData);
+            market.TryToCollectThisPearlsFromThisPlayerData(GetPearls(), playerData);
         }
     }
+
+
+
 
    List<SelectionPearl> GetPearls()
     {
