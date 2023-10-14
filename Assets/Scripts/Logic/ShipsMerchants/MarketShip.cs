@@ -85,11 +85,11 @@ public class MarketShip : IMarket
 }
 public abstract class IMarket: MonoBehaviour
 {
-    public abstract void TryToCollectThisPearlsFromThisPlayerData(List<SelectionPearl> selectionPearls, PlayerSO playerData);
    public static event  Action<PearlCollectedDTO> OnSelectionPearlCollected;
+    public  static event Action<IMarket> onNewMarket;
+    public abstract void TryToCollectThisPearlsFromThisPlayerData(List<SelectionPearl> selectionPearls, PlayerSO playerData);
     public abstract int GetNumberOfColors();
     public  abstract void SetColorsToCollect(List<Color> colors);
-    public  static event Action<IMarket> onNewMarket;
 
     protected void InvokeOnPearlColleted(PearlCollectedDTO pearlCollectedData) 
         => OnSelectionPearlCollected?.Invoke(pearlCollectedData);
