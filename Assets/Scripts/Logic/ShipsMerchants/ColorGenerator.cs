@@ -7,10 +7,10 @@ public class ColorGenerator {
 
     List<Color> colors;
 
-    public ColorGenerator(List<Color> colors, MarketShipGenerator shipPearlsGetterGenerator)
+    public ColorGenerator(List<Color> colors)
     {
         this.colors = colors;
-        shipPearlsGetterGenerator.OnCreatedMerchant += AddColorsToMarket; 
+        MarketShip.onNewMarketShip += AddColorsToMarket;
     }
 
     public void AddColorsToMarket(IMarket market) 

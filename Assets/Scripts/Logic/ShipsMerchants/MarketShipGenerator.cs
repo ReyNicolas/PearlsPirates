@@ -4,17 +4,16 @@ using UnityEngine;
 public class MarketShipGenerator: IGameObjectCreator
 {
     GameObject shipPrefab;
-    public event Action<MarketShip> OnCreatedMerchant;
     public event Action<GameObject> onCreatedInMapGameObject;
 
     MatchSO matchData;
 
-    public MarketShipGenerator(GameObject shipPrefab, PositionGenerator positionAsigner, PearlsPointsCalculator pearlsPointsCalculator, MatchSO matchData)
+    public MarketShipGenerator(GameObject shipPrefab, PositionGenerator positionAsigner, MatchSO matchData)
     {
         this.shipPrefab = shipPrefab;       
         this.matchData = matchData;
-        pearlsPointsCalculator.SubscribeToShipGenerator(this);
         positionAsigner.AddObjectToListen(this);
+        MarketShip.onNewMarketShip += GenerateShipAfterDestroy;
     }
 
     public void StartGeneration()
@@ -29,12 +28,10 @@ public class MarketShipGenerator: IGameObjectCreator
     {
         var shipScript = GameObject.Instantiate(shipPrefab, Vector3.zero, Quaternion.identity).GetComponent<MarketShip>();
         shipScript.Initialize(matchData.timeToGenerateMerchants);
-        shipScript.OnDestroy += GenerateShipAfterDestroy;
         onCreatedInMapGameObject?.Invoke(shipScript.gameObject);
-        OnCreatedMerchant?.Invoke(shipScript);
     }
 
-    void GenerateShipAfterDestroy(MarketShip getter)
+    public void GenerateShipAfterDestroy(MarketShip getter)
     {
         GenerateShip();
     }

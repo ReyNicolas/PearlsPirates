@@ -9,9 +9,15 @@ public class MarketShip : MonoBehaviour, IMarket
 
     [SerializeField] List<Color> colorsToCollect = new List<Color>();
     [SerializeField] List<Transform> pearlsContainers;
-    public event Action<PearlCollectedDTO> OnSelectionPearlCollected;
-    public event Action<MarketShip> OnDestroy;
+    public static event Action<MarketShip> onNewMarketShip; 
+    public static event Action<PearlCollectedDTO> OnSelectionPearlCollected;
+    public static event Action<MarketShip> OnDestroy;
     public event Action<List<Color>> OnChangeColors;
+
+    private void Start()
+    {
+        onNewMarketShip?.Invoke(this);
+    }
     public void Initialize(float timeAlive)
     {
         StopCoroutine("DestroyMe");
@@ -85,7 +91,8 @@ public class MarketShip : MonoBehaviour, IMarket
 public interface IMarket
 {
     void TryToCollectThisPearlsFromThisPlayerData(List<SelectionPearl> selectionPearls, PlayerSO playerData);
-    event Action<PearlCollectedDTO> OnSelectionPearlCollected;
+    static event  Action<PearlCollectedDTO> OnSelectionPearlCollected;
     int GetNumberOfColors();
     void SetColorsToCollect(List<Color> colors);
+    static event Action<IMarket> onNewMarket;
 }

@@ -14,12 +14,19 @@ public class MarketsManager : MonoBehaviour
     [SerializeField] List<MarketShip> marketsShips = new List<MarketShip>();
     [SerializeField] List<MarketPier> marketPiers = new List<MarketPier>();
 
-  
+    private void Awake()
+    {
+        MarketShip.onNewMarketShip += AddMerchant;
+        MarketShip.OnDestroy += RemoveMerchant;
+        
+    }
+
+
     private void Start()
     {
-        marketShipGenerator = new MarketShipGenerator(shipPrefab, gameManager.positionGenerator, gameManager.pearlsPointsCalculator, matchData);
-        colorGenerator = new ColorGenerator(PowersColors(), marketShipGenerator);
-        marketShipGenerator.OnCreatedMerchant += AddMerchant;
+        marketShipGenerator = new MarketShipGenerator(shipPrefab, gameManager.positionGenerator, matchData);
+        colorGenerator = new ColorGenerator(PowersColors());
+        
         marketShipGenerator.StartGeneration();
         marketPiers.ForEach(mp => { InitializeMarketPier(mp); });
     }
@@ -47,7 +54,6 @@ public class MarketsManager : MonoBehaviour
     {
         marketsShips.Add(merchantToAdd);
         matchData.merchantsInScene = marketsShips.Count;
-        merchantToAdd.OnDestroy += RemoveMerchant;
     }
 
     void RemoveMerchant(MarketShip merchantToRemove)

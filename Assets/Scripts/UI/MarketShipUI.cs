@@ -11,8 +11,13 @@ public class MarketShipUI : MonoBehaviour
     private void Awake()
     {
         shipPearlsGetter.OnChangeColors += SetColors;
-        shipPearlsGetter.OnDestroy+= (ship => Destroy(gameObject));
+        MarketShip.OnDestroy += TryDestroyMe;
         transform.SetParent(GameObject.FindWithTag("ScreenCanvas").transform);
+    }
+
+    void TryDestroyMe(MarketShip ship)
+    {
+        if (ship == shipPearlsGetter) Destroy(gameObject);
     }
 
     private void Update()
