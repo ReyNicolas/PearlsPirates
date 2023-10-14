@@ -34,7 +34,6 @@ public class MarketsManager : MonoBehaviour
     void InitializeMarketPier(MarketPier mp)
     {
         mp.OnCollected += SetMarketPierColors;
-        mp.OnSelectionPearlCollected += gameManager.pearlsPointsCalculator.AddPearlToPlayerPoints;
         SetMarketPierColors(mp);
     }
 

@@ -4,13 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class MarketShip : MonoBehaviour, IMarket
+public class MarketShip : IMarket
 {
 
     [SerializeField] List<Color> colorsToCollect = new List<Color>();
     [SerializeField] List<Transform> pearlsContainers;
-    public static event Action<MarketShip> onNewMarketShip; 
-    public static event Action<PearlCollectedDTO> OnSelectionPearlCollected;
+    public static event Action<MarketShip> onNewMarketShip;
     public static event Action<MarketShip> OnDestroy;
     public event Action<List<Color>> OnChangeColors;
 
@@ -30,18 +29,18 @@ public class MarketShip : MonoBehaviour, IMarket
         OnDestroy?.Invoke(this);
         Destroy(gameObject);
     }
-    public int GetNumberOfColors()
+    public override int GetNumberOfColors()
     {
         return pearlsContainers.Count;
     }
-    public void SetColorsToCollect(List<Color> colors)
+    public override void SetColorsToCollect(List<Color> colors)
     {
         colorsToCollect = colors;
         OnChangeColors?.Invoke(colorsToCollect);
     }
 
 
-    public void TryToCollectThisPearlsFromThisPlayerData(List<SelectionPearl> selectionPearls, PlayerSO playerData)
+    public override void TryToCollectThisPearlsFromThisPlayerData(List<SelectionPearl> selectionPearls, PlayerSO playerData)
     {
         List<SelectionPearl> pearlsToSelect = selectionPearls;
         List<SelectionPearl> pearlsToCollect = new List<SelectionPearl>();
@@ -70,7 +69,7 @@ public class MarketShip : MonoBehaviour, IMarket
 
     void CollectThisPearl(SelectionPearl pearl, PlayerSO playerData)
     {
-        OnSelectionPearlCollected?.Invoke(GeneratePearlCollected(pearl, playerData));
+        InvokeOnPearlColleted(GeneratePearlCollected(pearl, playerData));
         SetConainerToPearl(pearl);
     }
 
@@ -81,18 +80,23 @@ public class MarketShip : MonoBehaviour, IMarket
         pearlsContainers.RemoveAt(0);
     }
 
-    PearlCollectedDTO GeneratePearlCollected(SelectionPearl pearl, PlayerSO playerData)
-    {
-        playerData.pearlsCollectedDatas.Add(pearl.GetPowerData());
-        return new PearlCollectedDTO(pearl.GetPowerData(), playerData); 
-    }
+   
 
 }
-public interface IMarket
+public abstract class IMarket: MonoBehaviour
 {
-    void TryToCollectThisPearlsFromThisPlayerData(List<SelectionPearl> selectionPearls, PlayerSO playerData);
-    static event  Action<PearlCollectedDTO> OnSelectionPearlCollected;
-    int GetNumberOfColors();
-    void SetColorsToCollect(List<Color> colors);
-    static event Action<IMarket> onNewMarket;
+    public abstract void TryToCollectThisPearlsFromThisPlayerData(List<SelectionPearl> selectionPearls, PlayerSO playerData);
+   public static event  Action<PearlCollectedDTO> OnSelectionPearlCollected;
+    public abstract int GetNumberOfColors();
+    public  abstract void SetColorsToCollect(List<Color> colors);
+    public  static event Action<IMarket> onNewMarket;
+
+    protected void InvokeOnPearlColleted(PearlCollectedDTO pearlCollectedData) 
+        => OnSelectionPearlCollected?.Invoke(pearlCollectedData);
+
+    protected  PearlCollectedDTO GeneratePearlCollected(SelectionPearl pearl, PlayerSO playerData)
+    {
+        playerData.pearlsCollectedDatas.Add(pearl.GetPowerData());
+        return new PearlCollectedDTO(pearl.GetPowerData(), playerData);
+    }
 }

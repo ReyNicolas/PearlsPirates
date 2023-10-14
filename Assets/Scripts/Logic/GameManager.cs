@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour, IGameObjectCreator
     [SerializeField] GameObject optionsGO;
     public PlayerRespawnGenerator respawnGenerator;
     public PositionGenerator positionGenerator = new PositionGenerator();
-    public PearlsPointsCalculator pearlsPointsCalculator = new PearlsPointsCalculator();
     CompositeDisposable disposables;
     PointsManager pointsManager;
     List<PlayerSO> playersDatas;
@@ -76,7 +75,7 @@ public class GameManager : MonoBehaviour, IGameObjectCreator
         positionGenerator.AddObjectToListen(this);
     }
     void SetPointManager()
-        => pointsManager = new PointsManager(matchData.playersDatas, new List<IPlayerPointsGiver>() { pearlsPointsCalculator });
+        => pointsManager = new PointsManager(matchData.playersDatas);
     void SetPlayers()
     {
         var gamepadCount = Gamepad.all.Count;

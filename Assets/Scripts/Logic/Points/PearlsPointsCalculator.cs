@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 
-public class PearlsPointsCalculator: IPlayerPointsGiver
+public class PearlsPointsCalculator
 {
-    public event Action<string, int> OnGivePlayerPoints;
-
-
-    public PearlsPointsCalculator()
+    public PearlsPointsCalculator(PlayerPointsGiver playerPointsGiver)
     {
-        IMarket.OnSelectionPearlCollected += AddPearlToPlayerPoints;
+        IMarket.OnSelectionPearlCollected += (pearlCollectedData=> AddPearlToPlayerPoints(pearlCollectedData,playerPointsGiver));
     }
 
-   public void AddPearlToPlayerPoints(PearlCollectedDTO pearlCollectedData) =>
-        OnGivePlayerPoints?.Invoke(pearlCollectedData.playerData.PlayerName, 1);
+   public void AddPearlToPlayerPoints(PearlCollectedDTO pearlCollectedData, PlayerPointsGiver playerPointsGiver)
+    {
+         playerPointsGiver.GivePoints(pearlCollectedData.playerData.PlayerName, 1);
+    }
 
 }
 

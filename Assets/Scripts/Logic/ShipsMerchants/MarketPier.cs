@@ -2,25 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MarketPier: MonoBehaviour, IMarket
+public class MarketPier: IMarket
 {
     [SerializeField] List<Color> colorsToCollect = new List<Color>();
     public int numberOfCollorsToCollect;
-    public event Action<PearlCollectedDTO> OnSelectionPearlCollected;
     public event Action<List<Color>> OnChangeColors;
     public event Action<MarketPier> OnCollected;
 
-    public int GetNumberOfColors()
+    public override int GetNumberOfColors()
     {
         return numberOfCollorsToCollect;
     }
-    public void SetColorsToCollect(List<Color> colors)
+    public override void SetColorsToCollect(List<Color> colors)
     {
         colorsToCollect = colors;
         OnChangeColors?.Invoke(colorsToCollect);
     }
 
-    public void TryToCollectThisPearlsFromThisPlayerData(List<SelectionPearl> selectionPearls, PlayerSO playerData)
+    public override void TryToCollectThisPearlsFromThisPlayerData(List<SelectionPearl> selectionPearls, PlayerSO playerData)
     {
         List<SelectionPearl> pearlsToSelect = selectionPearls;
         List<SelectionPearl> pearlsToCollect = new List<SelectionPearl>();
@@ -48,13 +47,9 @@ public class MarketPier: MonoBehaviour, IMarket
 
     void CollectThisPearl(SelectionPearl pearl, PlayerSO playerData)
     {
-        OnSelectionPearlCollected?.Invoke(GeneratePearlCollected(pearl, playerData));
+        InvokeOnPearlColleted(GeneratePearlCollected(pearl, playerData));
         Destroy(pearl.gameObject);
     }
-    PearlCollectedDTO GeneratePearlCollected(SelectionPearl pearl, PlayerSO playerData)
-    {
-        playerData.pearlsCollectedDatas.Add(pearl.GetPowerData());
-        return new PearlCollectedDTO(pearl.GetPowerData(), playerData);
-    }
+    
 
 }
