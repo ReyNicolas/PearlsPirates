@@ -1,16 +1,11 @@
 ﻿using System;
 
-public class PearlsPointsCalculator
+public static class PearlsPointsCalculator
 {
-    PlayerPointsGiver playerPointsGiver;
-    public PearlsPointsCalculator(PlayerPointsGiver playerPointsGiver)
+    
+    public static void AddPearlToPlayerPoints(PearlCollectedDTO pearlCollectedData)
     {
-        this.playerPointsGiver = playerPointsGiver;
-    }
-
-    public void AddPearlToPlayerPoints(PearlCollectedDTO pearlCollectedData)
-    {
-         playerPointsGiver.GivePoints(pearlCollectedData.playerData.PlayerName, 1);
+         PlayerPointsGiver.GivePoints(pearlCollectedData.playerData.PlayerName, 1);
     }
 
 }
