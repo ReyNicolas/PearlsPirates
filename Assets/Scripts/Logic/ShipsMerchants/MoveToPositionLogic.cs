@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class MoveToPositionLogic : MonoBehaviour
 {
-    [SerializeField] float speed;
+    [SerializeField] int speed;
     [SerializeField] LayerMask layerMask;
+    [SerializeField] int degreesPerSecond;
     Rigidbody2D rb;
     Vector3 position;
-    int degreesPerSecond = 90;
+    
 
     private void Awake()
     {
@@ -22,9 +22,9 @@ public class MoveToPositionLogic : MonoBehaviour
 
     private void Update()
     {
-        rb.velocity = transform.up * speed;
-
         if (Vector3.Distance(position, transform.position) < 0.1f) Destroy(gameObject);
+        if (rb.velocity.magnitude > speed) return;
+        rb.velocity = transform.up * speed;
     }
     private void LateUpdate()
     {
@@ -33,13 +33,10 @@ public class MoveToPositionLogic : MonoBehaviour
             transform.Rotate(0, 0, degreesPerSecond * Time.deltaTime); 
             return;
         }
-        
         transform.rotation = Quaternion.RotateTowards(
-            transform.rotation,
-            Quaternion.FromToRotation(Vector3.up, (position-transform.position)).normalized, degreesPerSecond * Time.deltaTime);
-           
-        
-            
-
+            transform.rotation
+            , Quaternion.FromToRotation(Vector3.up, (position-transform.position)).normalized
+            , degreesPerSecond * Time.deltaTime); 
     }
+    
 }

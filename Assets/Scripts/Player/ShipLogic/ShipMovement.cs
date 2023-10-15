@@ -46,17 +46,17 @@ public class ShipMovement : MonoBehaviour, IDestroy
 
     void MoveShip(Vector2 direction)
     {
-        
+        if (CheckSpeedLimit()) return;
         rigidbody2D.AddForce(transform.up * direction.y * acSpeed * Time.deltaTime, ForceMode2D.Impulse);
         if (minTorque<math.abs(direction.x)) rigidbody2D.AddTorque(-direction.x * turnSpeed * Time.deltaTime,ForceMode2D.Impulse);
-        CheckSpeedLimit();
     }
 
-    void CheckSpeedLimit()
+    bool CheckSpeedLimit()
     {
         actualSpeed = rigidbody2D.velocity.magnitude;
-        if (actualSpeed > maxSpeed)rigidbody2D.velocity = rigidbody2D.velocity.normalized * maxSpeed;
         playerData.actualSpeed.Value = actualSpeed;
+        //if (actualSpeed > maxSpeed)rigidbody2D.velocity = rigidbody2D.velocity.normalized * maxSpeed;
+        return actualSpeed > maxSpeed;
     }
           
 
