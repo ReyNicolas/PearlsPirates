@@ -27,12 +27,36 @@ public class PositionGenerator
     public void SetDimensions(Vector2 vector) => 
         dimension = vector;
 
-    public void AddObjectToListen(IGameObjectCreator gameObjectCreator)
+ 
+
+    public Vector2 ReturnABorderPosition()
     {
-        gameObjectCreator.onCreatedInMapGameObject += AssignPosition;
+        if(Random.Range(0,2) == 0)
+        {
+            if (Random.Range(0, 2) == 0)
+            {
+                return new Vector2(xMin, Random.Range(yMin+margin, yMax-margin));
+            }
+            return new Vector2(xMax, Random.Range(yMin+margin, yMax-margin));
+        }
+
+        if (Random.Range(0, 2) == 0)
+        {
+            return new Vector2( Random.Range(xMin+margin, xMax-margin), yMin);
+        }
+        return new Vector2(Random.Range(xMin+margin, xMax-margin), yMax);
     }
 
-    void AssignPosition(GameObject gameObject)
+    public Vector2 ReturnABorderPositionToMove(Vector2 vectorBorderStartPosition)
+    {
+        if (vectorBorderStartPosition.x == xMin) return new Vector2(xMax, Random.Range(yMin + margin, yMax - margin));
+        if (vectorBorderStartPosition.x == xMax) return new Vector2(xMin, Random.Range(yMin + margin, yMax - margin));
+        if (vectorBorderStartPosition.y == yMin) return new Vector2(Random.Range(xMax + margin, xMax - margin), yMax);
+        return new Vector2(Random.Range(xMin + margin, xMax - margin), yMin);
+    }
+
+
+    public void AssignPosition(GameObject gameObject)
     {
         gameObject.transform.position = ReturnPosition();
     }

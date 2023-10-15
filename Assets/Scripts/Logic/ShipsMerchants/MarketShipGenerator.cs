@@ -1,39 +1,39 @@
 using System;
 using UnityEngine;
 
-public class MarketShipGenerator: IGameObjectCreator
+public class MarketShipGenerator: MonoBehaviour
 {
-    GameObject shipPrefab;
-    public event Action<GameObject> onCreatedInMapGameObject;
+    [SerializeField] GameObject marketShipPrefab;
+    [SerializeField] MatchSO matchData;
+    [SerializeField] GameManager gameManager;
+    PositionGenerator positionGenerator;
+    float shipGenerateTimer;
 
-    MatchSO matchData;
-
-    public MarketShipGenerator(GameObject shipPrefab, PositionGenerator positionAsigner, MatchSO matchData)
+    private void Start()
     {
-        this.shipPrefab = shipPrefab;       
-        this.matchData = matchData;
-        positionAsigner.AddObjectToListen(this);
-        MarketShip.onNewMarketShip += GenerateShipAfterDestroy;
+        positionGenerator = gameManager.positionGenerator;
     }
 
-    public void StartGeneration()
+    private void Update()
     {
-        for(int i=0; i<matchData.maxNumberOfMerchants; i++)
+        shipGenerateTimer -= Time.deltaTime;
+
+        if(shipGenerateTimer<0 
+            && matchData.maxNumberOfMerchants> matchData.merchantsInScene)
         {
-            GenerateShip();
+            GenerateMarketShip();
         }
     }
 
-    void GenerateShip()
+
+    
+
+    void GenerateMarketShip()
     {
-        var shipScript = GameObject.Instantiate(shipPrefab, Vector3.zero, Quaternion.identity).GetComponent<MarketShip>();
-        shipScript.Initialize(matchData.timeToGenerateMerchants);
-        onCreatedInMapGameObject?.Invoke(shipScript.gameObject);
+        var marketShipScript = Instantiate(marketShipPrefab, Vector3.zero, Quaternion.identity).GetComponent<MarketShip>();
+        marketShipScript.Initialize(matchData.timeToGenerateMerchants);
+        marketShipScript.transform.position = positionGenerator.ReturnABorderPosition();
     }
 
-    public void GenerateShipAfterDestroy(MarketShip getter)
-    {
-        GenerateShip();
-    }
 }
 

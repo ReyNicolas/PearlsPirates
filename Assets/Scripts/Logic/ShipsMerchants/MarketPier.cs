@@ -7,7 +7,7 @@ public class MarketPier: IMarket
     [SerializeField] List<Color> colorsToCollect = new List<Color>();
     public int numberOfCollorsToCollect;
     public event Action<List<Color>> OnChangeColors;
-    public event Action<MarketPier> OnCollected;
+    public static event Action<MarketPier> OnCollected;
 
     public override int GetNumberOfColors()
     {

@@ -9,16 +9,15 @@ using UniRx;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-public class GameManager : MonoBehaviour, IGameObjectCreator
+public class GameManager : MonoBehaviour
 {
     [SerializeField] MatchSO matchData;
     [SerializeField] GameObject optionsGO;
     public PlayerRespawnGenerator respawnGenerator;
     public PositionGenerator positionGenerator = new PositionGenerator();
+
     CompositeDisposable disposables;
     List<PlayerSO> playersDatas;
-
-    public event Action<GameObject> onCreatedInMapGameObject;
 
     private void Awake()
     {
@@ -64,14 +63,19 @@ public class GameManager : MonoBehaviour, IGameObjectCreator
     void SetRespawnGenerator()
     {
         respawnGenerator = new PlayerRespawnGenerator(matchData.instantPearlPrefab);
-        positionGenerator.AddObjectToListen(respawnGenerator);
+        respawnGenerator.onCreatedForMapGameObject += SetPositionForMapGameobject;
     }
 
     void SetPositionGenerator()
     {
         positionGenerator.SetDimension();
-        positionGenerator.AddObjectToListen(this);
     }
+
+    void SetPositionForMapGameobject(GameObject gameobject)
+    {
+        positionGenerator.AssignPosition(gameobject);
+    }
+
     void SetPlayers()
     {
         var gamepadCount = Gamepad.all.Count;
@@ -79,7 +83,7 @@ public class GameManager : MonoBehaviour, IGameObjectCreator
         {
             var shipGO = Instantiate(matchData.playerShipPrefab, Vector3.zero, Quaternion.identity);
             SetPlayerDataInShip(playersDatas[i], shipGO.GetComponent<PearlCollectorsManager>(), shipGO.GetComponent<ShipMovement>());
-            onCreatedInMapGameObject?.Invoke(shipGO);
+            SetPositionForMapGameobject(shipGO);
             respawnGenerator.Listen(shipGO.GetComponent<IDestroy>()); 
             SetInput(i, shipGO.GetComponent<PlayerInput>());
             SetATransformLookToZeroCoord(shipGO.transform);

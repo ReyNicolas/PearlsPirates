@@ -7,35 +7,33 @@ using UnityEngine;
 public class MarketsManager : MonoBehaviour
 {
     ColorGenerator colorGenerator;
-    MarketShipGenerator marketShipGenerator;
     [SerializeField] MatchSO matchData;
-    [SerializeField] GameObject shipPrefab;
     [SerializeField] GameManager gameManager;
-    [SerializeField] List<MarketShip> marketsShips = new List<MarketShip>();
     [SerializeField] List<MarketPier> marketPiers = new List<MarketPier>();
+    [SerializeField] List<MarketShip> marketsShips = new List<MarketShip>();
 
     private void Awake()
     {
         MarketShip.onNewMarketShip += AddMerchant;
         MarketShip.OnDestroy += RemoveMerchant;
-        
+        MarketPier.OnCollected += SetMarketPierColors;
     }
 
 
     private void Start()
     {
-        marketShipGenerator = new MarketShipGenerator(shipPrefab, gameManager.positionGenerator, matchData);
         colorGenerator = new ColorGenerator(PowersColors());
-        
-        marketShipGenerator.StartGeneration();
-        marketPiers.ForEach(mp => { InitializeMarketPier(mp); });
+        marketPiers.ForEach(mp => { SetMarketPierColors(mp); });
     }
 
-    void InitializeMarketPier(MarketPier mp)
+    private void OnDestroy()
     {
-        mp.OnCollected += SetMarketPierColors;
-        SetMarketPierColors(mp);
+        MarketShip.onNewMarketShip -= AddMerchant;
+        MarketShip.OnDestroy -= RemoveMerchant;
+        MarketPier.OnCollected -= SetMarketPierColors;
     }
+
+    
 
     void SetMarketPierColors(MarketPier pier)
     {

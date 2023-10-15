@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PearlManager : MonoBehaviour
@@ -14,14 +16,26 @@ public class PearlManager : MonoBehaviour
     {
         pearlGenerator = new PearlGenerator(matchData.pearlPrefab);
         powerGenerator = new PearlPowerGenerator(matchData.powersDatas,pearlGenerator);
-        matchManager.positionGenerator.AddObjectToListen(pearlGenerator);
+        pearlGenerator.onCreatedForMapGameObject += SetPosition;
         pearlsInMatchController = new PearlsInMatchController(matchData, pearlGenerator);
     }
+
+   
 
     private void Start()
     {
         StartCoroutine(GeneratePearl());
         StartCoroutine(PlayWind());
+    }
+
+    private void OnDestroy()
+    {
+        pearlGenerator.onCreatedForMapGameObject -= SetPosition;
+    }
+
+    void SetPosition(GameObject go)
+    {
+        matchManager.positionGenerator.AssignPosition(go);
     }
 
     IEnumerator PlayWind()
@@ -38,11 +52,14 @@ public class PearlManager : MonoBehaviour
     {
         while (true)
         {
-            if(matchData.numberPearlsToObtainInScene< matchData.maxNumberOfPearls) pearlGenerator.CreatePearl();
+            if(matchData.numberPearlsToObtainInScene< matchData.maxNumberOfPearls) 
+                pearlGenerator.CreatePearl();
             yield return new WaitForSeconds(matchData.timeToGeneratePearl);
         }
         
     }
+
+
 }
 
 

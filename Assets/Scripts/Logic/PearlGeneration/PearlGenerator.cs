@@ -1,11 +1,11 @@
 using System;
 using UnityEngine;
 
-public class PearlGenerator: IGameObjectCreator
+public class PearlGenerator
 {
     GameObject pearlPrefab;
     public event Action<PearlToObtain> OnCreatedPearlToObtain;
-    public event Action<GameObject> onCreatedInMapGameObject;
+    public event Action<GameObject> onCreatedForMapGameObject;
     public PearlGenerator(GameObject pearlPrefab)
     {
         this.pearlPrefab = pearlPrefab;     
@@ -15,12 +15,12 @@ public class PearlGenerator: IGameObjectCreator
     {
         var pearlToObtainGenerated = GameObject.Instantiate(pearlPrefab, Vector3.zero, Quaternion.identity).GetComponent<PearlToObtain>();
         OnCreatedPearlToObtain?.Invoke(pearlToObtainGenerated);
-        onCreatedInMapGameObject?.Invoke(pearlToObtainGenerated.gameObject);
+        onCreatedForMapGameObject?.Invoke(pearlToObtainGenerated.gameObject);
     }        
     
 }
 
 public interface IGameObjectCreator
 {
-    event Action<GameObject> onCreatedInMapGameObject;
+    event Action<GameObject> onCreatedForMapGameObject;
 }
