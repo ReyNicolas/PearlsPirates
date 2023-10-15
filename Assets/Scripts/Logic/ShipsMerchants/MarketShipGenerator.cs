@@ -12,6 +12,7 @@ public class MarketShipGenerator: MonoBehaviour
     private void Start()
     {
         positionGenerator = gameManager.positionGenerator;
+        shipGenerateTimer = matchData.timeToGenerateMerchants;
     }
 
     private void Update()
@@ -22,6 +23,7 @@ public class MarketShipGenerator: MonoBehaviour
             && matchData.maxNumberOfMerchants> matchData.merchantsInScene)
         {
             GenerateMarketShip();
+            shipGenerateTimer = matchData.timeToGenerateMerchants;
         }
     }
 
@@ -30,9 +32,9 @@ public class MarketShipGenerator: MonoBehaviour
 
     void GenerateMarketShip()
     {
-        var marketShipScript = Instantiate(marketShipPrefab, Vector3.zero, Quaternion.identity).GetComponent<MarketShip>();
-        marketShipScript.Initialize(matchData.timeToGenerateMerchants);
-        marketShipScript.transform.position = positionGenerator.ReturnABorderPosition();
+        var borderPositionOrigin = positionGenerator.ReturnABorderPosition();
+        var moveToPositionLogic = Instantiate(marketShipPrefab,borderPositionOrigin , Quaternion.identity).GetComponent<MoveToPositionLogic>();
+        moveToPositionLogic.SetPositionToMove(positionGenerator.ReturnABorderPositionToMove(borderPositionOrigin));
     }
 
 }

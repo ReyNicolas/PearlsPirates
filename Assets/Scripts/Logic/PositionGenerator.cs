@@ -49,10 +49,10 @@ public class PositionGenerator
 
     public Vector2 ReturnABorderPositionToMove(Vector2 vectorBorderStartPosition)
     {
-        if (vectorBorderStartPosition.x == xMin) return new Vector2(xMax, Random.Range(yMin + margin, yMax - margin));
-        if (vectorBorderStartPosition.x == xMax) return new Vector2(xMin, Random.Range(yMin + margin, yMax - margin));
-        if (vectorBorderStartPosition.y == yMin) return new Vector2(Random.Range(xMax + margin, xMax - margin), yMax);
-        return new Vector2(Random.Range(xMin + margin, xMax - margin), yMin);
+        if (vectorBorderStartPosition.x == xMin) return new Vector2(xMax + margin, Random.Range(yMin + margin, yMax - margin));
+        if (vectorBorderStartPosition.x == xMax) return new Vector2(xMin - margin, Random.Range(yMin + margin, yMax - margin));
+        if (vectorBorderStartPosition.y == yMin) return new Vector2(Random.Range(xMax + margin, xMax - margin), yMax + margin);
+        return new Vector2(Random.Range(xMin + margin, xMax - margin), yMin - margin);
     }
 
 

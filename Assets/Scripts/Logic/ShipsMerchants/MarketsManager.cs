@@ -15,7 +15,7 @@ public class MarketsManager : MonoBehaviour
     private void Awake()
     {
         MarketShip.onNewMarketShip += AddMerchant;
-        MarketShip.OnDestroy += RemoveMerchant;
+        MarketShip.onDestroy += RemoveMerchant;
         MarketPier.OnCollected += SetMarketPierColors;
     }
 
@@ -29,7 +29,7 @@ public class MarketsManager : MonoBehaviour
     private void OnDestroy()
     {
         MarketShip.onNewMarketShip -= AddMerchant;
-        MarketShip.OnDestroy -= RemoveMerchant;
+        MarketShip.onDestroy -= RemoveMerchant;
         MarketPier.OnCollected -= SetMarketPierColors;
     }
 

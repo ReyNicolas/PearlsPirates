@@ -5,25 +5,18 @@ using UnityEngine.UI;
 
 public class MarketShipUI : MonoBehaviour
 {
-    [SerializeField] List<Image> imagesToSetColors;
+    [SerializeField] List<SpriteRenderer> imagesToSetColors;
     [SerializeField] MarketShip shipPearlsGetter;
 
     private void Awake()
     {
         shipPearlsGetter.OnChangeColors += SetColors;
-        MarketShip.OnDestroy += TryDestroyMe;
-        transform.SetParent(GameObject.FindWithTag("ScreenCanvas").transform);
+    }
+    private void OnDestroy()
+    {
+        shipPearlsGetter.OnChangeColors -= SetColors;
     }
 
-    void TryDestroyMe(MarketShip ship)
-    {
-        if (ship == shipPearlsGetter) Destroy(gameObject);
-    }
-
-    private void Update()
-    {
-        transform.position = shipPearlsGetter.transform.position + Vector3.right;
-    }
 
 
     void SetColors(List<Color> colors)

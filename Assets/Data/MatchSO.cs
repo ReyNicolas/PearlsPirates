@@ -62,6 +62,7 @@ public class MatchSO : ScriptableObject
 
     public void Initialize()
     {
+        merchantsInScene = 0;
         numberPearlsToObtainInScene = 0;
         playersDatas.ForEach(playerData=> playerData.Initialize());
         winnerData.Dispose();

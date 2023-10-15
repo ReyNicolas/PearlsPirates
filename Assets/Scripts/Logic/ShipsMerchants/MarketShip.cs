@@ -9,9 +9,11 @@ public class MarketShip : IMarket
 
     [SerializeField] List<Color> colorsToCollect = new List<Color>();
     [SerializeField] List<Transform> pearlsContainers;
+    
     public static event Action<MarketShip> onNewMarketShip;
-    public static event Action<MarketShip> OnDestroy;
+    public static event Action<MarketShip> onDestroy;
     public event Action<List<Color>> OnChangeColors;
+
 
     protected override void Start()
     {
@@ -19,20 +21,12 @@ public class MarketShip : IMarket
         onNewMarketShip?.Invoke(this);
     }
 
-   
+    private void OnDestroy()
+    {
+        onDestroy?.Invoke(this);
+    }
 
-    public void Initialize(float timeAlive)
-    {
-        StopCoroutine("DestroyMe");
-        StartCoroutine(DestroyMe(timeAlive));
-    }
-     
-    IEnumerator DestroyMe(float timeAlive)
-    {
-        yield return new WaitForSeconds(timeAlive);
-        OnDestroy?.Invoke(this);
-        Destroy(gameObject);
-    }
+
     public override int GetNumberOfColors()
     {
         return pearlsContainers.Count;
@@ -48,10 +42,11 @@ public class MarketShip : IMarket
     {
         List<SelectionPearl> pearlsToSelect = selectionPearls;
         List<SelectionPearl> pearlsToCollect = new List<SelectionPearl>();
-        
+        SelectionPearl pearl ;
+
         for(int i = 0; i < colorsToCollect.Count; i++)
         {
-            var pearl = pearlsToSelect.Find(ps => ps.GetPowerData().PowerColor == colorsToCollect[i]);
+            pearl = pearlsToSelect.Find(ps => ps.GetPowerData().PowerColor == colorsToCollect[i]);
             if (pearl != null) 
             {
                 pearlsToCollect.Add(pearl);
@@ -67,8 +62,7 @@ public class MarketShip : IMarket
         pearlsSelected.ForEach(ps => CollectThisPearl(ps, playerData));
         colorsToCollect.Clear();
         OnChangeColors?.Invoke(colorsToCollect);
-        StopCoroutine("DestroyMe");
-        StartCoroutine(DestroyMe(0.1f));
+        Destroy(gameObject);
     }
 
     void CollectThisPearl(SelectionPearl pearl, PlayerSO playerData)
@@ -86,32 +80,4 @@ public class MarketShip : IMarket
 
    
 
-}
-public abstract class IMarket: MonoBehaviour
-{
-    public static event Action<PearlCollectedDTO> OnSelectionPearlCollected;
-    public static event Action<IMarket> onNewMarket;
-    public static event Action<IMarket> onDestroyMarket;
-    private void OnDestroy()
-    {
-        onDestroyMarket?.Invoke(this);
-    }
-    protected virtual void Start()
-    {
-        onNewMarket?.Invoke(this);
-    }
-
-  
-    public abstract void TryToCollectThisPearlsFromThisPlayerData(List<SelectionPearl> selectionPearls, PlayerSO playerData);
-    public abstract int GetNumberOfColors();
-    public  abstract void SetColorsToCollect(List<Color> colors);
-
-    protected void InvokeOnPearlColleted(PearlCollectedDTO pearlCollectedData) 
-        => OnSelectionPearlCollected?.Invoke(pearlCollectedData);
-
-    protected  PearlCollectedDTO GeneratePearlCollected(SelectionPearl pearl, PlayerSO playerData)
-    {
-        playerData.pearlsCollectedDatas.Add(pearl.GetPowerData());
-        return new PearlCollectedDTO(pearl.GetPowerData(), playerData);
-    }
 }

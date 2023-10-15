@@ -500,7 +500,7 @@ GameObject:
   - component: {fileID: 6839797664339280863}
   - component: {fileID: 6278137472322870825}
   - component: {fileID: -3516220420518434702}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PierMarket
   m_TagString: Scenary
   m_Icon: {fileID: 0}

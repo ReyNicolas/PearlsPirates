@@ -708,7 +708,6 @@ GameObject:
   - component: {fileID: 316494519}
   - component: {fileID: 316494521}
   - component: {fileID: 316494522}
-  - component: {fileID: 316494523}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -758,21 +757,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   matchData: {fileID: 11400000, guid: ffc32afcbaf134045ba596fcc3c6776a, type: 2}
---- !u!114 &316494523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 316494517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc7aeaac87571dd4f9bb9aa06b063b01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  marketShipPrefab: {fileID: 6522883866240905775, guid: 36577121acda66f4fb294a7434a3569f, type: 3}
-  matchData: {fileID: 11400000, guid: ffc32afcbaf134045ba596fcc3c6776a, type: 2}
-  gameManager: {fileID: 316494521}
 --- !u!1 &405655468
 GameObject:
   m_ObjectHideFlags: 0
@@ -2625,6 +2609,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1145058914}
   - component: {fileID: 1145058915}
+  - component: {fileID: 1145058916}
   m_Layer: 0
   m_Name: MerchantManager
   m_TagString: Untagged
@@ -2667,6 +2652,21 @@ MonoBehaviour:
   - {fileID: 1315263507252202527}
   - {fileID: 1801364583}
   marketsShips: []
+--- !u!114 &1145058916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145058913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc7aeaac87571dd4f9bb9aa06b063b01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  marketShipPrefab: {fileID: 6522883866240905775, guid: 36577121acda66f4fb294a7434a3569f, type: 3}
+  matchData: {fileID: 11400000, guid: ffc32afcbaf134045ba596fcc3c6776a, type: 2}
+  gameManager: {fileID: 316494521}
 --- !u!1 &1148457500
 GameObject:
   m_ObjectHideFlags: 0
@@ -5012,6 +5012,10 @@ PrefabInstance:
     - target: {fileID: 6142464133407358755, guid: 0943a4a02e04fec4c8395bc189bdfb56, type: 3}
       propertyPath: m_Name
       value: PierMarket
+      objectReference: {fileID: 0}
+    - target: {fileID: 6142464133407358755, guid: 0943a4a02e04fec4c8395bc189bdfb56, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6831901590778116166, guid: 0943a4a02e04fec4c8395bc189bdfb56, type: 3}
       propertyPath: m_SortingLayer
