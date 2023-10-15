@@ -2,12 +2,13 @@
 
 public class PearlsPointsCalculator
 {
+    PlayerPointsGiver playerPointsGiver;
     public PearlsPointsCalculator(PlayerPointsGiver playerPointsGiver)
     {
-        IMarket.OnSelectionPearlCollected += (pearlCollectedData=> AddPearlToPlayerPoints(pearlCollectedData,playerPointsGiver));
+        this.playerPointsGiver = playerPointsGiver;
     }
 
-   public void AddPearlToPlayerPoints(PearlCollectedDTO pearlCollectedData, PlayerPointsGiver playerPointsGiver)
+    public void AddPearlToPlayerPoints(PearlCollectedDTO pearlCollectedData)
     {
          playerPointsGiver.GivePoints(pearlCollectedData.playerData.PlayerName, 1);
     }

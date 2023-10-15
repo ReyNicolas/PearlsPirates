@@ -13,10 +13,14 @@ public class MarketShip : IMarket
     public static event Action<MarketShip> OnDestroy;
     public event Action<List<Color>> OnChangeColors;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         onNewMarketShip?.Invoke(this);
     }
+
+   
+
     public void Initialize(float timeAlive)
     {
         StopCoroutine("DestroyMe");
@@ -85,8 +89,19 @@ public class MarketShip : IMarket
 }
 public abstract class IMarket: MonoBehaviour
 {
-   public static event  Action<PearlCollectedDTO> OnSelectionPearlCollected;
-    public  static event Action<IMarket> onNewMarket;
+    public static event Action<PearlCollectedDTO> OnSelectionPearlCollected;
+    public static event Action<IMarket> onNewMarket;
+    public static event Action<IMarket> onDestroyMarket;
+    private void OnDestroy()
+    {
+        onDestroyMarket?.Invoke(this);
+    }
+    protected virtual void Start()
+    {
+        onNewMarket?.Invoke(this);
+    }
+
+  
     public abstract void TryToCollectThisPearlsFromThisPlayerData(List<SelectionPearl> selectionPearls, PlayerSO playerData);
     public abstract int GetNumberOfColors();
     public  abstract void SetColorsToCollect(List<Color> colors);

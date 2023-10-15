@@ -1,6 +1,6 @@
 ﻿using System;
 
-public class PlayerPointsGiver
+public  class PlayerPointsGiver
 {
    public  event Action<string, int> OnGivePlayerPoints; 
 

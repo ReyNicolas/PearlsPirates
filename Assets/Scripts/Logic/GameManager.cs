@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour, IGameObjectCreator
     public PlayerRespawnGenerator respawnGenerator;
     public PositionGenerator positionGenerator = new PositionGenerator();
     CompositeDisposable disposables;
-    PointsManager pointsManager;
     List<PlayerSO> playersDatas;
 
     public event Action<GameObject> onCreatedInMapGameObject;
@@ -26,7 +25,6 @@ public class GameManager : MonoBehaviour, IGameObjectCreator
         playersDatas = matchData.playersDatas;
         matchData.Initialize();
         SetPositionGenerator();
-        SetPointManager();
         SetRespawnGenerator();
         SetPlayers();
     }
@@ -74,8 +72,6 @@ public class GameManager : MonoBehaviour, IGameObjectCreator
         positionGenerator.SetDimension();
         positionGenerator.AddObjectToListen(this);
     }
-    void SetPointManager()
-        => pointsManager = new PointsManager(matchData.playersDatas);
     void SetPlayers()
     {
         var gamepadCount = Gamepad.all.Count;
@@ -84,15 +80,13 @@ public class GameManager : MonoBehaviour, IGameObjectCreator
             var shipGO = Instantiate(matchData.playerShipPrefab, Vector3.zero, Quaternion.identity);
             SetPlayerDataInShip(playersDatas[i], shipGO.GetComponent<PearlCollectorsManager>(), shipGO.GetComponent<ShipMovement>());
             onCreatedInMapGameObject?.Invoke(shipGO);
-            respawnGenerator.Listen(shipGO.GetComponent<IDestroy>());
+            respawnGenerator.Listen(shipGO.GetComponent<IDestroy>()); 
             SetInput(i, shipGO.GetComponent<PlayerInput>());
             SetATransformLookToZeroCoord(shipGO.transform);
         }
     }
-    void SetATransformLookToZeroCoord(Transform aTransform)
-    {
-        aTransform.up = - aTransform.position;
-    }
+    void SetATransformLookToZeroCoord(Transform aTransform) 
+        => aTransform.up = -aTransform.position;
 
     void SetPlayerDataInShip(PlayerSO playerData, PearlCollectorsManager collectorsManager, ShipMovement shipMovement)
     {
@@ -106,10 +100,8 @@ public class GameManager : MonoBehaviour, IGameObjectCreator
         InputUser.PerformPairingWithDevice(Gamepad.all[index], user: playerInput.user);
     }
 
-    void StopGame()
-    {       
-        Time.timeScale = 0;        
-    }
+    void StopGame() 
+        => Time.timeScale = 0;
 
 
     public void Restart()
