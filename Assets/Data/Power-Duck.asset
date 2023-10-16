@@ -15,4 +15,4 @@ MonoBehaviour:
   PowerColor: {r: 1, g: 1, b: 0, a: 0.8627451}
   PowerPrefab: {fileID: 8026774802749510680, guid: 23cd31b48f072184aaaa49dfa578070a, type: 3}
   TimeToStart: 2
-  sprite: {fileID: 21300000, guid: c4e36e2b5ee0e3d4ca930b7241fd3aba, type: 3}
+  sprite: {fileID: 263496184, guid: 3c80bffc156104f4eb8682c625c14b6d, type: 3}

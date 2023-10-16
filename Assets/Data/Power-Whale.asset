@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2466f14fcadc54aa8ed6682135b254, type: 3}
   m_Name: Power-Whale
   m_EditorClassIdentifier: 
-  PowerColor: {r: 0, g: 1, b: 0.17976356, a: 0.8627451}
+  PowerColor: {r: 1, g: 0, b: 0.7833333, a: 0.8627451}
   PowerPrefab: {fileID: 2541412941404171679, guid: aa5fe19da70413a4db4022122568b0ed, type: 3}
   TimeToStart: 2
-  sprite: {fileID: 21300000, guid: 16db5e9adb96bd445b6c7721153f1d53, type: 3}
+  sprite: {fileID: -831915232, guid: 3c80bffc156104f4eb8682c625c14b6d, type: 3}

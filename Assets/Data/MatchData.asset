@@ -31,8 +31,8 @@ MonoBehaviour:
   numberPearlsToObtainInScene: 10
   timeToGeneratePearl: 2
   maxNumberOfPearls: 10
-  merchantsInScene: 1
-  timeToGenerateMerchants: 1
+  merchantsInScene: 2
+  timeToGenerateMerchants: 15
   maxNumberOfMerchants: 5
   wind: {x: 0.1, y: 0.1}
   mixer: {fileID: 24100000, guid: e4016fd05d9805943b0420f19a715ad7, type: 2}
