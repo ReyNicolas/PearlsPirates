@@ -124,6 +124,7 @@ MonoBehaviour:
   direction: {x: 0, y: 1}
   timeAlive: 5
   audioSource: {fileID: 4676461679569812178}
+  particleSystem: {fileID: 2112032643588535592}
 --- !u!82 &4676461679569812178
 AudioSource:
   m_ObjectHideFlags: 0
