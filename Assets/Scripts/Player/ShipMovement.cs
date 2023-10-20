@@ -34,21 +34,22 @@ public class ShipMovement : MonoBehaviour, IDestroy
     {
         movement = Vector2.ClampMagnitude(playerInput.actions["Move"].ReadValue<Vector2>(), 1f);
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.relativeVelocity.magnitude>=1) GetComponent<AudioSource>().Play();
-    }
        
     private void FixedUpdate()
     {
         MoveShip(movement);        
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.relativeVelocity.magnitude>=1) GetComponent<AudioSource>().Play();
+    }
+
     void MoveShip(Vector2 direction)
     {
         if (CheckSpeedLimit()) return;
-        rigidbody2D.AddForce(transform.up * direction.y * acSpeed * Time.deltaTime, ForceMode2D.Impulse);
-        if (minTorque<math.abs(direction.x)) rigidbody2D.AddTorque(-direction.x * turnSpeed * Time.deltaTime,ForceMode2D.Impulse);
+        rigidbody2D.AddForce(transform.up * direction.y * acSpeed * Time.fixedDeltaTime, ForceMode2D.Impulse);
+        if (minTorque<math.abs(direction.x)) rigidbody2D.AddTorque(-direction.x * turnSpeed * Time.fixedDeltaTime,ForceMode2D.Impulse);
     }
 
     bool CheckSpeedLimit()
