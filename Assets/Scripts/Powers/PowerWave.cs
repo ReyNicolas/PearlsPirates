@@ -27,7 +27,7 @@ public class PowerWave : MonoBehaviour
     private void Reduce()
     {
         transform.localScale -= Vector3.up * (reductionMultiplier * Time.deltaTime);
-        if(transform.localScale.x<0)Destroy(gameObject);
+        if(transform.localScale.y<0)Destroy(gameObject);
         audioSource.volume = audioSource.volume - (reductionMultiplier * Time.deltaTime);
         particleSystem.startLifetime = transform.localScale.y;
     }
@@ -40,8 +40,8 @@ public class PowerWave : MonoBehaviour
         }
         if (collision.CompareTag("Scenary"))
         {
-            transform.localScale -= Vector3.up * (reductionMultiplier);
-            audioSource.volume = audioSource.volume - (reductionMultiplier);
+            transform.localScale -= Vector3.one * ( Time.deltaTime);
+            audioSource.volume -= (Time.deltaTime);
         }  
 
     }
