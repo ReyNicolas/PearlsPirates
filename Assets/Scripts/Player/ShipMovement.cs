@@ -30,14 +30,9 @@ public class ShipMovement : MonoBehaviour, IDestroy
         InvokeRepeating("Particles", 0, 0.1f);
     }
 
-    private void Update()
-    {
-        movement = Vector2.ClampMagnitude(playerInput.actions["Move"].ReadValue<Vector2>(), 1f);
-    }
-       
     private void FixedUpdate()
     {
-        MoveShip(movement);        
+        MoveShip();        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -45,11 +40,16 @@ public class ShipMovement : MonoBehaviour, IDestroy
         if(collision.relativeVelocity.magnitude>=1) GetComponent<AudioSource>().Play();
     }
 
-    void MoveShip(Vector2 direction)
+    public void SetMovement(Vector2 vector)
+    {
+        movement = vector;
+    }
+
+    void MoveShip()
     {
         if (CheckSpeedLimit()) return;
-        rigidbody2D.AddForce(transform.up * direction.y * acSpeed * Time.fixedDeltaTime, ForceMode2D.Impulse);
-        if (minTorque<math.abs(direction.x)) rigidbody2D.AddTorque(-direction.x * turnSpeed * Time.fixedDeltaTime,ForceMode2D.Impulse);
+        rigidbody2D.AddForce(transform.up * movement.y * acSpeed * Time.fixedDeltaTime, ForceMode2D.Impulse);
+        if (minTorque<math.abs(movement.x)) rigidbody2D.AddTorque(-movement.x * turnSpeed * Time.fixedDeltaTime,ForceMode2D.Impulse);
     }
 
     bool CheckSpeedLimit()

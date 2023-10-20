@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEngine.InputSystem.InputAction;
 using System;
 
 public class ContainerRotate : MonoBehaviour
@@ -14,15 +13,15 @@ public class ContainerRotate : MonoBehaviour
         if (degrees != 0) Rotate();
     }
 
-    public void RotateRight(CallbackContext context)
+    public void RotateRight()
     {
-        if (context.started) AddRotation( -60 );
+         AddRotation( -60 );
     }
 
   
-    public void RotateLeft(CallbackContext context)
+    public void RotateLeft()
     {
-        if (context.started) AddRotation(60);
+         AddRotation(60);
     }
     void AddRotation(float degrees)
     {

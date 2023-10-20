@@ -10594,10 +10594,11 @@ GameObject:
   - component: {fileID: 7320592137278272680}
   - component: {fileID: 2018482887337732101}
   - component: {fileID: 2655296778463712130}
-  - component: {fileID: 8164886757627560637}
-  - component: {fileID: 7944406644910211483}
   - component: {fileID: 4315813878268582773}
   - component: {fileID: 3050994964467742987}
+  - component: {fileID: 7944406644910211483}
+  - component: {fileID: 8164886757627560637}
+  - component: {fileID: 752174492263439614}
   m_Layer: 0
   m_Name: Ship2Canon
   m_TagString: Player
@@ -10738,50 +10739,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &8164886757627560637
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7126736621012607696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0d305bea898fd24cbafdc1fdbb1d7e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  acSpeed: 30
-  turnSpeed: 12
-  maxSpeed: 6
-  actualSpeed: 0
-  timeToWaitReduce: 0.5
-  minTorque: 0.5
-  movement: {x: 0, y: 0}
-  rigidbody2D: {fileID: 2655296778463712130}
-  particleSystem: {fileID: 5406970263006323116}
-  playerInput: {fileID: 4315813878268582773}
-  playerData: {fileID: 0}
---- !u!114 &7944406644910211483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7126736621012607696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee0bc64df2a0a0243b720f8934ba4249, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collectors:
-  - {fileID: 2407691674725669101}
-  - {fileID: 3249196738669970922}
-  - {fileID: 2671184791935428282}
-  - {fileID: 2974797813577315135}
-  - {fileID: 7177961684674278790}
-  - {fileID: 2596791972435050357}
-  rotateClip: {fileID: 0}
-  playerData: {fileID: 0}
 --- !u!114 &4315813878268582773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10817,9 +10774,9 @@ MonoBehaviour:
     m_ActionName: Player/Aim[/XInputControllerWindows/rightStick,/XInputControllerWindows1/rightStick]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 520547362135370977}
-        m_TargetAssemblyTypeName: CannonShoot, Assembly-CSharp
-        m_MethodName: Shoot
+      - m_Target: {fileID: 752174492263439614}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: ShootCannonRight
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10833,9 +10790,9 @@ MonoBehaviour:
     m_ActionName: Player/Fire[/XInputControllerWindows/rightTrigger,/XInputControllerWindows1/rightTrigger]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3880835129753027932}
-        m_TargetAssemblyTypeName: CannonShoot, Assembly-CSharp
-        m_MethodName: Shoot
+      - m_Target: {fileID: 752174492263439614}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: ShootCannonLeft
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10849,8 +10806,8 @@ MonoBehaviour:
     m_ActionName: Player/FireLeft[/XInputControllerWindows/leftTrigger]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1365609689555778725}
-        m_TargetAssemblyTypeName: ContainerRotate, Assembly-CSharp
+      - m_Target: {fileID: 752174492263439614}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
         m_MethodName: RotateRight
         m_Mode: 0
         m_Arguments:
@@ -10865,8 +10822,8 @@ MonoBehaviour:
     m_ActionName: Player/ContainerRight[/XInputControllerWindows/rightShoulder]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1365609689555778725}
-        m_TargetAssemblyTypeName: ContainerRotate, Assembly-CSharp
+      - m_Target: {fileID: 752174492263439614}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
         m_MethodName: RotateLeft
         m_Mode: 0
         m_Arguments:
@@ -10980,6 +10937,67 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7944406644910211483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7126736621012607696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee0bc64df2a0a0243b720f8934ba4249, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectors:
+  - {fileID: 2407691674725669101}
+  - {fileID: 3249196738669970922}
+  - {fileID: 2671184791935428282}
+  - {fileID: 2974797813577315135}
+  - {fileID: 7177961684674278790}
+  - {fileID: 2596791972435050357}
+  rotateClip: {fileID: 0}
+  playerData: {fileID: 0}
+--- !u!114 &8164886757627560637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7126736621012607696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0d305bea898fd24cbafdc1fdbb1d7e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acSpeed: 30
+  turnSpeed: 12
+  maxSpeed: 6
+  actualSpeed: 0
+  timeToWaitReduce: 0.5
+  minTorque: 0.5
+  movement: {x: 0, y: 0}
+  rigidbody2D: {fileID: 2655296778463712130}
+  particleSystem: {fileID: 5406970263006323116}
+  playerInput: {fileID: 4315813878268582773}
+  playerData: {fileID: 0}
+--- !u!114 &752174492263439614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7126736621012607696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 313c647c180787f4483abfade57c7a02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInput: {fileID: 4315813878268582773}
+  cannonRight: {fileID: 520547362135370977}
+  cannonLeft: {fileID: 3880835129753027932}
+  shipMovement: {fileID: 8164886757627560637}
+  containerRotate: {fileID: 1365609689555778725}
 --- !u!1 &7838764219221849689
 GameObject:
   m_ObjectHideFlags: 0
