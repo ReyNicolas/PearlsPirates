@@ -379,7 +379,7 @@ GameObject:
   - component: {fileID: 6522883866240905773}
   - component: {fileID: 91901144301056724}
   - component: {fileID: 7786445095920486811}
-  - component: {fileID: 8114786658694196707}
+  - component: {fileID: 5730601580010569147}
   m_Layer: 7
   m_Name: ShipMarket
   m_TagString: Untagged
@@ -395,7 +395,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6522883866240905775}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.08715578, w: 0.9961947}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -405,7 +405,7 @@ Transform:
   - {fileID: 7951252685098910395}
   - {fileID: 6776235828345964111}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 10}
 --- !u!212 &6522883866240905770
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -551,7 +551,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0.6
+  m_LinearDrag: 0.4
   m_AngularDrag: 0.5
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -582,7 +582,8 @@ MonoBehaviour:
   - {fileID: 2278369779954564213}
   - {fileID: 6549843391952364941}
   - {fileID: 7951252685098910395}
---- !u!114 &8114786658694196707
+  moveToPositionLogic: {fileID: 5730601580010569147}
+--- !u!114 &5730601580010569147
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

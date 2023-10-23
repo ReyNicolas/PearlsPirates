@@ -10594,13 +10594,14 @@ GameObject:
   - component: {fileID: 7320592137278272680}
   - component: {fileID: 2018482887337732101}
   - component: {fileID: 2655296778463712130}
-  - component: {fileID: 4315813878268582773}
   - component: {fileID: 3050994964467742987}
   - component: {fileID: 7944406644910211483}
   - component: {fileID: 8164886757627560637}
-  - component: {fileID: 752174492263439614}
+  - component: {fileID: 660864165308087589}
+  - component: {fileID: -8903428232524315893}
+  - component: {fileID: -5696734651079240167}
   m_Layer: 7
-  m_Name: Ship2Canon
+  m_Name: Ship2CanonBot
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10739,108 +10740,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4315813878268582773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7126736621012607696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 26f7b28d85beca74f9a4b41efb4177ff, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 3798b0f1-5a4d-454b-9f91-b7eb20c5a6fa
-    m_ActionName: Player/Move[/XInputControllerWindows/leftStick,/XInputControllerWindows1/leftStick]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: fd642125-3d9e-45e2-863d-00b1f688e8cc
-    m_ActionName: Player/Aim[/XInputControllerWindows/rightStick,/XInputControllerWindows1/rightStick]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 752174492263439614}
-        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: ShootCannonRight
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 0b1a4508-d310-4539-a94e-a819ea4dac9b
-    m_ActionName: Player/Fire[/XInputControllerWindows/rightTrigger,/XInputControllerWindows1/rightTrigger]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 752174492263439614}
-        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: ShootCannonLeft
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: a6c763f6-6609-472c-a711-e81d8cf930ae
-    m_ActionName: Player/FireLeft[/XInputControllerWindows/leftTrigger]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 752174492263439614}
-        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: RotateRight
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: e06f668e-77d8-4bde-85f6-27ab6e2ab028
-    m_ActionName: Player/ContainerRight[/XInputControllerWindows/rightShoulder]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 752174492263439614}
-        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: RotateLeft
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 467d47f4-532f-444d-9ebc-d3a02b0888b3
-    m_ActionName: Player/ContainerLeft[/XInputControllerWindows/leftShoulder]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!82 &3050994964467742987
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10979,9 +10878,9 @@ MonoBehaviour:
   movement: {x: 0, y: 0}
   rigidbody2D: {fileID: 2655296778463712130}
   particleSystem: {fileID: 5406970263006323116}
-  playerInput: {fileID: 4315813878268582773}
+  playerInput: {fileID: 0}
   playerData: {fileID: 0}
---- !u!114 &752174492263439614
+--- !u!114 &660864165308087589
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10990,14 +10889,46 @@ MonoBehaviour:
   m_GameObject: {fileID: 7126736621012607696}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 313c647c180787f4483abfade57c7a02, type: 3}
+  m_Script: {fileID: 11500000, guid: 5758beb1004f22d4ca74710745718b1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 4315813878268582773}
-  cannonRight: {fileID: 520547362135370977}
-  cannonLeft: {fileID: 3880835129753027932}
-  shipMovement: {fileID: 8164886757627560637}
-  containerRotate: {fileID: 1365609689555778725}
+  moveToPositionLogic: {fileID: 0}
+  data: {fileID: 0}
+--- !u!114 &-8903428232524315893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7126736621012607696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a76d98375a4148b876a75da05dd2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2.5
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  degreesPerSecond: 120
+--- !u!114 &-5696734651079240167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7126736621012607696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f6cc80171999cf4abaac956011515bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireControlRate: 2
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  cannonShootRight: {fileID: 520547362135370977}
+  cannonShootLeft: {fileID: 3880835129753027932}
 --- !u!1 &7838764219221849689
 GameObject:
   m_ObjectHideFlags: 0

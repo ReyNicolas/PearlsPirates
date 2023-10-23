@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MarketPier: IMarket
 {
-    [SerializeField] List<Color> colorsToCollect = new List<Color>();
     public int numberOfCollorsToCollect;
     public event Action<List<Color>> OnChangeColors;
     public static event Action<MarketPier> OnCollected;
@@ -50,6 +49,5 @@ public class MarketPier: IMarket
         InvokeOnPearlColleted(GeneratePearlCollected(pearl, playerData));
         Destroy(pearl.gameObject);
     }
-    
 
 }

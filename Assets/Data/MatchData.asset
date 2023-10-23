@@ -16,6 +16,7 @@ MonoBehaviour:
   matchScene: MatchScene
   playersDatas:
   - {fileID: 11400000, guid: 0bc177a17d13a3b46af33a3d4e86cbec, type: 2}
+  - {fileID: 11400000, guid: 5666c198324df7240bc98c38daae4699, type: 2}
   powersDatas:
   - {fileID: 11400000, guid: fbb158fe8017f7543a0b2c408909cdba, type: 2}
   - {fileID: 11400000, guid: ce51a1afa3e6169479eb7d7b4a4cd722, type: 2}
@@ -28,11 +29,11 @@ MonoBehaviour:
   totalPointsLimit: 90
   totalPlayerPointsLimit: 20
   timeLeft: 30
-  numberPearlsToObtainInScene: 10
+  numberPearlsToObtainInScene: 6
   timeToGeneratePearl: 2
   maxNumberOfPearls: 10
-  merchantsInScene: 2
-  timeToGenerateMerchants: 15
+  merchantsInScene: 3
+  timeToGenerateMerchants: 2
   maxNumberOfMerchants: 5
   wind: {x: 0.1, y: 0.1}
   mixer: {fileID: 24100000, guid: e4016fd05d9805943b0420f19a715ad7, type: 2}

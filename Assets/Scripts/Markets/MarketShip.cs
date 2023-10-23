@@ -7,8 +7,8 @@ using UnityEngine;
 public class MarketShip : IMarket
 {
 
-    [SerializeField] List<Color> colorsToCollect = new List<Color>();
     [SerializeField] List<Transform> pearlsContainers;
+    [SerializeField] MoveToPositionLogic moveToPositionLogic;
     
     public static event Action<MarketShip> onNewMarketShip;
     public static event Action<MarketShip> onDestroy;
@@ -19,10 +19,13 @@ public class MarketShip : IMarket
     {
         base.Start();
         onNewMarketShip?.Invoke(this);
+        moveToPositionLogic.OnArriveToPosition += ()=> Destroy(gameObject) ;
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
+        moveToPositionLogic.OnArriveToPosition -= () => Destroy(gameObject);
         onDestroy?.Invoke(this);
     }
 

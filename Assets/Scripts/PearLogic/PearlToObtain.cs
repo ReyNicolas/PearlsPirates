@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PearlToObtain : MonoBehaviour, IDestroy
@@ -8,6 +9,7 @@ public class PearlToObtain : MonoBehaviour, IDestroy
     [SerializeField] bool havePearl = true;
     [SerializeField] PowerSO powerData;
     [SerializeField] SpriteRenderer spriteRenderer;
+    public static List<PearlToObtain> pearlToObtains = new List<PearlToObtain>();
     public event Action<PearlToObtain> OnDestroy;
     public event Action<GameObject> onDestroy;
 
@@ -16,6 +18,7 @@ public class PearlToObtain : MonoBehaviour, IDestroy
     private void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
+        pearlToObtains.Add(this);
     }
     public void Initialize(PowerSO powerData)
     {
@@ -46,6 +49,7 @@ public class PearlToObtain : MonoBehaviour, IDestroy
 
     IEnumerator DestroyMe()
     {
+        pearlToObtains.Remove(this);
         OnDestroy?.Invoke(this);
         yield return new WaitForEndOfFrame();
         Destroy(gameObject);
