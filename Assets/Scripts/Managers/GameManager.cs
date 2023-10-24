@@ -17,15 +17,14 @@ public class GameManager : MonoBehaviour
     public PositionGenerator positionGenerator = new PositionGenerator();
 
     CompositeDisposable disposables;
-    List<PlayerSO> playersDatas;
 
     private void Awake()
     {
-        playersDatas = matchData.playersDatas;
         matchData.Initialize();
         SetPositionGenerator();
         SetRespawnGenerator();
-        SetPlayers();
+        SetHumanPlayers();
+        SetBotPlayers();
     }
 
     private void Start()
@@ -76,19 +75,32 @@ public class GameManager : MonoBehaviour
         positionGenerator.AssignPosition(gameobject);
     }
 
-    void SetPlayers()
+    void SetHumanPlayers()
     {
         var gamepadCount = Gamepad.all.Count;
-        for (int i = 0; i < math.min(playersDatas.Count, gamepadCount); i++)
+        for (int i = 0; i < math.min(matchData.humansDatas.Count, gamepadCount); i++)
         {
-            var shipGO = Instantiate(matchData.playerShipPrefab, Vector3.zero, Quaternion.identity);
-            SetPlayerDataInShip(playersDatas[i], shipGO.GetComponent<PearlCollectorsManager>(), shipGO.GetComponent<ShipMovement>());
-            SetPositionForMapGameobject(shipGO);
-            respawnGenerator.Listen(shipGO.GetComponent<IDestroy>()); 
-            SetInput(i, shipGO.GetComponent<PlayerInput>());
-            SetATransformLookToZeroCoord(shipGO.transform);
+            var shipHumanGO = Instantiate(matchData.playerShipPrefab, Vector3.zero, Quaternion.identity);
+            SetPlayerDataInShip(matchData.humansDatas[i], shipHumanGO.GetComponent<PearlCollectorsManager>(), shipHumanGO.GetComponent<ShipMovement>());
+            SetPositionForMapGameobject(shipHumanGO);
+            respawnGenerator.Listen(shipHumanGO.GetComponent<IDestroy>()); 
+            SetInput(i, shipHumanGO.GetComponent<PlayerInput>());
+            SetATransformLookToZeroCoord(shipHumanGO.transform);
         }
     }
+    void SetBotPlayers()
+    {
+        for (int i = 0; i < matchData.botsDatas.Count; i++)
+        {
+            var botShipGO = Instantiate(matchData.botsrShipPrefab, Vector3.zero, Quaternion.identity);
+            SetPlayerDataInShip(matchData.botsDatas[i], botShipGO.GetComponent<PearlCollectorsManager>(), botShipGO.GetComponent<ShipMovement>());
+            SetBotDataInShip(matchData.botsDatas[i], botShipGO.GetComponent<IAMoveControlLogic>());
+            SetPositionForMapGameobject(botShipGO);
+            respawnGenerator.Listen(botShipGO.GetComponent<IDestroy>());
+            SetATransformLookToZeroCoord(botShipGO.transform);
+        }
+    }
+
     void SetATransformLookToZeroCoord(Transform aTransform) 
         => aTransform.up = -aTransform.position;
 
@@ -98,6 +110,11 @@ public class GameManager : MonoBehaviour
         shipMovement.playerData = playerData;
         shipMovement.GetComponent<SpriteRenderer>().sprite = playerData.shipSprite;
     } 
+
+    void SetBotDataInShip(PlayerSO playerData, IAMoveControlLogic iAMoveControlLogic)
+    {
+        iAMoveControlLogic.data = playerData;
+    }
     void SetInput(int index, PlayerInput playerInput)
     {
         playerInput.user.UnpairDevices();

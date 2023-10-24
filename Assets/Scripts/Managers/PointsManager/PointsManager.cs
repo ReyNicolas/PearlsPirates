@@ -10,6 +10,7 @@ public class PointsManager: MonoBehaviour
     {
         playersDatas = matchData.playersDatas;
 
+
         PlayerPointsGiver.OnGivePlayerPoints += AddPointsToPlayer;
         IMarket.OnSelectionPearlCollected += AddPearlToPlayerPoints;
     }

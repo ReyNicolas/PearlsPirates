@@ -10600,6 +10600,7 @@ GameObject:
   - component: {fileID: 660864165308087589}
   - component: {fileID: -8903428232524315893}
   - component: {fileID: -5696734651079240167}
+  - component: {fileID: 6688049638126418226}
   m_Layer: 7
   m_Name: Ship2CanonBot
   m_TagString: Player
@@ -10892,7 +10893,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5758beb1004f22d4ca74710745718b1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveToPositionLogic: {fileID: 0}
+  moveToPositionLogic: {fileID: -8903428232524315893}
   data: {fileID: 0}
 --- !u!114 &-8903428232524315893
 MonoBehaviour:
@@ -10906,11 +10907,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a76d98375a4148b876a75da05dd2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2.5
+  speed: 6
+  acSpeed: 30
   layerMask:
     serializedVersion: 2
     m_Bits: 64
-  degreesPerSecond: 120
+  degreesPerSecond: 60
 --- !u!114 &-5696734651079240167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10929,6 +10931,21 @@ MonoBehaviour:
     m_Bits: 128
   cannonShootRight: {fileID: 520547362135370977}
   cannonShootLeft: {fileID: 3880835129753027932}
+--- !u!114 &6688049638126418226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7126736621012607696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9627c50f73116104f88def38a1148abe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minTime: 2
+  maxTime: 4
+  containerRotate: {fileID: 1365609689555778725}
 --- !u!1 &7838764219221849689
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,10 +13,7 @@ public class IAMoveControlLogic: MonoBehaviour
         moveToPositionLogic.OnArriveToPosition += FindPositionToMove;        
     }
 
-    private void Start()
-    {
-        data.Initialize();
-    }
+   
 
     private void OnDestroy()
     {
@@ -26,7 +23,7 @@ public class IAMoveControlLogic: MonoBehaviour
     private void Update()
     {
         timer -= Time.deltaTime;
-        FindPositionToMove();
+       if(timer <= 0)  FindPositionToMove();
     }
 
     void FindPositionToMove()

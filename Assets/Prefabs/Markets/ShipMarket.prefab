@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 91901144301056724}
   - component: {fileID: 7786445095920486811}
   - component: {fileID: 5730601580010569147}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: ShipMarket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -395,7 +395,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6522883866240905775}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.08715578, w: 0.9961947}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -405,7 +405,7 @@ Transform:
   - {fileID: 7951252685098910395}
   - {fileID: 6776235828345964111}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 10}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6522883866240905770
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -550,9 +550,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0.4
-  m_AngularDrag: 0.5
+  m_Mass: 10
+  m_LinearDrag: 0.8
+  m_AngularDrag: 0.2
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -595,11 +595,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a76d98375a4148b876a75da05dd2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 1.5
+  acSpeed: 20
   layerMask:
     serializedVersion: 2
     m_Bits: 64
-  degreesPerSecond: 120
+  degreesPerSecond: 30
 --- !u!1 &8216193967365465134
 GameObject:
   m_ObjectHideFlags: 0

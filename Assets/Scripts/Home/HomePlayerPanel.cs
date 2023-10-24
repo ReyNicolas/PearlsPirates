@@ -16,4 +16,14 @@ public class HomePlayerPanel : MonoBehaviour
         playerName.color = playerData.PlayerColor;
         shipImage.sprite = playerData.shipSprite;
     }
+
+    public void SetName(bool isBot)
+    {
+        if (isBot)
+        {
+            playerName.text = playerData.PlayerName + " BOT";
+            return;
+        } 
+        playerName.text = playerData.PlayerName;
+    }
 }

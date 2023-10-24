@@ -12,8 +12,11 @@ public class MatchSO : ScriptableObject
     public string homeMenuScene;
     public string matchScene;
     public List<PlayerSO> playersDatas;
+    public List<PlayerSO> humansDatas;
+    public List<PlayerSO> botsDatas;
     public List<PowerSO> powersDatas;
     public GameObject playerShipPrefab;
+    public GameObject botsrShipPrefab;
     public GameObject pearlPrefab;
     public GameObject instantPearlPrefab;
     [Header("End conditions Settings")]

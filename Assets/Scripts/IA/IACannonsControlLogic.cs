@@ -1,18 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CannonsControlLogic : MonoBehaviour
+public class IACannonsControlLogic : MonoBehaviour
 {
     [SerializeField] float fireControlRate;
     [SerializeField] LayerMask layerMask;
     [SerializeField] CannonShoot cannonShootRight;
     [SerializeField] CannonShoot cannonShootLeft;
-
+    float timer;
     // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        InvokeRepeating("Attack", fireControlRate, fireControlRate);
+        timer -= Time.deltaTime;
+        if (timer < 0) Attack();
     }
 
     void Attack()
@@ -27,8 +26,6 @@ public class CannonsControlLogic : MonoBehaviour
             Debug.Log("colision left");
             cannonShootLeft.Shoot();
         }
+        timer = fireControlRate;
     }
-
-    
-
 }
