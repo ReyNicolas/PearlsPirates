@@ -12,7 +12,7 @@ public class PlayerRespawnGenerator : IGameObjectCreator
 
     public void Listen(IDestroy contentToListen)
     {
-        contentToListen.onDestroy += CreateInstantPearl;
+        contentToListen.OnDestroyGO += CreateInstantPearl;
     }
 
     public void CreateInstantPearl(GameObject content)

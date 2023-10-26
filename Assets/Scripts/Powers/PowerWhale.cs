@@ -7,7 +7,7 @@ public class PowerWhale : MonoBehaviour, IDestroy
     [SerializeField] Transform targetTransform;
     [SerializeField] float timeAlive;
 
-    public event Action<GameObject> onDestroy;
+    public event Action<GameObject> OnDestroyGO;
 
     public void Start()
     {
@@ -34,6 +34,6 @@ public class PowerWhale : MonoBehaviour, IDestroy
     public void Destroy()
     {
         Destroy(gameObject);
-        onDestroy?.Invoke(gameObject);
+        OnDestroyGO?.Invoke(gameObject);
     }
 }

@@ -22,7 +22,7 @@ public class ShipMovement : MonoBehaviour, IDestroy
     [SerializeField] PlayerInput playerInput;
     public PlayerSO playerData;
 
-    public event Action<GameObject> onDestroy;
+    public event Action<GameObject> OnDestroyGO;
 
     private void Start()
     {
@@ -74,7 +74,7 @@ public class ShipMovement : MonoBehaviour, IDestroy
 
     public void Destroy()
     {
-        onDestroy?.Invoke(gameObject);
+        OnDestroyGO?.Invoke(gameObject);
         particleSystem.Clear();
         gameObject.SetActive(false);
     }

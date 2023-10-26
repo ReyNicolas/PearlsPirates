@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class PowerDuck : MonoBehaviour, IDestroy
 {
-    public event Action<GameObject> onDestroy;
+    public event Action<GameObject> OnDestroyGO;
 
     public void Destroy()
     {
         Destroy(gameObject);
-        onDestroy?.Invoke(gameObject);
+        OnDestroyGO?.Invoke(gameObject);
     }
 }

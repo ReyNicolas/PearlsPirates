@@ -8,14 +8,14 @@ public class IAMoveControlLogic: MonoBehaviour
     public PlayerSO data;
     float timer;
 
-    private void Awake()
+    private void OnEnable()
     {
         moveToPositionLogic.OnArriveToPosition += FindPositionToMove;        
     }
 
    
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         moveToPositionLogic.OnArriveToPosition -= FindPositionToMove;
     }
@@ -48,8 +48,8 @@ public class IAMoveControlLogic: MonoBehaviour
             return;
         }
 
-        
 
+        if (PearlToObtain.pearlToObtains == null) return;
         moveToPositionLogic
             .SetPositionToMove( 
                 ClosePosition( 

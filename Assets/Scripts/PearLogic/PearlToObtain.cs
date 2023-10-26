@@ -10,8 +10,8 @@ public class PearlToObtain : MonoBehaviour, IDestroy
     [SerializeField] PowerSO powerData;
     [SerializeField] SpriteRenderer spriteRenderer;
     public static List<PearlToObtain> pearlToObtains = new List<PearlToObtain>();
-    public event Action<PearlToObtain> OnDestroy;
-    public event Action<GameObject> onDestroy;
+    public event Action<PearlToObtain> OnDestroyPearlObtain;
+    public event Action<GameObject> OnDestroyGO;
 
     Rigidbody2D rigidbody2D;
 
@@ -19,6 +19,10 @@ public class PearlToObtain : MonoBehaviour, IDestroy
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         pearlToObtains.Add(this);
+    }
+    private void OnDestroy()
+    {
+        pearlToObtains.Remove(this);
     }
     public void Initialize(PowerSO powerData)
     {
@@ -49,8 +53,7 @@ public class PearlToObtain : MonoBehaviour, IDestroy
 
     IEnumerator DestroyMe()
     {
-        pearlToObtains.Remove(this);
-        OnDestroy?.Invoke(this);
+        OnDestroyPearlObtain?.Invoke(this);
         yield return new WaitForEndOfFrame();
         Destroy(gameObject);
     }

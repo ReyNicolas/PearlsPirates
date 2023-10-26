@@ -4,5 +4,5 @@ using UnityEngine;
 public interface IDestroy
 {
     void Destroy();
-    event Action<GameObject> onDestroy;
+    event Action<GameObject> OnDestroyGO;
 }

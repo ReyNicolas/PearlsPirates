@@ -16,7 +16,7 @@ public class PearlsInMatchController
         pearlsToObtains.Add(pearlToAdd);
 
         matchData.numberPearlsToObtainInScene = pearlsToObtains.Count;
-        pearlToAdd.OnDestroy += RemovePearl;
+        pearlToAdd.OnDestroyPearlObtain += RemovePearl;
     }
 
     void RemovePearl(PearlToObtain pearlToRemove)

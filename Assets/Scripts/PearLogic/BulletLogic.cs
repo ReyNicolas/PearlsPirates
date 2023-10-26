@@ -15,7 +15,7 @@ public class BulletLogic: MonoBehaviour, IDestroy
 
     PowerSO powerData;
 
-    public event Action<GameObject> onDestroy;
+    public event Action<GameObject> OnDestroyGO;
 
     public void Initialize(PowerSO powerData)
     {

@@ -10870,8 +10870,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0d305bea898fd24cbafdc1fdbb1d7e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acSpeed: 30
-  turnSpeed: 12
+  acSpeed: 0
+  turnSpeed: 0
   maxSpeed: 6
   actualSpeed: 0
   timeToWaitReduce: 0.5
