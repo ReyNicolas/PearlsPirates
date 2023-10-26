@@ -4,7 +4,7 @@
 Welcome to the prototype of "Pirate Pearls"! Immerse yourself in a world of mysterious pearls containing elements from another realm. Collect pearls to gain points in the markets or shoot them to free what is contained within
 
 ## Controls 
-Use the left stick to navigate your ship . Utilize the right stick to aim in your desired direction.  Press the right trigger to fire a pearl in the direction your cannon is aiming. 
+Use the left stick to navigate your ship . Press the left or right trigger to fire a pearl in the direction your cannon is aiming. Press the left or right button to change positions of the pearls in your ship.
 R key to restart Match, Escape key to return Home menu.
 
 ## Gameplay
