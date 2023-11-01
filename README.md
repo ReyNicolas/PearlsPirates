@@ -1,4 +1,4 @@
-# PearlsPirates (Unity) [Play on itch.io](darkreyn.itch.io/pirate-pearls)
+# PearlsPirates (Unity) [Play on itch.io](https://darkreyn.itch.io/pirate-pearls)
 
 ## Description
 Welcome to the prototype of "Pirate Pearls"! Immerse yourself in a world of mysterious pearls containing elements from another realm. Collect pearls to gain points in the markets or shoot them to free what is contained within
@@ -28,7 +28,7 @@ Note: you need at least one gamepad to play.
 
 or
 
-[You can play this version on itch.io](darkreyn.itch.io/pirate-pearls)
+[You can play this version on itch.io](https://darkreyn.itch.io/pirate-pearls)
 
 ## Details:
 
