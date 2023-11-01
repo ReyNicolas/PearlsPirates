@@ -1,4 +1,4 @@
-# PearlsPirates (Unity)
+# PearlsPirates (Unity) [Play on itch.io](darkreyn.itch.io/pirate-pearls)
 
 ## Description
 Welcome to the prototype of "Pirate Pearls"! Immerse yourself in a world of mysterious pearls containing elements from another realm. Collect pearls to gain points in the markets or shoot them to free what is contained within
@@ -17,7 +17,6 @@ This game is an ongoing prototype and may be subject to changes and improvements
 Play with up to 4 gamepads.
 
 ## Running the Game
-
 Follow these steps to run the game on your local machine:
 
 1. Clone this repository to your computer
@@ -26,6 +25,10 @@ Follow these steps to run the game on your local machine:
 4. Ensure you've configured the target platform (PC) in Unity's build settings.
 5. Click the play button in the Unity editor to start the game.
 Note: you need at least one gamepad to play.
+
+or
+
+[You can play this version on itch.io](darkreyn.itch.io/pirate-pearls)
 
 ## Details:
 
@@ -36,6 +39,5 @@ Made in Unity.
 
 
 ## Credits:
-[Music](https://assetstore.unity.com/packages/audio/music/arcade-game-bgm-17-210775) 
 
 [Home Menu UI](https://assetstore.unity.com/packages/2d/gui/icons/simple-ui-icons-147101)
