@@ -16,3 +16,4 @@ MonoBehaviour:
   PowerPrefab: {fileID: 2541412941404171679, guid: 1853b4aa42f40d244885379a8bb8048f, type: 3}
   TimeToStart: 2
   sprite: {fileID: 971026764, guid: 3c80bffc156104f4eb8682c625c14b6d, type: 3}
+  Description: A whirpool that attracts everything nearby.

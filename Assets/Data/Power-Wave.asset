@@ -16,3 +16,5 @@ MonoBehaviour:
   PowerPrefab: {fileID: 1427411701510591610, guid: dda4f4f4aa6c56a48a54d8610f4bf807, type: 3}
   TimeToStart: 2
   sprite: {fileID: -1049444014, guid: 3c80bffc156104f4eb8682c625c14b6d, type: 3}
+  Description: A wave that carries away everything it hits. The wave gradually decreases
+    in size until it disappears.

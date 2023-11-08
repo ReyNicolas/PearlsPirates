@@ -7,5 +7,8 @@ public class PowerSO : ScriptableObject
     public GameObject PowerPrefab;
     public float TimeToStart;
     public Sprite sprite;
+    [Multiline]
+    [TextArea(3, 10)]
+    public string Description;
 }
 

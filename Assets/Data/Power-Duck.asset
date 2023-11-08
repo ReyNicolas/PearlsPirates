@@ -16,3 +16,4 @@ MonoBehaviour:
   PowerPrefab: {fileID: 8026774802749510680, guid: 23cd31b48f072184aaaa49dfa578070a, type: 3}
   TimeToStart: 2
   sprite: {fileID: 263496184, guid: 3c80bffc156104f4eb8682c625c14b6d, type: 3}
+  Description: Just a rubber duck. It can be the target of another power.

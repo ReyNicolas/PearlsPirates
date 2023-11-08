@@ -16,3 +16,4 @@ MonoBehaviour:
   PowerPrefab: {fileID: 1427411701510591610, guid: 699ea596bd29ee94d94ace73b6109b55, type: 3}
   TimeToStart: 2
   sprite: {fileID: -1734989987, guid: 3c80bffc156104f4eb8682c625c14b6d, type: 3}
+  Description: Blast of air that pushes strongly everything it reaches.
