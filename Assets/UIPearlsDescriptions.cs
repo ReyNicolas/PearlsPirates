@@ -16,6 +16,7 @@ public class UIPearlsDescriptions : MonoBehaviour
             Instantiate(containerPrefab, contentTransform)
                 .Initialize(powerData);
         }
+        
     }
 
     private void OnDisable()
