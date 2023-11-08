@@ -18,12 +18,10 @@ public class IACannonsControlLogic : MonoBehaviour
     {
         if (Physics2D.OverlapCircle(transform.position + (transform.right * 3), 2 ,layerMask))
         {
-            Debug.Log("colision right");
             cannonShootRight.Shoot();
         }
         if (Physics2D.OverlapCircle(transform.position - (transform.right * 3), 2, layerMask))
         {
-            Debug.Log("colision left");
             cannonShootLeft.Shoot();
         }
         timer = fireControlRate;

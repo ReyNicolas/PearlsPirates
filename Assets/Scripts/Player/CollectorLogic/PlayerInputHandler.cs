@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
-using System;
 
 public class PlayerInputHandler : MonoBehaviour
 {

@@ -68,7 +68,6 @@ public class PositionGenerator
         {
             var position = GenerateRandomPosition();
             if (!Physics2D.BoxCast(position, Vector2.one, 0, Vector2.zero, 0.5f)) return position;
-            else Debug.Log("no position");
         }        
     }
 

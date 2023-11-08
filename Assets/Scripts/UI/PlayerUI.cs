@@ -7,13 +7,17 @@ using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] Sprite defaultNotPowerSprite;
     [SerializeField] GameObject pearlCollectedPrefab;
-    [SerializeField] List<Image> powersImages;
     [SerializeField] Canvas ScreenCanvas;
-    [SerializeField] TextMeshProUGUI playerPoints;
     [SerializeField] PlayerSO playerData;
+    [SerializeField] MatchSO matchData;
+    [Header("Player Info")]
+    [SerializeField] List<Image> powersImages;
+    [SerializeField] TextMeshProUGUI playerPoints;
     CompositeDisposable disposables;
+
 
     private void OnEnable()
     {
@@ -31,15 +35,15 @@ public class PlayerUI : MonoBehaviour
             );
     }
 
+   
+    private void Start()
+    {  
+        SetPlayerColor(GetComponent<Image>(), playerData.PlayerColor);
+    }
+
     private void OnDisable()
     {
         disposables.Dispose();
-    }
-    private void Start()
-    {
-        
-
-        SetPlayerColor(GetComponent<Image>(), playerData.PlayerColor);
     }
 
     void ShowPearlCollected(PowerSO power)
@@ -49,11 +53,11 @@ public class PlayerUI : MonoBehaviour
         pearlGO.GetComponent<Image>().color = power.PowerColor;
     }
 
-   
+
 
     void UpdatePlayerPointsText(int value)
     {
-        playerPoints.text = value.ToString();
+        playerPoints.text = value.ToString() +" / " + matchData.totalPlayerPointsLimit.ToString();
     }
 
     void SetPowerImage(int id, PowerSO power) 
@@ -61,6 +65,6 @@ public class PlayerUI : MonoBehaviour
     void SetPlayerColor(Image panelImage, Color playerColor)
     {
         panelImage.color = new Color(playerColor.r, playerColor.g, playerColor.b, 0.75f);
-        playerPoints.color = new Color(playerColor.r, playerColor.g, playerColor.b, 0.75f);
+        //playerPoints.color = new Color(playerColor.r, playerColor.g, playerColor.b, 0.75f);
     }
 }

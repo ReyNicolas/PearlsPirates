@@ -21,8 +21,6 @@ public class MoveToPositionLogic : MonoBehaviour
     public void SetPositionToMove(Vector2 position)
     {
         this.position = position;
-        Debug.Log(gameObject);
-        Debug.Log(position);
        // transform.up = this.position - transform.position;
     }
 
