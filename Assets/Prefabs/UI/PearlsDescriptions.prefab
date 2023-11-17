@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1937953451595806949}
   - component: {fileID: 262738185373821062}
   - component: {fileID: 7893107213952267637}
-  - component: {fileID: 1856049889667652798}
+  - component: {fileID: 1543936562916177752}
   m_Layer: 5
   m_Name: PearlsDescriptions
   m_TagString: Untagged
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1856049889667652798
+--- !u!114 &1543936562916177752
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88,10 +88,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 869693180990843789}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac89b8ed04e314645b58da3bf0aa80cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e1638b8d11ce2849a0a286df544dff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  containerPrefab: {fileID: 1403642764602070780, guid: 402b739e54db7474a9bd63cc44c3d0b4, type: 3}
+  containerPrefab: {fileID: 6676788785897025086, guid: 402b739e54db7474a9bd63cc44c3d0b4, type: 3}
   matchData: {fileID: 11400000, guid: ffc32afcbaf134045ba596fcc3c6776a, type: 2}
   contentTransform: {fileID: 4867688407239405518}
 --- !u!1 &1067623076373084804
@@ -601,7 +601,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3864946806489629838}
   m_HandleRect: {fileID: 3634001785872004218}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7798225895810788594}
   - component: {fileID: 3265381462179392229}
   - component: {fileID: 234262074063218746}
-  - component: {fileID: 1403642764602070780}
+  - component: {fileID: 6676788785897025086}
   m_Layer: 5
   m_Name: PowerContainer
   m_TagString: Untagged
@@ -77,7 +77,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1403642764602070780
+--- !u!114 &6676788785897025086
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -86,7 +86,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 501658552984204497}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed76968cb73f24c4ebfbdde2f106a78d, type: 3}
+  m_Script: {fileID: 11500000, guid: acfb26d5e3e857b48afba01845fff526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   powerImage: {fileID: 2769837761419824907}
