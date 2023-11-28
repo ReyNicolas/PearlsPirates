@@ -115,7 +115,7 @@ public class GameManager : MonoBehaviour
     {
         var playerInput = shipGO.GetComponent<PlayerInput>();
         playerInput.user.UnpairDevices();
-        InputUser.PerformPairingWithDevice(Gamepad.all[int.Parse(playerData.InputDevice.Replace("Gamepad", ""))], user: playerInput.user);
+        InputUser.PerformPairingWithDevice(Gamepad.all[int.Parse(playerData.InputDevice.Replace("Gamepad", "")) - 1], user: playerInput.user);
         playerInput.SwitchCurrentActionMap("Gamepad");
         playerInput.defaultActionMap = "Gamepad";
     }
