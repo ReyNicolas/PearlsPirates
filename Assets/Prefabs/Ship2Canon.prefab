@@ -10836,6 +10836,174 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 467d47f4-532f-444d-9ebc-d3a02b0888b3
     m_ActionName: Player/ContainerLeft[/XInputControllerWindows/leftShoulder]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 75049076-3caa-4fd9-9369-a1a3f4c8139b
+    m_ActionName: Gamepad/Move
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a53ae782-0b30-4b4f-a0d3-cd8bd1b932fd
+    m_ActionName: Gamepad/Aim
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 70f089a2-752b-4905-8440-9da1c5ed3e4e
+    m_ActionName: Gamepad/Fire
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1a90de0b-486a-45e8-994a-86f672bf6908
+    m_ActionName: Gamepad/FireLeft
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e0a22663-b1a6-4bc6-bd77-100da8cd658b
+    m_ActionName: Gamepad/ContainerRight
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: eae46ffa-5eb4-4c27-8ca4-221744f8b157
+    m_ActionName: Gamepad/ContainerLeft
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 042595f8-61b2-49b6-89f1-7692e3048602
+    m_ActionName: Keyboard1/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8f158331-b77e-4ddc-b843-7b919f587bb0
+    m_ActionName: Keyboard1/Aim
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 752174492263439614}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: ShootCannonRight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b6d49930-62b2-400e-92f9-124f2ce24f8c
+    m_ActionName: Keyboard1/Fire[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 752174492263439614}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: ShootCannonLeft
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a4aa557d-fbd8-482e-aca6-9530d9838604
+    m_ActionName: Keyboard1/FireLeft[/Keyboard/g]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 752174492263439614}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: RotateRight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 59dfbcf9-c95e-4320-8943-c4863f2eeee5
+    m_ActionName: Keyboard1/ContainerRight[/Keyboard/b]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 752174492263439614}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: RotateLeft
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ab197dc5-66bf-4038-bb46-77850da0d1be
+    m_ActionName: Keyboard1/ContainerLeft[/Keyboard/v]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 58460ad8-4ca6-45b1-8a04-3a0bfbb64e64
+    m_ActionName: Keyboard2/Move[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0d16a316-4c0e-4456-a2a9-6129eac87bdd
+    m_ActionName: Keyboard2/Aim
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 752174492263439614}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: ShootCannonRight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1c5dd4ec-1f77-42b5-8f31-3545614bb47c
+    m_ActionName: Keyboard2/Fire[/Keyboard/numpad8]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 752174492263439614}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: ShootCannonLeft
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a6a70cf1-7f45-4668-a300-9140a99b1610
+    m_ActionName: Keyboard2/FireLeft[/Keyboard/numpad9]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 752174492263439614}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: RotateRight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 05c95790-9e6e-482e-9a0d-430397532012
+    m_ActionName: Keyboard2/ContainerRight[/Keyboard/numpad6]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 752174492263439614}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: RotateLeft
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d8264d5b-f98e-4d6e-833d-97fa0ecce510
+    m_ActionName: Keyboard2/ContainerLeft[/Keyboard/numpad5]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

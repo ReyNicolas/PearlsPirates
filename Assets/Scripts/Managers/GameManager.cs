@@ -1,13 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
-using Unity.Mathematics;
-using System;
 using UniRx;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,16 +19,19 @@ public class GameManager : MonoBehaviour
         matchData.Initialize();
         SetPositionGenerator();
         SetRespawnGenerator();
-        SetHumanPlayers();
-        SetBotPlayers();
+        SetPlayers();
     }
 
     private void Start()
     {
+        SetDisposables();
+    }
+    void SetDisposables()
+    {
         disposables = new CompositeDisposable(
-            matchData.winnerData
-            .Where(winner => winner != null)
-            .Subscribe(_ => StopGame()));
+                    matchData.winnerData
+                    .Where(winner => winner != null)
+                    .Subscribe(_ => StopGame()));
 
         matchData.playersDatas.ForEach(playerData
             => disposables.Add(  // add disposable playerData
@@ -40,7 +39,6 @@ public class GameManager : MonoBehaviour
                        .Subscribe(value => matchData.CheckWinner(value)))
             );
     }
-
 
     private void OnDestroy()
     {
@@ -74,31 +72,52 @@ public class GameManager : MonoBehaviour
     {
         positionGenerator.AssignPosition(gameobject);
     }
-
-    void SetHumanPlayers()
+    void SetPlayers()
     {
-        var gamepadCount = Gamepad.all.Count;
-        for (int i = 0; i < math.min(matchData.humansDatas.Count, gamepadCount); i++)
+        foreach (PlayerSO playerData in matchData.playersDatas)
         {
-            var shipHumanGO = Instantiate(matchData.playerShipPrefab, Vector3.zero, Quaternion.identity);
-            SetPlayerDataInShip(matchData.humansDatas[i], shipHumanGO.GetComponent<PearlCollectorsManager>(), shipHumanGO.GetComponent<ShipMovement>());
-            SetPositionForMapGameobject(shipHumanGO);
-            respawnGenerator.Listen(shipHumanGO.GetComponent<IDestroy>()); 
-            SetInput(i, shipHumanGO.GetComponent<PlayerInput>());
-            SetATransformLookToZeroCoord(shipHumanGO.transform);
+            GameObject shipGO;
+            if (playerData.InputDevice.Contains("Keyboard"))
+            {
+                shipGO = Instantiate(matchData.playerShipPrefab, Vector3.zero, Quaternion.identity);
+                SetKeyboardPlayer(playerData, shipGO);
+            }
+            else if (playerData.InputDevice.Contains("Gamepad"))
+            {
+                shipGO = Instantiate(matchData.playerShipPrefab, Vector3.zero, Quaternion.identity);
+
+                SetGamepadPlayer(playerData, shipGO);
+            }
+            else
+            {
+                shipGO = Instantiate(matchData.botsrShipPrefab, Vector3.zero, Quaternion.identity);
+
+                SetBotDataInShip(playerData, shipGO.GetComponent<IAMoveControlLogic>());
+            }
+
+            SetPlayerDataInShip(playerData, shipGO.GetComponent<PearlCollectorsManager>(), shipGO.GetComponent<ShipMovement>());
+            SetPositionForMapGameobject(shipGO);
+            respawnGenerator.Listen(shipGO.GetComponent<IDestroy>());
+            SetATransformLookToZeroCoord(shipGO.transform);
         }
     }
-    void SetBotPlayers()
+
+    static void SetKeyboardPlayer(PlayerSO playerData, GameObject shipGO)
     {
-        for (int i = 0; i < matchData.botsDatas.Count; i++)
-        {
-            var botShipGO = Instantiate(matchData.botsrShipPrefab, Vector3.zero, Quaternion.identity);
-            SetPlayerDataInShip(matchData.botsDatas[i], botShipGO.GetComponent<PearlCollectorsManager>(), botShipGO.GetComponent<ShipMovement>());
-            SetBotDataInShip(matchData.botsDatas[i], botShipGO.GetComponent<IAMoveControlLogic>());
-            SetPositionForMapGameobject(botShipGO);
-            respawnGenerator.Listen(botShipGO.GetComponent<IDestroy>());
-            SetATransformLookToZeroCoord(botShipGO.transform);
-        }
+        var playerInput = shipGO.GetComponent<PlayerInput>();
+        playerInput.user.UnpairDevices();
+        InputUser.PerformPairingWithDevice(InputSystem.devices[0], user: playerInput.user);
+        playerInput.SwitchCurrentActionMap(playerData.InputDevice);
+        playerInput.defaultActionMap = playerData.InputDevice;
+    }
+
+    static void SetGamepadPlayer(PlayerSO playerData, GameObject shipGO)
+    {
+        var playerInput = shipGO.GetComponent<PlayerInput>();
+        playerInput.user.UnpairDevices();
+        InputUser.PerformPairingWithDevice(Gamepad.all[int.Parse(playerData.InputDevice.Replace("Gamepad", ""))], user: playerInput.user);
+        playerInput.SwitchCurrentActionMap("Gamepad");
+        playerInput.defaultActionMap = "Gamepad";
     }
 
     void SetATransformLookToZeroCoord(Transform aTransform) 
@@ -115,15 +134,9 @@ public class GameManager : MonoBehaviour
     {
         iAMoveControlLogic.data = playerData;
     }
-    void SetInput(int index, PlayerInput playerInput)
-    {
-        playerInput.user.UnpairDevices();
-        InputUser.PerformPairingWithDevice(Gamepad.all[index], user: playerInput.user);
-    }
 
     void StopGame() 
         => Time.timeScale = 0;
-
 
     public void Restart()
     {

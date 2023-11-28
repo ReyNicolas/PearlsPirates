@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -15,52 +16,93 @@ public class HomeMenuManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI gamepadCount;
     [SerializeField] TextMeshProUGUI maxPlayers;
     [SerializeField] TextMeshProUGUI errorMessage;
-    int gamepads = 0;
+    [SerializeField] List<string> keyboards = new List<string>();
+    readonly string KEYBOARD1 = "Keyboard1";
+    readonly string KEYBOARD2 = "Keyboard2";
+    int gamepads, playerCount;
 
 
     private void Start()
     {
         SetPoinstPlayer();
         SetPoinstMatch();
-        CountGamepads();
+        CountPlayers();
         InputSystem.onDeviceChange += OnDeviceChange;
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            if (keyboards.Contains(KEYBOARD1))
+            {
+                keyboards.Remove(KEYBOARD1);
+            }
+            else
+            {
+                keyboards.Add(KEYBOARD1);
+            }
+
+            CountPlayers();
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad8))
+        {
+            if (keyboards.Contains(KEYBOARD2))
+            {
+                keyboards.Remove(KEYBOARD2);
+            }
+            else
+            {
+                keyboards.Add(KEYBOARD2);
+            }
+            CountPlayers();
+        }
+    }
+
+
     void OnDeviceChange(InputDevice device, InputDeviceChange change)
     {
-        CountGamepads();
+        CountPlayers();
     }
-    public void CountGamepads()
+    public void CountPlayers()
     {
         gamepads = Gamepad.all.Count;
         gamepadCount.text = gamepads.ToString();
+
+        playerCount = keyboards.Count + gamepads;
+        
         playersPanels.ForEach(pp => pp.gameObject.SetActive(false));
-        for (int i = 0; i < gamepads; i++)
+
+        for (int i = 0; i < int.Parse(maxPlayers.text); i++)
         {
             playersPanels[i].gameObject.SetActive(true);
-            playersPanels[i].SetName(false);            
-        }
-        for (int i = gamepads; i < int.Parse(maxPlayers.text); i++)
-        {
-            playersPanels[i].gameObject.SetActive(true);
-            playersPanels[i].SetName(true);
-        }
 
+            if (i < keyboards.Count)
+            {
+                playersDatas[i].InputDevice = keyboards[i];
+            }
+            else if (i < playerCount)
+            {
+                playersDatas[i].InputDevice = "Gamepad" + (i + 1 - keyboards.Count);
+            }
+            else
+            {
+                playersDatas[i].InputDevice = "Bot";
+            }
 
+            playersPanels[i].SetMyPlayer(playersDatas[i]);          
+        }
     }
 
     public void StartMatch()
     {
-        if (Gamepad.all.Count == 0)
+        if (playerCount == 0)
         {
-            errorMessage.text = "Add at least one gamepad";
+            errorMessage.text = "Add at least one gamepad or keyboard player";
             return;
         }
         var totalPlayers = int.Parse(maxPlayers.text);
-
-        matchData.humansDatas = playersDatas.Take(Gamepad.all.Count).ToList();
         matchData.playersDatas = playersDatas.Take(totalPlayers).ToList();
-        matchData.botsDatas = matchData.playersDatas.Where(pd=> !matchData.humansDatas.Contains(pd)).ToList();
         InputSystem.onDeviceChange -= OnDeviceChange;
         matchData.Initialize();
         SceneManager.LoadScene(matchData.matchScene);

@@ -9,21 +9,16 @@ public class HomePlayerPanel : MonoBehaviour
     [SerializeField] PlayerSO playerData;
     [SerializeField] TextMeshProUGUI playerName;
     [SerializeField] Image shipImage;
+    [SerializeField] Image inputImage;
 
-    private void Start()
+    public void SetMyPlayer(PlayerSO playerData)
     {
+        this.playerData = playerData;
         playerName.text = playerData.PlayerName;
         playerName.color = playerData.PlayerColor;
+        Debug.Log(playerData.InputDevice);
         shipImage.sprite = playerData.shipSprite;
-    }
+        inputImage.sprite = Resources.Load<Sprite>(playerData.InputDevice);
 
-    public void SetName(bool isBot)
-    {
-        if (isBot)
-        {
-            playerName.text = playerData.PlayerName + " BOT";
-            return;
-        } 
-        playerName.text = playerData.PlayerName;
     }
 }

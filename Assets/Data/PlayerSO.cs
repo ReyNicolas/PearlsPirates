@@ -10,6 +10,7 @@ public class PlayerSO : ScriptableObject
     public string PlayerName;
     public Color PlayerColor;
     public int PlayerScore;
+    public string InputDevice;
     public ReactiveProperty<int> PointsToAdd= new ReactiveProperty<int>(0);
     public ReactiveCollection<PowerSO> pearlsCollectedDatas = new ReactiveCollection<PowerSO>();
     public ReactiveDictionary<int, PowerSO> powersInCollectors = new ReactiveDictionary<int, PowerSO> {
