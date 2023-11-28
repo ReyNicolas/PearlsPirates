@@ -7492,7 +7492,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 989591316}
         m_TargetAssemblyTypeName: HomeMenuManager, Assembly-CSharp
-        m_MethodName: CountGamepads
+        m_MethodName: CountPlayers
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
