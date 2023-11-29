@@ -17,8 +17,8 @@ public class HomeMenuManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI maxPlayers;
     [SerializeField] TextMeshProUGUI errorMessage;
     [SerializeField] List<string> keyboards = new List<string>();
-    readonly string KEYBOARD1 = "Keyboard1";
-    readonly string KEYBOARD2 = "Keyboard2";
+    readonly string KEYBOARD1 = InputsTypesNames.KEYBOARD + 1;
+    readonly string KEYBOARD2 = InputsTypesNames.KEYBOARD + 2;
     int gamepads, playerCount;
 
 
@@ -70,28 +70,47 @@ public class HomeMenuManager : MonoBehaviour
         gamepadCount.text = gamepads.ToString();
 
         playerCount = keyboards.Count + gamepads;
-        
+
         playersPanels.ForEach(pp => pp.gameObject.SetActive(false));
 
-        for (int i = 0; i < int.Parse(maxPlayers.text); i++)
+        for (int i = 0; i < keyboards.Count; i++)
         {
             playersPanels[i].gameObject.SetActive(true);
-
-            if (i < keyboards.Count)
-            {
-                playersDatas[i].InputDevice = keyboards[i];
-            }
-            else if (i < playerCount)
-            {
-                playersDatas[i].InputDevice = "Gamepad" + (i + 1 - keyboards.Count);
-            }
-            else
-            {
-                playersDatas[i].InputDevice = "Bot";
-            }
-
-            playersPanels[i].SetMyPlayer(playersDatas[i]);          
+            playersDatas[i].InputDevice = keyboards[i];
+            playersPanels[i].SetMyPlayer(playersDatas[i]);
         }
+        for (int i = keyboards.Count; i < playerCount; i++)
+        {
+            playersPanels[i].gameObject.SetActive(true);
+            playersDatas[i].InputDevice = InputsTypesNames.GAMEPAD + (i + 1 - keyboards.Count);
+            playersPanels[i].SetMyPlayer(playersDatas[i]);
+        }
+        for (int i = playerCount; i < int.Parse(maxPlayers.text); i++)
+        {
+            playersPanels[i].gameObject.SetActive(true);
+            playersDatas[i].InputDevice = InputsTypesNames.BOT;
+            playersPanels[i].SetMyPlayer(playersDatas[i]);
+        }
+
+        //for (int i = 0; i < int.Parse(maxPlayers.text); i++)
+        //{
+        //    playersPanels[i].gameObject.SetActive(true);
+
+        //    if (i < keyboards.Count)
+        //    {
+        //        playersDatas[i].InputDevice = keyboards[i];
+        //    }
+        //    else if (i < playerCount)
+        //    {
+        //        playersDatas[i].InputDevice = InputsTypesNames.GAMEPAD + (i + 1 - keyboards.Count);
+        //    }
+        //    else
+        //    {
+        //        playersDatas[i].InputDevice = InputsTypesNames.BOT;
+        //    }
+
+        //    playersPanels[i].SetMyPlayer(playersDatas[i]);
+        //}
     }
 
     public void StartMatch()

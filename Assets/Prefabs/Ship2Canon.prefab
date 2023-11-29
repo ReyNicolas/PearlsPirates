@@ -11172,7 +11172,7 @@ MonoBehaviour:
   - {fileID: 2974797813577315135}
   - {fileID: 7177961684674278790}
   - {fileID: 2596791972435050357}
-  rotateClip: {fileID: 0}
+  rotateClip: {fileID: 8300000, guid: 77399f06a85edbc41a8c7d5738df0702, type: 3}
   playerData: {fileID: 0}
 --- !u!114 &8164886757627560637
 MonoBehaviour:

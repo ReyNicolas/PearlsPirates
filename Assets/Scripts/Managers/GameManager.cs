@@ -1,9 +1,8 @@
 ﻿using System.Linq;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Users;
 using UniRx;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +10,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject optionsGO;
     public PlayerRespawnGenerator respawnGenerator;
     public PositionGenerator positionGenerator = new PositionGenerator();
+    InputSetterManager inputSetterManager = new InputSetterManager();
+    PlayerGenerator playerGenerator;
 
     CompositeDisposable disposables;
 
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
         matchData.Initialize();
         SetPositionGenerator();
         SetRespawnGenerator();
+        SetPlayerGenerator();
         SetPlayers();
     }
 
@@ -63,77 +65,20 @@ public class GameManager : MonoBehaviour
         respawnGenerator.onCreatedForMapGameObject += SetPositionForMapGameobject;
     }
 
-    void SetPositionGenerator()
-    {
-        positionGenerator.SetDimension();
-    }
+    void SetPositionGenerator() 
+        => positionGenerator.SetDimension();
 
-    void SetPositionForMapGameobject(GameObject gameobject)
-    {
-        positionGenerator.AssignPosition(gameobject);
-    }
-    void SetPlayers()
-    {
-        foreach (PlayerSO playerData in matchData.playersDatas)
-        {
-            GameObject shipGO;
-            if (playerData.InputDevice.Contains("Keyboard"))
-            {
-                shipGO = Instantiate(matchData.playerShipPrefab, Vector3.zero, Quaternion.identity);
-                SetKeyboardPlayer(playerData, shipGO);
-            }
-            else if (playerData.InputDevice.Contains("Gamepad"))
-            {
-                shipGO = Instantiate(matchData.playerShipPrefab, Vector3.zero, Quaternion.identity);
+    void SetPlayerGenerator() 
+        => playerGenerator = new PlayerGenerator(respawnGenerator, positionGenerator, inputSetterManager, matchData);
 
-                SetGamepadPlayer(playerData, shipGO);
-            }
-            else
-            {
-                shipGO = Instantiate(matchData.botsrShipPrefab, Vector3.zero, Quaternion.identity);
+    void SetPositionForMapGameobject(GameObject gameobject) 
+        => positionGenerator.AssignPosition(gameobject);
 
-                SetBotDataInShip(playerData, shipGO.GetComponent<IAMoveControlLogic>());
-            }
-
-            SetPlayerDataInShip(playerData, shipGO.GetComponent<PearlCollectorsManager>(), shipGO.GetComponent<ShipMovement>());
-            SetPositionForMapGameobject(shipGO);
-            respawnGenerator.Listen(shipGO.GetComponent<IDestroy>());
-            SetATransformLookToZeroCoord(shipGO.transform);
-        }
-    }
-
-    static void SetKeyboardPlayer(PlayerSO playerData, GameObject shipGO)
-    {
-        var playerInput = shipGO.GetComponent<PlayerInput>();
-        playerInput.user.UnpairDevices();
-        InputUser.PerformPairingWithDevice(InputSystem.devices[0], user: playerInput.user);
-        playerInput.SwitchCurrentActionMap(playerData.InputDevice);
-        playerInput.defaultActionMap = playerData.InputDevice;
-    }
-
-    static void SetGamepadPlayer(PlayerSO playerData, GameObject shipGO)
-    {
-        var playerInput = shipGO.GetComponent<PlayerInput>();
-        playerInput.user.UnpairDevices();
-        InputUser.PerformPairingWithDevice(Gamepad.all[int.Parse(playerData.InputDevice.Replace("Gamepad", "")) - 1], user: playerInput.user);
-        playerInput.SwitchCurrentActionMap("Gamepad");
-        playerInput.defaultActionMap = "Gamepad";
-    }
-
-    void SetATransformLookToZeroCoord(Transform aTransform) 
-        => aTransform.up = -aTransform.position;
-
-    void SetPlayerDataInShip(PlayerSO playerData, PearlCollectorsManager collectorsManager, ShipMovement shipMovement)
-    {
-        collectorsManager.playerData = playerData;
-        shipMovement.playerData = playerData;
-        shipMovement.GetComponent<SpriteRenderer>().sprite = playerData.shipSprite;
-    } 
-
-    void SetBotDataInShip(PlayerSO playerData, IAMoveControlLogic iAMoveControlLogic)
-    {
-        iAMoveControlLogic.data = playerData;
-    }
+    void SetPlayers() 
+        => matchData.playersDatas
+            .ForEach(
+            playerData 
+            => playerGenerator.GeneratePlayerFromData(playerData));
 
     void StopGame() 
         => Time.timeScale = 0;
@@ -148,9 +93,5 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         SceneManager.LoadScene(matchData.homeMenuScene);
     }
-   
-   
-
-   
    
 }
