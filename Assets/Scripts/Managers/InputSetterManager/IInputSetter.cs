@@ -1,6 +1,5 @@
 ﻿using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
-using UnityEngine.XR;
 
 public abstract class IInputSetter
 {
@@ -22,8 +21,11 @@ public class KeyboardInputSetter : IInputSetter
 
     public override void SetInput(string inputDevice, PlayerInput playerInput)
     {
-        playerInput.user.UnpairDevices();
-        InputUser.PerformPairingWithDevice(Keyboard.current, user: playerInput.user);
+        if (playerInput.user.valid)
+        {
+            playerInput.user.UnpairDevices();
+            InputUser.PerformPairingWithDevice(Keyboard.current, user: playerInput.user);
+        }        
         playerInput.defaultActionMap = inputDevice;
         playerInput.SwitchCurrentActionMap(inputDevice);
     }

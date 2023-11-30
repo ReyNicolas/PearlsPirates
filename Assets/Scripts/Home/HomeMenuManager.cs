@@ -91,26 +91,6 @@ public class HomeMenuManager : MonoBehaviour
             playersDatas[i].InputDevice = InputsTypesNames.BOT;
             playersPanels[i].SetMyPlayer(playersDatas[i]);
         }
-
-        //for (int i = 0; i < int.Parse(maxPlayers.text); i++)
-        //{
-        //    playersPanels[i].gameObject.SetActive(true);
-
-        //    if (i < keyboards.Count)
-        //    {
-        //        playersDatas[i].InputDevice = keyboards[i];
-        //    }
-        //    else if (i < playerCount)
-        //    {
-        //        playersDatas[i].InputDevice = InputsTypesNames.GAMEPAD + (i + 1 - keyboards.Count);
-        //    }
-        //    else
-        //    {
-        //        playersDatas[i].InputDevice = InputsTypesNames.BOT;
-        //    }
-
-        //    playersPanels[i].SetMyPlayer(playersDatas[i]);
-        //}
     }
 
     public void StartMatch()

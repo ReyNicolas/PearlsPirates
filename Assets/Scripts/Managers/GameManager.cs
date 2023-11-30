@@ -2,7 +2,6 @@
 using UnityEngine;
 using UniRx;
 using UnityEngine.SceneManagement;
-using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
