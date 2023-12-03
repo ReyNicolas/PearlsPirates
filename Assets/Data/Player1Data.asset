@@ -16,8 +16,9 @@ MonoBehaviour:
   PlayerName: Red Player
   PlayerColor: {r: 1, g: 0, b: 0, a: 1}
   PlayerScore: 0
+  InputDevice: Bot
   PointsToAdd:
-    value: 0
-  position: {x: -0.8077693, y: 5.8434753, z: 0}
+    value: 7
+  position: {x: 7.376506, y: 3.7371726, z: 0}
   actualSpeed:
-    value: 0
+    value: 2.3138611

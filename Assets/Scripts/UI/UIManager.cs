@@ -4,7 +4,7 @@ using UniRx;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] ResultUI resultUI;
+    [SerializeField] ResultsWindowUI resultUI;
     [SerializeField] MatchSO matchData;
     [SerializeField] List<GameObject> playerPanels;
     CompositeDisposable disposables;
@@ -25,11 +25,8 @@ public class UIManager : MonoBehaviour
     }
 
     void SetResult(PlayerSO playerData)
-    {
-        
-        resultUI.gameObject.SetActive(true);
-        resultUI.ShowResult(matchData);
-        
+    {        
+        resultUI.gameObject.SetActive(true);        
     }
 }
 

@@ -16,8 +16,9 @@ MonoBehaviour:
   PlayerName: Brown Player
   PlayerColor: {r: 0.5882353, g: 0.29411766, b: 0, a: 1}
   PlayerScore: 0
+  InputDevice: Bot
   PointsToAdd:
-    value: 0
-  position: {x: 0, y: 0, z: 0}
+    value: 5
+  position: {x: -9.066516, y: 1.0945263, z: 0}
   actualSpeed:
     value: 0

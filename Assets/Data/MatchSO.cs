@@ -78,21 +78,22 @@ public class MatchSO : ScriptableObject
         }
     }
 
-    void SetWinner()
-    {
-        winnerData.Value = playersDatas.OrderByDescending(pd => pd.PointsToAdd.Value).First();
-    }
+    void SetWinner() 
+        => winnerData.Value = playersDatas.OrderByDescending(pd => pd.PointsToAdd.Value).First();
 
-    bool EndedByTotalPlayerPointsLimit()
-    {
-        return playersDatas.Any(pd => pd.PointsToAdd.Value >= totalPlayerPointsLimit);
-    }
+    bool EndedByTotalPlayerPointsLimit() 
+        => playersDatas.Any(pd => pd.PointsToAdd.Value >= totalPlayerPointsLimit);
 
-    bool EndedByTotalPointsLimit()
-    {
-        return (playersDatas.Sum(pd => pd.PointsToAdd.Value)) >= totalPointsLimit;
-    }
+    bool EndedByTotalPointsLimit() 
+        => PointsLimitPassed() && NotDraw();
 
-    
+    bool PointsLimitPassed() 
+        => (playersDatas.Sum(pd => pd.PointsToAdd.Value)) >= totalPointsLimit;
+
+    bool NotDraw()
+    {
+        int higherPoint = playersDatas.Max(pd => pd.PointsToAdd.Value);
+        return playersDatas.Count(pd => pd.PointsToAdd.Value == higherPoint) == 1;
+    }
 }
 
