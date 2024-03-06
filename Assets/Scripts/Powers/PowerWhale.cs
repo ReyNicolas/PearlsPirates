@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PowerWhale : MonoBehaviour, IDestroy
 {
+    [SerializeField] Animator animator;
     [SerializeField] float speed;
     [SerializeField] Transform targetTransform;
     [SerializeField] int timeAlive;
@@ -11,7 +12,7 @@ public class PowerWhale : MonoBehaviour, IDestroy
 
     private void Awake()
     {
-        Destroy(gameObject, timeAlive);
+        Invoke("InvokeEnd", timeAlive);
     }
 
 
@@ -29,7 +30,14 @@ public class PowerWhale : MonoBehaviour, IDestroy
         if (collision.CompareTag("Player") && targetTransform == null)
         {
             targetTransform = collision.transform;
+            animator.SetTrigger("Following");
         }
+    }
+
+    void InvokeEnd()
+    {
+        animator.SetTrigger("End");
+        Destroy(gameObject, 1);
     }
 
     public void Destroy()

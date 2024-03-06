@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1835088905851930744}
   - component: {fileID: 4697276939330284075}
   - component: {fileID: 7955313981987574668}
+  - component: {fileID: 3198721705601240259}
   m_Layer: 0
   m_Name: Power-Whale
   m_TagString: Untagged
@@ -146,6 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249c7a26344381c4b8283f5f4954f380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 3198721705601240259}
   speed: 5
   targetTransform: {fileID: 0}
   timeAlive: 5
@@ -245,6 +247,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &3198721705601240259
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2541412941404171679}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c20e3c657a147084db7c5a88b31f895f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3589634947305146490
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,8 +342,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 16db5e9adb96bd445b6c7721153f1d53, type: 3}
+  m_SortingOrder: -2
+  m_Sprite: {fileID: 1849217101, guid: cc768ad2bb063554190d1231b9da44e9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
